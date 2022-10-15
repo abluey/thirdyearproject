@@ -17,9 +17,9 @@ public class MainMenuManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
+    // void Update() {
         
-    }
+    // }
 
     private void startGame() {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(startSceneName, LoadSceneMode.Additive);
