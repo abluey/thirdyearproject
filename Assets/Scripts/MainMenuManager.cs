@@ -8,12 +8,12 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private Button startGameBtn;
     [SerializeField] private string startSceneName;
+    [SerializeField] private Button quitBtn;
 
     // Start is called before the first frame update
     void Start() {
-        Debug.Log($"Button is null? {startGameBtn == null}");
-        Debug.Log($"Button.OnClick is null? {startGameBtn.onClick == null}");
         startGameBtn.onClick.AddListener(startGame);
+        quitBtn.onClick.AddListener(quitConfirm);
     }
 
     // Update is called once per frame
@@ -28,5 +28,9 @@ public class MainMenuManager : MonoBehaviour
 
     private void onStartGame(AsyncOperation loadOperation) {
         _ = SceneManager.UnloadSceneAsync(gameObject.scene);
+    }
+
+    private void quitConfirm() {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Quit", LoadSceneMode.Additive);
     }
 }
