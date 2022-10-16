@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [SerializeField] private Button startGameBtn;
-    [SerializeField] private string startSceneName;
+    // [SerializeField] private Button startGameBtn;
+    // [SerializeField] private string startSceneName;
     [SerializeField] private Button quitBtn;
 
     // Start is called before the first frame update
     void Start() {
-        startGameBtn.onClick.AddListener(startGame);
-        quitBtn.onClick.AddListener(quitConfirm);
+        // startGameBtn.onClick.AddListener(StartGame);
+        quitBtn.onClick.AddListener(QuitConfirm);
     }
 
     // Update is called once per frame
@@ -21,16 +21,16 @@ public class MainMenuManager : MonoBehaviour
         
     // }
 
-    private void startGame() {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(startSceneName, LoadSceneMode.Additive);
-        asyncLoad.completed += onStartGame;
-    }
+    // private void StartGame() {
+    //     AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(startSceneName, LoadSceneMode.Additive);
+    //     asyncLoad.completed += OnStartGame;
+    // }
 
-    private void onStartGame(AsyncOperation loadOperation) {
-        _ = SceneManager.UnloadSceneAsync(gameObject.scene);
-    }
+    // private void OnStartGame(AsyncOperation loadOperation) {
+    //     _ = SceneManager.UnloadSceneAsync(gameObject.scene);
+    // }
 
-    private void quitConfirm() {
+    private void QuitConfirm() {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Quit", LoadSceneMode.Additive);
     }
 }

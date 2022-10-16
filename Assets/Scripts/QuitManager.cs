@@ -11,8 +11,8 @@ public class QuitManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        yesBtn.onClick.AddListener(quitYes);
-        noBtn.onClick.AddListener(quitNo);
+        yesBtn.onClick.AddListener(QuitYes);
+        noBtn.onClick.AddListener(QuitNo);
     }
 
     // Update is called once per frame
@@ -20,11 +20,11 @@ public class QuitManager : MonoBehaviour
         
     // }
 
-    private void quitYes() {
+    private void QuitYes() {
         Application.Quit();
     }
 
-    private void quitNo() {
+    private void QuitNo() {
         SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 }
