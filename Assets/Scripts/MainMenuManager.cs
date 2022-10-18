@@ -6,13 +6,12 @@ using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    // [SerializeField] private Button startGameBtn;
-    // [SerializeField] private string startSceneName;
+    [SerializeField] private Button settingsBtn;
     [SerializeField] private Button quitBtn;
 
     // Start is called before the first frame update
     void Start() {
-        // startGameBtn.onClick.AddListener(StartGame);
+        settingsBtn.onClick.AddListener(Settings);
         quitBtn.onClick.AddListener(QuitConfirm);
     }
 
@@ -21,14 +20,9 @@ public class MainMenuManager : MonoBehaviour
         
     // }
 
-    // private void StartGame() {
-    //     AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(startSceneName, LoadSceneMode.Additive);
-    //     asyncLoad.completed += OnStartGame;
-    // }
-
-    // private void OnStartGame(AsyncOperation loadOperation) {
-    //     _ = SceneManager.UnloadSceneAsync(gameObject.scene);
-    // }
+    private void Settings() {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Settings", LoadSceneMode.Additive);
+    }
 
     private void QuitConfirm() {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Quit", LoadSceneMode.Additive);
