@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class Fader : MonoBehaviour
 {
-    [SerializeField] public Button triggerBtn;
-    [SerializeField] public Button triggerBtn2;
-    [SerializeField] public Button triggerBtn3;
-
+    public Button triggerBtn;
     [SerializeField] private string loadScene;
+
+    public Button triggerBtn2;
     [SerializeField] private string loadScene2;
+
+    public Button triggerBtn3;
     [SerializeField] private string loadScene3;
 
     private string sceneToLoad;
