@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SettingsManager : MonoBehaviour
+public class Credits : MonoBehaviour
 {
     [SerializeField] private Button backBtn;
 
@@ -13,12 +13,6 @@ public class SettingsManager : MonoBehaviour
     {
         backBtn.onClick.AddListener(Back);
     }
-
-    // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
 
     private void Back() {
         SceneManager.UnloadSceneAsync(gameObject.scene);
