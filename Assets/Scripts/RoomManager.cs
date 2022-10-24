@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-public class StartSceneManager : MonoBehaviour
+public class RoomManager : MonoBehaviour
 {
     [SerializeField] private Button saveBtn;
     [SerializeField] private Button quitBtn;
@@ -18,7 +18,7 @@ public class StartSceneManager : MonoBehaviour
     void Start() {
         savedText.text = "";
         saveBtn.onClick.AddListener(Save);
-        quitBtn.onClick.AddListener(QuitConfirm);
+        quitBtn.onClick.AddListener(Quit);
     }
 
     private void Save() {
@@ -31,7 +31,7 @@ public class StartSceneManager : MonoBehaviour
         }
     }
 
-    private void QuitConfirm() {
+    private void Quit() {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Quit", LoadSceneMode.Additive);
     }
 

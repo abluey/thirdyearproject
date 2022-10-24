@@ -15,11 +15,6 @@ public class QuitManager : MonoBehaviour
         noBtn.onClick.AddListener(QuitNo);
     }
 
-    // Update is called once per frame
-    // void Update() {
-        
-    // }
-
     private void QuitYes() {
         Application.Quit();
     }
