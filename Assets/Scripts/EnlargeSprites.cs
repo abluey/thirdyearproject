@@ -9,6 +9,8 @@ public class EnlargeSprites : MonoBehaviour
     [SerializeField] private Color originalColor;
     [SerializeField] private Color newColor;
 
+    [SerializeField] private Vector3 originalSize;
+
     public void OnMouseOver()
     {
         transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
@@ -17,7 +19,7 @@ public class EnlargeSprites : MonoBehaviour
 
     public void OnMouseExit()
     {
-        transform.localScale = new Vector3(1, 1, 1);
+        transform.localScale = originalSize;
         image.color = originalColor;
     }
 }

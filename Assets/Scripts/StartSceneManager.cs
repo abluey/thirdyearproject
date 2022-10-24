@@ -12,15 +12,11 @@ public class StartSceneManager : MonoBehaviour
     [SerializeField] private Button quitBtn;
 
     public TMPro.TMP_Text savedText;
-
-    // public Image laptop;
-    // public Image list;
     
     
     // Start is called before the first frame update
     void Start() {
         savedText.text = "";
-
         saveBtn.onClick.AddListener(Save);
         quitBtn.onClick.AddListener(QuitConfirm);
     }
