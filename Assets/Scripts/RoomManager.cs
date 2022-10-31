@@ -8,36 +8,30 @@ using TMPro;
 
 public class RoomManager : MonoBehaviour
 {
-    [SerializeField] private Button saveBtn;
+    [SerializeField] private Button menuBtn;
     [SerializeField] private Button quitBtn;
 
-    public TMPro.TMP_Text savedText;
-    
+    public Image background;
+    public Color morning;
+    public Color afternoon;
+    public Color evening;
     
     // Start is called before the first frame update
     void Start() {
-        savedText.text = "";
-        saveBtn.onClick.AddListener(Save);
-        quitBtn.onClick.AddListener(Quit);
-    }
 
-    private void Save() {
-        // save
-        PlayerPrefs.SetInt("DayCount", 3);
-        PlayerPrefs.Save();
-        // show text saying game saved
-        if (PlayerPrefs.HasKey("DayCount")) {
-            StartCoroutine(ShowSavedNotif());
+        // setting background tint
+        Debug.Log("Day: " + PlayerPrefs.GetInt("DayCount") + " Time: " + PlayerPrefs.GetInt("TimeCount"));
+        switch (PlayerPrefs.GetInt("TimeCount")) {
+            case 0: background.color = morning; break;
+            case 1: background.color = afternoon; break;
+            case 2: background.color = evening; break;
         }
+
+        menuBtn.onClick.AddListener( delegate { PopModal("ToMenu"); });
+        quitBtn.onClick.AddListener( delegate { PopModal("Quit"); });
     }
 
-    private void Quit() {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Quit", LoadSceneMode.Additive);
-    }
-
-    IEnumerator ShowSavedNotif() {
-        savedText.text = "Game saved.";
-        yield return new WaitForSeconds (1.0f);
-        savedText.text = "";
+    private void PopModal(string sceneName) {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
     }
 }

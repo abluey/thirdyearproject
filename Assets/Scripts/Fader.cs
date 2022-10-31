@@ -28,11 +28,6 @@ public class Fader : MonoBehaviour
         triggerBtn3?.onClick.AddListener(delegate {FadeToScene(3);});
     }
 
-    // Update is called once per frame
-    void Update() {
-        
-    }
-
     public void FadeToScene(int triggerNumber) {
         triggerBtnNum = triggerNumber;
         animator.SetTrigger("FadeOut");

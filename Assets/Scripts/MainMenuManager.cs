@@ -12,12 +12,18 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Button creditsBtn;
     [SerializeField] private Button quitBtn;
 
-    // Start is called before the first frame update
+
+// TODO with this: "Are you sure" when selecting New Game instead of Load Game (new modal needed)
+    private bool hasPlayed = false;
+
     void Start() {
-        if (PlayerPrefs.HasKey("DayCount")) {
-            loadBtn.onClick.AddListener(delegate { PopModal("LoadGame"); });
-        } else {
+
+        if (PlayerPrefs.GetInt("DayCount") == 0 && PlayerPrefs.GetInt("TimeCount") == 0) {
             loadBtn.interactable = false;
+            hasPlayed = false;
+        } else { 
+            loadBtn.onClick.AddListener(delegate { PopModal("LoadGame"); });
+            hasPlayed = true;
         }
         
         startBtn.onClick.AddListener(Reset);
