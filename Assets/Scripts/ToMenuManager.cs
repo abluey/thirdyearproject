@@ -37,14 +37,9 @@ public class ToMenuManager : MonoBehaviour
     }
 
     private void Save() {
-        // save
-        PlayerPrefs.SetInt("DayCount", 1);
-        PlayerPrefs.SetInt("TimeCount", 2);
+        Debug.Log("Day: " + PlayerPrefs.GetInt("DayCount") + " Time: " + PlayerPrefs.GetInt("TimeCount"));
         PlayerPrefs.Save();
-        // show text saying game saved
-        if (PlayerPrefs.HasKey("DayCount")) {
-            StartCoroutine(ShowSavedNotif());
-        }
+        StartCoroutine(ShowSavedNotif());
     }
 
     private void Close() {

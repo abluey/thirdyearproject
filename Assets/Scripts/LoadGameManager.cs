@@ -14,16 +14,28 @@ public class LoadGameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        if (PlayerPrefs.HasKey("DayCount")) {
-            playBtn.interactable = true;
-            Content.text = "Saved game found - Day " + PlayerPrefs.GetInt("DayCount");
-            playBtn.onClick.AddListener(Play);
-        } else {
+    {   
+        // haven't touched the game; Day 0 Time 0
+        if (PlayerPrefs.GetInt("DayCount") == 0 && PlayerPrefs.GetInt("TimeCount") == 0) {
             playBtn.interactable = false;
             Content.text = "No saved game found.";
+        } else {
+            playBtn.interactable = true;
+            Content.text = "Saved game found - Day " + PlayerPrefs.GetInt("DayCount") + ", " + GetTimeName(PlayerPrefs.GetInt("TimeCount"));
+            playBtn.onClick.AddListener(Play);
         }
+
         backBtn.onClick.AddListener(Back);
+    }
+
+    // dupe from TimeTransition but I'm not about to drag the entire TT script as a game component for Loading a goddamn game
+    private string GetTimeName(int time) {
+        switch (time) {
+            case 0: return "morning";
+            case 1: return "afternoon";
+            case 2: return "evening";
+            default: return "ERROR: illegal time number";
+        }
     }
 
     private void Play() {

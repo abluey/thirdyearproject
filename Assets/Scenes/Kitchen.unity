@@ -845,7 +845,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8442758963544599221, guid: 77d82777808dc084f8eb4ad1b43430bd, type: 3}
       propertyPath: loadScene2
-      value: 
+      value: TimeTransition
       objectReference: {fileID: 0}
     - target: {fileID: 8442758963544599221, guid: 77d82777808dc084f8eb4ad1b43430bd, type: 3}
       propertyPath: triggerBtn
@@ -854,7 +854,7 @@ PrefabInstance:
     - target: {fileID: 8442758963544599221, guid: 77d82777808dc084f8eb4ad1b43430bd, type: 3}
       propertyPath: triggerBtn2
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1823083605}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 77d82777808dc084f8eb4ad1b43430bd, type: 3}

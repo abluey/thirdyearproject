@@ -266,6 +266,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1485027189725618132, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2072649223707750863, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
       propertyPath: m_text
       value: Load Game
@@ -280,11 +284,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3297474691207200572, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 300
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 3297474691207200572, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3297474691207200572, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -15
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 5045082769754896499, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
       propertyPath: m_Name
@@ -376,7 +384,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7602854259481839289, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
       propertyPath: m_text
-      value: You have no saved games.
+      value: No saved game found.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602854259481839289, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
