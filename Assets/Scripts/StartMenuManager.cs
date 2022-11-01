@@ -12,32 +12,53 @@ public class StartMenuManager : MonoBehaviour
     [SerializeField] private Button creditsBtn;
     [SerializeField] private Button quitBtn;
 
+    [SerializeField] private Canvas load;
+    [SerializeField] private Canvas credits;
+    [SerializeField] private Canvas settings;
+
 
 // TODO with this: "Are you sure" when selecting New Game instead of Load Game (new modal needed)
     private bool hasPlayed = false;
 
     void Start() {
+        load.gameObject.SetActive(false);
+        credits.gameObject.SetActive(false);
+        settings.gameObject.SetActive(false);
 
         if (PlayerPrefs.GetInt("DayCount") == 0 && PlayerPrefs.GetInt("TimeCount") == 0) {
             loadBtn.interactable = false;
             hasPlayed = false;
         } else { 
-            loadBtn.onClick.AddListener(delegate { PopModal("LoadGame"); });
+            // loadBtn.onClick.AddListener(delegate { PopModal("LoadGame"); });
             hasPlayed = true;
+            loadBtn.onClick.AddListener(Load);
         }
         
         startBtn.onClick.AddListener(Reset);
 
-        creditsBtn.onClick.AddListener(delegate { PopModal("Credits"); });
-        settingsBtn.onClick.AddListener(delegate { PopModal("Settings"); });
-        quitBtn.onClick.AddListener(delegate { PopModal("Quit"); });
+        creditsBtn.onClick.AddListener(Credits);
+        settingsBtn.onClick.AddListener(Settings);
+
+        quitBtn.onClick.AddListener(delegate { PopScene("Quit"); });
     }
 
     private void Reset() {
         PlayerPrefs.DeleteAll();
     }
 
-    private void PopModal(string sceneName) {
+    private void PopScene(string sceneName) {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+    }
+
+    private void Load() {
+        load.gameObject.SetActive(true);
+    }
+
+    private void Credits() {
+        credits.gameObject.SetActive(true);
+    }
+
+    private void Settings() {
+        settings.gameObject.SetActive(true);
     }
 }

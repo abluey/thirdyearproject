@@ -9,8 +9,11 @@ public class BedroomManager : MonoBehaviour
     [SerializeField] private Button laptopBtn;
     [SerializeField] private Button todoListBtn;
 
+    [SerializeField] private Canvas list;
+
     void Start()
     {
+        list.gameObject.SetActive(false);
         laptopBtn.onClick.AddListener(OpenLaptop);
         todoListBtn.onClick.AddListener(ToDoList);
     }
@@ -25,6 +28,6 @@ public class BedroomManager : MonoBehaviour
     }
 
     private void ToDoList() {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("ToDoList", LoadSceneMode.Additive);
+        list.gameObject.SetActive(true);
     }
 }

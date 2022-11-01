@@ -6,5 +6,4 @@ using UnityEngine.UI;
 
 public class Credits : MonoBehaviour
 {
-
 }
