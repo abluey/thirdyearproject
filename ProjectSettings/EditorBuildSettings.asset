@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/LoadGame.unity
     guid: e645d3971b754444e86c1c34c0869706
   - enabled: 1
+    path: Assets/Scenes/TimeTransition.unity
+    guid: c6c3bafe05dd19f46a4d84844bd68c0a
+  - enabled: 1
     path: Assets/Scenes/Room.unity
     guid: fc6c615215a527a43b2b112f146f836d
   - enabled: 1
