@@ -8,7 +8,6 @@ public class GameMenuManager : MonoBehaviour
 {
     [SerializeField] private Button saveBtn;
     [SerializeField] private Button menuBtn;
-    [SerializeField] private Button closeBtn;
 
     public TMPro.TMP_Text savedText;
 
@@ -17,7 +16,6 @@ public class GameMenuManager : MonoBehaviour
 
         saveBtn.onClick.AddListener(Save);
         menuBtn.onClick.AddListener(Menu);
-        closeBtn.onClick.AddListener(Close);
     }
 
     private void Menu() {
@@ -30,7 +28,7 @@ public class GameMenuManager : MonoBehaviour
             {
                 Scene scene = SceneManager.GetSceneAt(n);
                 if (scene.name == "Kitchen" || scene.name == "Room") {
-                    SceneManager.UnloadSceneAsync(scene.name);
+                    _ = SceneManager.UnloadSceneAsync(scene.name);
                 }
             }
         _ = SceneManager.UnloadSceneAsync(gameObject.scene);
@@ -40,10 +38,6 @@ public class GameMenuManager : MonoBehaviour
         Debug.Log("Day: " + PlayerPrefs.GetInt("DayCount") + " Time: " + PlayerPrefs.GetInt("TimeCount"));
         PlayerPrefs.Save();
         StartCoroutine(ShowSavedNotif());
-    }
-
-    private void Close() {
-        SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 
     IEnumerator ShowSavedNotif() {

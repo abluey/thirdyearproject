@@ -20,6 +20,6 @@ public class QuitManager : MonoBehaviour
     }
 
     private void QuitNo() {
-        SceneManager.UnloadSceneAsync(gameObject.scene);
+        _ = SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 }

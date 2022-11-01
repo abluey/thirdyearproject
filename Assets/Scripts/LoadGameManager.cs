@@ -8,7 +8,6 @@ using TMPro;
 public class LoadGameManager : MonoBehaviour
 {
     [SerializeField] private Button playBtn;
-    [SerializeField] private Button backBtn;
 
     public TMPro.TMP_Text Content;
 
@@ -24,8 +23,6 @@ public class LoadGameManager : MonoBehaviour
             Content.text = "Saved game found - Day " + PlayerPrefs.GetInt("DayCount") + ", " + GetTimeName(PlayerPrefs.GetInt("TimeCount"));
             playBtn.onClick.AddListener(Play);
         }
-
-        backBtn.onClick.AddListener(Back);
     }
 
     // dupe from TimeTransition but I'm not about to drag the entire TT script as a game component for Loading a goddamn game
@@ -44,17 +41,16 @@ public class LoadGameManager : MonoBehaviour
     }
 
     private void OnLoadComplete(AsyncOperation loadOperation) {
+        
+        // unloading the menu since Load Game is a popup modal
         for (int n = 0; n < SceneManager.sceneCount; ++n)
             {
                 Scene scene = SceneManager.GetSceneAt(n);
                 if (scene.name == "StartMenu") {
-                    SceneManager.UnloadSceneAsync(scene.name);
+                    _ = SceneManager.UnloadSceneAsync(scene.name);
                 }
             }
-        _ = SceneManager.UnloadSceneAsync(gameObject.scene);
-    }
 
-    private void Back() {
-        SceneManager.UnloadSceneAsync(gameObject.scene);
+        _ = SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 }

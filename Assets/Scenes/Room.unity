@@ -1015,6 +1015,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8372277576ba334c959d1261d907d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laptopBtn: {fileID: 183671284}
+  todoListBtn: {fileID: 2014621644}
 --- !u!1 &1468661562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,6 +1346,10 @@ PrefabInstance:
       value: TimeTransition
       objectReference: {fileID: 0}
     - target: {fileID: 8442758963544599221, guid: 77d82777808dc084f8eb4ad1b43430bd, type: 3}
+      propertyPath: loadScene3
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8442758963544599221, guid: 77d82777808dc084f8eb4ad1b43430bd, type: 3}
       propertyPath: triggerBtn
       value: 
       objectReference: {fileID: 435344155}
@@ -1355,6 +1361,10 @@ PrefabInstance:
       propertyPath: triggerBtn2
       value: 
       objectReference: {fileID: 1656536603}
+    - target: {fileID: 8442758963544599221, guid: 77d82777808dc084f8eb4ad1b43430bd, type: 3}
+      propertyPath: triggerBtn3
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 77d82777808dc084f8eb4ad1b43430bd, type: 3}

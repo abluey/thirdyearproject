@@ -281,6 +281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Modal
       objectReference: {fileID: 0}
+    - target: {fileID: 5302276594369679909, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
+      propertyPath: backBtn
+      value: 
+      objectReference: {fileID: 128275646}
     - target: {fileID: 5969528348841134101, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -405,7 +409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7f3c25c8026084ab17f756800e4db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backBtn: {fileID: 128275646}
 --- !u!1 &1486189672
 GameObject:
   m_ObjectHideFlags: 0
