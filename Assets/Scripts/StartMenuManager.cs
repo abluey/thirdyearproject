@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenuManager : MonoBehaviour
+public class StartMenuManager : MonoBehaviour
 {
     [SerializeField] private Button startBtn;
     [SerializeField] private Button loadBtn;

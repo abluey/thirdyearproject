@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ToMenuManager : MonoBehaviour
+public class GameMenuManager : MonoBehaviour
 {
     [SerializeField] private Button saveBtn;
     [SerializeField] private Button menuBtn;
@@ -21,7 +21,7 @@ public class ToMenuManager : MonoBehaviour
     }
 
     private void Menu() {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("StartMenu", LoadSceneMode.Additive);
         asyncLoad.completed += OnLoadComplete;
     }
 

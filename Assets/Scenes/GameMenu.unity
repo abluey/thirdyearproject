@@ -679,7 +679,7 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Save before returning to menu.
 
-        Unsaved progress will be lost.'
+        Unsaved progress could be lost.'
       objectReference: {fileID: 0}
     - target: {fileID: 7838651267945255442, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
       propertyPath: m_LocalScale.x

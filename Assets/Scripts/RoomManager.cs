@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 public class RoomManager : MonoBehaviour
 {
@@ -15,19 +14,19 @@ public class RoomManager : MonoBehaviour
     public Color morning;
     public Color afternoon;
     public Color evening;
+    public TMPro.TMP_Text day;
     
-    // Start is called before the first frame update
     void Start() {
-
         // setting background tint
-        Debug.Log("Day: " + PlayerPrefs.GetInt("DayCount") + " Time: " + PlayerPrefs.GetInt("TimeCount"));
         switch (PlayerPrefs.GetInt("TimeCount")) {
             case 0: background.color = morning; break;
             case 1: background.color = afternoon; break;
             case 2: background.color = evening; break;
         }
 
-        menuBtn.onClick.AddListener( delegate { PopModal("ToMenu"); });
+        day.text = "Day " + PlayerPrefs.GetInt("DayCount");
+
+        menuBtn.onClick.AddListener( delegate { PopModal("GameMenu"); });
         quitBtn.onClick.AddListener( delegate { PopModal("Quit"); });
     }
 

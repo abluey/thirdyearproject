@@ -47,7 +47,7 @@ public class LoadGameManager : MonoBehaviour
         for (int n = 0; n < SceneManager.sceneCount; ++n)
             {
                 Scene scene = SceneManager.GetSceneAt(n);
-                if (scene.name == "MainMenu") {
+                if (scene.name == "StartMenu") {
                     SceneManager.UnloadSceneAsync(scene.name);
                 }
             }
