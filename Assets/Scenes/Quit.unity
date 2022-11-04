@@ -547,6 +547,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Modal
       objectReference: {fileID: 0}
+    - target: {fileID: 5302276594369679909, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5969528348841134101, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -631,7 +635,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5302276594369679909, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7838651267945255442, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
       insertIndex: -1
