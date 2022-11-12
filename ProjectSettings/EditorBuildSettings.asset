@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: abcf088e80ea83441a8fc4beaaaef5e1
   - enabled: 0
-    path: Assets/Scenes/LoadGame.unity
-    guid: e645d3971b754444e86c1c34c0869706
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/TimeConfirm.unity
+    guid: 5ec31cab278f5804ba0898dd6a5cf354
   - enabled: 1
     path: Assets/Scenes/TimeTransition.unity
     guid: c6c3bafe05dd19f46a4d84844bd68c0a
@@ -21,8 +24,8 @@ EditorBuildSettings:
     path: Assets/Scenes/LaptopScreen.unity
     guid: d2b3939e10a57714eb8d5fb78c85ff95
   - enabled: 0
-    path: Assets/Scenes/ToDoList.unity
-    guid: ac313b4e24f88784891b4e3376425a74
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Kitchen.unity
     guid: ade819ddc9bcb91479c0ce5a373b47e6
@@ -30,11 +33,11 @@ EditorBuildSettings:
     path: Assets/Scenes/GameMenu.unity
     guid: e11083e29a68eb142a416da650bc5e98
   - enabled: 0
-    path: Assets/Scenes/Settings.unity
-    guid: 1b9765bdaae568d48b75195ca0ee68bf
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/Credits.unity
-    guid: 3c6fef81bf50f2d4286e763731388067
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Quit.unity
     guid: e3e55fdae322e7f4c898ea70fd9b7dbc

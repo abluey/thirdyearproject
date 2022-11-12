@@ -860,7 +860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8442758963544599221, guid: 77d82777808dc084f8eb4ad1b43430bd, type: 3}
       propertyPath: loadScene2
-      value: TimeTransition
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8442758963544599221, guid: 77d82777808dc084f8eb4ad1b43430bd, type: 3}
       propertyPath: triggerBtn
@@ -869,7 +869,7 @@ PrefabInstance:
     - target: {fileID: 8442758963544599221, guid: 77d82777808dc084f8eb4ad1b43430bd, type: 3}
       propertyPath: triggerBtn2
       value: 
-      objectReference: {fileID: 1823083605}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 77d82777808dc084f8eb4ad1b43430bd, type: 3}
@@ -1002,6 +1002,7 @@ GameObject:
   - component: {fileID: 1823083605}
   - component: {fileID: 1823083604}
   - component: {fileID: 1823083603}
+  - component: {fileID: 1823083608}
   m_Layer: 5
   m_Name: Alarm
   m_TagString: Untagged
@@ -1172,6 +1173,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823083601}
   m_CullTransparentMesh: 1
+--- !u!114 &1823083608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823083601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3913202d07bf5a544bc78b20d1cda703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clockBtn: {fileID: 1823083605}
 --- !u!1 &1832428002
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ public class RoomManager : MonoBehaviour
         day.text = "Day " + PlayerPrefs.GetInt("DayCount");
 
         menuBtn.onClick.AddListener( delegate { PopModal("GameMenu"); });
-        quitBtn.onClick.AddListener( delegate { PopModal("Quit"); });
+        quitBtn.onClick.AddListener( delegate { PopModal("Quit"); });;
     }
 
     private void PopModal(string sceneName) {

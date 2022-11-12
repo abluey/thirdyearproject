@@ -29,7 +29,6 @@ public class StartMenuManager : MonoBehaviour
             loadBtn.interactable = false;
             hasPlayed = false;
         } else { 
-            // loadBtn.onClick.AddListener(delegate { PopModal("LoadGame"); });
             hasPlayed = true;
             loadBtn.onClick.AddListener(Load);
         }
