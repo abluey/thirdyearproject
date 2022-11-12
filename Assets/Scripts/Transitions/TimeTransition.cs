@@ -13,7 +13,6 @@ public class TimeTransition : MonoBehaviour
     private int time;
     private int day;
 
-    // Start is called before the first frame update
     void Start()
     {   
         continueBtn.gameObject.SetActive(false);
@@ -44,7 +43,10 @@ public class TimeTransition : MonoBehaviour
             PlayerPrefs.SetInt("DayCount", PlayerPrefs.GetInt("DayCount") + 1);
             PlayerPrefs.SetInt("TimeCount", 0);
         }
+        PlayerPrefs.SetInt("CompletedTask", 0);
+
         content.text = "Day " + PlayerPrefs.GetInt("DayCount") + ", " + GetTimeName(PlayerPrefs.GetInt("TimeCount"));
+        
         PlayerPrefs.Save();
         savedText.text = "Game saved.";
 

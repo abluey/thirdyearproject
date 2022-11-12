@@ -653,7 +653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7602854259481839289, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
       propertyPath: m_text
-      value: Stay a little longer?
+      value: Are you sure?
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5302276594369679909, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}

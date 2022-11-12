@@ -21,8 +21,20 @@ EditorBuildSettings:
     path: Assets/Scenes/Room.unity
     guid: fc6c615215a527a43b2b112f146f836d
   - enabled: 1
-    path: Assets/Scenes/LaptopScreen.unity
+    path: Assets/Scenes/Laptop/LaptopScreen.unity
     guid: d2b3939e10a57714eb8d5fb78c85ff95
+  - enabled: 1
+    path: Assets/Scenes/Laptop/FriendMi.unity
+    guid: 7765bce233b5a2a408e1ae59e07287cf
+  - enabled: 1
+    path: Assets/Scenes/Laptop/BirthdaySite.unity
+    guid: 98a0abcb6b0da414ebfca8588a8a18f0
+  - enabled: 1
+    path: Assets/Scenes/Laptop/PlantSite.unity
+    guid: 9799b4089d5615b438c47022597092f1
+  - enabled: 1
+    path: Assets/Scenes/Laptop/Groceries.unity
+    guid: 9c52cf32a6f4aa8489bcb21e6d3ccd24
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
