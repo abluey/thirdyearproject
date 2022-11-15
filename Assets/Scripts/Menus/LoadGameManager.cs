@@ -15,12 +15,12 @@ public class LoadGameManager : MonoBehaviour
     void Start()
     {   
         // haven't touched the game; Day 0 Time 0
-        if (PlayerPrefs.GetInt("DayCount") == 0 && PlayerPrefs.GetInt("TimeCount") == 0) {
+        if (PlayerPrefs.GetInt("DayCount") == 0 && PlayerPrefs.GetInt("TimeCount") == 0 && !PlayerPrefs.HasKey("Name")) {
             playBtn.interactable = false;
             Content.text = "No saved game found.";
         } else {
             playBtn.interactable = true;
-            Content.text = "Saved game found - Day " + PlayerPrefs.GetInt("DayCount") + ", " + GetTimeName(PlayerPrefs.GetInt("TimeCount"));
+            Content.text = PlayerPrefs.GetString("Name") + " - Day " + PlayerPrefs.GetInt("DayCount") + ", " + GetTimeName(PlayerPrefs.GetInt("TimeCount"));
             playBtn.onClick.AddListener(Play);
         }
     }

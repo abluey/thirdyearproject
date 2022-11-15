@@ -22,8 +22,13 @@ public class FMManager : MonoBehaviour
         profileBtn.onClick.AddListener(Profile);
         aboutBtn.onClick.AddListener(About);
 
+        if (!PlayerPrefs.HasKey("Name")) {
+            Friends();
+        } else {
+            profile.gameObject.SetActive(false);
+        }
+        
         friends.gameObject.SetActive(false);
-        profile.gameObject.SetActive(false);
         about.gameObject.SetActive(false);
     }
 

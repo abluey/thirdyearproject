@@ -675,7 +675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7602854259481839289, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
       propertyPath: m_text
-      value: You have not completed today's task(s) yet. Continue?
+      value: Make sure you have completed your tasks!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:

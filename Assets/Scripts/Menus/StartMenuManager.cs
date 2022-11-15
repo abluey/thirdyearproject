@@ -25,7 +25,7 @@ public class StartMenuManager : MonoBehaviour
         credits.gameObject.SetActive(false);
         settings.gameObject.SetActive(false);
 
-        if (PlayerPrefs.GetInt("DayCount") == 0 && PlayerPrefs.GetInt("TimeCount") == 0) {
+        if (PlayerPrefs.GetInt("DayCount") == 0 && PlayerPrefs.GetInt("TimeCount") == 0 && !PlayerPrefs.HasKey("Name")) {
             loadBtn.interactable = false;
             hasPlayed = false;
         } else { 

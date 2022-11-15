@@ -8,7 +8,6 @@ public class ConfirmTime : MonoBehaviour
 {
     [SerializeField] private Button yesBtn;
 
-    // Start is called before the first frame update
     void Start()
     {
         yesBtn.onClick.AddListener(Confirm);
