@@ -6,10 +6,8 @@ using UnityEngine.UI;
 
 public class ProfileManager : MonoBehaviour
 {
-    [SerializeField] private Button homeBtn;
     [SerializeField] private Button saveBtn;
 
-    [SerializeField] private Canvas homepage;
     [SerializeField] private Image firstTimeImage;
 
     [SerializeField] private TMPro.TMP_InputField nameInput;
@@ -30,17 +28,10 @@ public class ProfileManager : MonoBehaviour
             firstTimeImage.gameObject.SetActive(false);
             PopulateProfile();
         }
-        
-        homeBtn.onClick.AddListener(Homepage);
         saveBtn.onClick.AddListener(Save);
 
         errorText.gameObject.SetActive(false);
         savedText.gameObject.SetActive(false);
-    }
-
-    private void Homepage() {
-        homepage.gameObject.SetActive(true);
-        gameObject.SetActive(false);
     }
 
     private void Save() {

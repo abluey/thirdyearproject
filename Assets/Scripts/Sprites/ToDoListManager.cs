@@ -19,20 +19,20 @@ public class ToDoListManager : MonoBehaviour
         time = PlayerPrefs.GetInt("TimeCount");
         switch (day) {
             case 0: todo = "- Set up FriendMi profile"; break;
-            case 1: case 2: todo = "- Look for new friends"; break;
+            case 1: case 2: todo = "- Any new friends?"; break;
             default: todo = "Nothing for now."; break;
         }
 
         if (day == 0) {
             if (time >= 1) {
-                todo += "\n\n- Check out potted plant prices";
+                todo += "\n\n- Check fridge (buy groceries?)";
             }
             if (time == 2) {
-                todo += "\n\n- Check fridge (buy groceries?)";
+                todo += "\n\n- Chill";
             }
         } else if (day == 1) {
             if (time >= 1) {
-                todo += "\n\n- Buy a plant";
+                todo += "\n\n- Buy a plant!";
             }
             if (time == 2) {
                 todo += "\n\n- Buy snacks";

@@ -15,36 +15,37 @@ public class FMManager : MonoBehaviour
     [SerializeField] private Canvas profile;
     [SerializeField] private Canvas about;
 
-    // Start is called before the first frame update
+    [SerializeField] private Button homeBtn;
+    private Canvas lastVisited;
+
     void Start()
     {
-        friendsBtn.onClick.AddListener(Friends);
-        profileBtn.onClick.AddListener(Profile);
-        aboutBtn.onClick.AddListener(About);
-
-        if (!PlayerPrefs.HasKey("Name")) {
-            Friends();
-        } else {
-            profile.gameObject.SetActive(false);
-        }
+        friendsBtn.onClick.AddListener( delegate { LoadCanvas(friends); });
+        profileBtn.onClick.AddListener(delegate { LoadCanvas(profile);});
+        aboutBtn.onClick.AddListener(delegate { LoadCanvas(about);});
+        homeBtn.onClick.AddListener(Home);
         
         friends.gameObject.SetActive(false);
         about.gameObject.SetActive(false);
+        homeBtn.gameObject.SetActive(false);
+
+        if (!PlayerPrefs.HasKey("Name")) {
+            LoadCanvas(profile);
+        } else {
+            profile.gameObject.SetActive(false);
+        }
     }
 
-    private void Friends() {
-        friends.gameObject.SetActive(true);
+    private void LoadCanvas(Canvas canvas) {
+        canvas.gameObject.SetActive(true);
         homepage.gameObject.SetActive(false);
+        homeBtn.gameObject.SetActive(true);
+        lastVisited = canvas;
     }
 
-    private void Profile() {
-        profile.gameObject.SetActive(true);
-        homepage.gameObject.SetActive(false);
+    private void Home() {
+        homepage.gameObject.SetActive(true);
+        lastVisited.gameObject.SetActive(false);
+        homeBtn.gameObject.SetActive(false);
     }
-
-    private void About() {
-        about.gameObject.SetActive(true);
-        homepage.gameObject.SetActive(false);
-    }
-
 }
