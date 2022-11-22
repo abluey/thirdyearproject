@@ -17,6 +17,12 @@ public class EnlargeSprites : MonoBehaviour
         image.color = newColor;
     }
 
+    public void OnMouseClick()
+    {
+        transform.localScale = originalSize;
+        image.color = originalColor;
+    }
+
     public void OnMouseExit()
     {
         transform.localScale = originalSize;
