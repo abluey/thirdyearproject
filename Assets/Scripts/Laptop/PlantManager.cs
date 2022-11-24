@@ -12,10 +12,12 @@ public class PlantManager : MonoBehaviour
     [SerializeField] private Button cheeseBtn;
 
     [SerializeField] private Button backBtn;
+    [SerializeField] private Button tcBtn;
 
     [SerializeField] private Canvas homepage;
     [SerializeField] private Canvas shopPage;
-    [HideInInspector] public static string selectedPlant;
+    [SerializeField] private Canvas checkoutPage;
+    public static string selectedPlant;
 
     void Start()
     {
@@ -25,8 +27,10 @@ public class PlantManager : MonoBehaviour
         cheeseBtn.onClick.AddListener( delegate { LoadCanvas("cheese"); } );
 
         backBtn.onClick.AddListener(Homepage);
+        tcBtn.onClick.AddListener(TCs);
 
         shopPage.gameObject.SetActive(false);
+        checkoutPage.gameObject.SetActive(false);
         backBtn.gameObject.SetActive(false);
     }
 
@@ -38,8 +42,13 @@ public class PlantManager : MonoBehaviour
     }
 
     private void Homepage() {
+        selectedPlant = "";
         homepage.gameObject.SetActive(true);
         backBtn.gameObject.SetActive(false);
         shopPage.gameObject.SetActive(false);
+    }
+
+    private void TCs() {
+        Debug.Log("Terms and conditions");
     }
 }

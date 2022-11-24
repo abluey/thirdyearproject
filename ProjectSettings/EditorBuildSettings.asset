@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: abcf088e80ea83441a8fc4beaaaef5e1
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/TimeConfirm.unity
     guid: 5ec31cab278f5804ba0898dd6a5cf354
@@ -35,25 +32,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Laptop/Groceries.unity
     guid: 9c52cf32a6f4aa8489bcb21e6d3ccd24
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Kitchen.unity
     guid: ade819ddc9bcb91479c0ce5a373b47e6
   - enabled: 1
     path: Assets/Scenes/GameMenu.unity
     guid: e11083e29a68eb142a416da650bc5e98
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Quit.unity
     guid: e3e55fdae322e7f4c898ea70fd9b7dbc
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   m_configObjects: {}

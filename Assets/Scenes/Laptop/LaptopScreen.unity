@@ -1099,6 +1099,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuitButton
       objectReference: {fileID: 0}
+    - target: {fileID: 4431228380309011155, guid: e1ec2429085b2db4abf608db81574a8d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4431228380309011155, guid: e1ec2429085b2db4abf608db81574a8d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4431228380309011155, guid: e1ec2429085b2db4abf608db81574a8d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2029012055}
+    - target: {fileID: 4431228380309011155, guid: e1ec2429085b2db4abf608db81574a8d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e1ec2429085b2db4abf608db81574a8d, type: 3}
@@ -1112,9 +1128,14 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4431228380309011155, guid: e1ec2429085b2db4abf608db81574a8d, type: 3}
   m_PrefabInstance: {fileID: 2029012052}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2029012055}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2029012055 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1970822235569024814, guid: e1ec2429085b2db4abf608db81574a8d, type: 3}
+  m_PrefabInstance: {fileID: 2029012052}
+  m_PrefabAsset: {fileID: 0}
