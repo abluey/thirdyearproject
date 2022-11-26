@@ -17,6 +17,7 @@ public class PlantManager : MonoBehaviour
     [SerializeField] private Canvas homepage;
     [SerializeField] private Canvas shopPage;
     [SerializeField] private Canvas checkoutPage;
+    [SerializeField] private Canvas purchasedPage;
     public static string selectedPlant;
 
     void Start()
@@ -31,6 +32,7 @@ public class PlantManager : MonoBehaviour
 
         shopPage.gameObject.SetActive(false);
         checkoutPage.gameObject.SetActive(false);
+        purchasedPage.gameObject.SetActive(false);
         backBtn.gameObject.SetActive(false);
     }
 

@@ -12,6 +12,8 @@ public class PlantCheckout : MonoBehaviour
 
     [SerializeField] private TMPro.TMP_Text plantName;
     [SerializeField] private TMPro.TMP_Text price;
+    [SerializeField] private TMPro.TMP_Text errorText;
+    [SerializeField] private Canvas purchasedPage;
 
     private string actualPlantName;
 
@@ -34,18 +36,22 @@ public class PlantCheckout : MonoBehaviour
             plantName.text = actualPlantName;
             price.text = "Total Price: £4.99";
         }
+
+        errorText.gameObject.SetActive(false);
     }
 
     private void Confirm() {
         if (tcs.isOn) {
+            errorText.gameObject.SetActive(false);
+            
             PlayerChoices.receivePlantPromo = promo.isOn;
             PlayerChoices.buyPremiumPlant = PlantShopManager.plantPremium;
             PlayerChoices.plantRibbonColor = PlantShopManager.ribbonColor;
             PlayerChoices.plantType = PlantManager.selectedPlant;
 
-            Debug.Log("Shopped");
+            purchasedPage.gameObject.SetActive(true);
         } else {
-            Debug.Log("ya fucked it");
+            errorText.gameObject.SetActive(true);
         }
     }
 }
