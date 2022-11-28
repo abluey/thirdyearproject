@@ -18,6 +18,7 @@ public class PlantManager : MonoBehaviour
     [SerializeField] private Canvas shopPage;
     [SerializeField] private Canvas checkoutPage;
     [SerializeField] private Canvas purchasedPage;
+    [SerializeField] private Canvas tcsPage;
     public static string selectedPlant;
 
     void Start()
@@ -30,6 +31,7 @@ public class PlantManager : MonoBehaviour
         backBtn.onClick.AddListener(Homepage);
         tcBtn.onClick.AddListener(TCs);
 
+        tcsPage.gameObject.SetActive(false);
         shopPage.gameObject.SetActive(false);
         checkoutPage.gameObject.SetActive(false);
         purchasedPage.gameObject.SetActive(false);
@@ -51,6 +53,6 @@ public class PlantManager : MonoBehaviour
     }
 
     private void TCs() {
-        Debug.Log("Terms and conditions");
+        tcsPage.gameObject.SetActive(true);
     }
 }
