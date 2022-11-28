@@ -48,6 +48,7 @@ public class TimeTransition : MonoBehaviour
         content.text = "Day " + PlayerPrefs.GetInt("DayCount") + ", " + GetTimeName(PlayerPrefs.GetInt("TimeCount"));
         
         PlayerPrefs.Save();
+        Save.SaveData();
         savedText.text = "Game saved.";
 
         yield return new WaitForSeconds(1.5f);

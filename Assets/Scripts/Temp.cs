@@ -16,16 +16,15 @@ public class Temp : MonoBehaviour
     {
         show.onClick.AddListener(Show);
         cheatBtn.onClick.AddListener(Cheat);
+    }
 
+    private void Show() {
         message = "PLANTS:"
                 + "\nPlant Type: " + PlayerChoices.plantType
                 + "\nPremium: " + PlayerChoices.buyPremiumPlant
                 + "\nReceive promo: " + PlayerChoices.receivePlantPromo
                 + "\nRibbon color: " + PlayerChoices.plantRibbonColor
                 ;
-    }
-
-    private void Show() {
         Debug.Log(message);
     }
 
