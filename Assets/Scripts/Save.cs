@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
     // so PlayerPrefs has:
-    // TimeCount, DayCount
+    // TimeCount, DayCount - we are NOT moving these to JSON because they change so quickly
     // Name, DOB, Gender, Bio
 
     // logic: only needs saving into JSON if it's not player-facing because so far i'm lazy

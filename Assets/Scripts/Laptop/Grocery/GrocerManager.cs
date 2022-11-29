@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class GrocerManager : MonoBehaviour
     [SerializeField] private Button dairyBtn;
     [SerializeField] private Button condimentBtn;
 
+    [SerializeField] private Button cartBtn;
+    [SerializeField] private TMPro.TMP_Text cartText;
     [SerializeField] private Button backBtn;
 
     [SerializeField] private Canvas homepage;
@@ -18,6 +21,7 @@ public class GrocerManager : MonoBehaviour
     [SerializeField] private Canvas veg;
     [SerializeField] private Canvas dairy;
     [SerializeField] private Canvas condiment;
+    [SerializeField] private Canvas cartPage;
 
     private Canvas lastVisited;
 
@@ -29,7 +33,9 @@ public class GrocerManager : MonoBehaviour
         condimentBtn.onClick.AddListener( delegate { LoadCanvas(condiment); } );
 
         backBtn.onClick.AddListener(Homepage);
+        cartBtn.onClick.AddListener(Cart);
 
+        cartPage.gameObject.SetActive(false);
         staples.gameObject.SetActive(false);
         veg.gameObject.SetActive(false);
         dairy.gameObject.SetActive(false);
@@ -48,6 +54,22 @@ public class GrocerManager : MonoBehaviour
         homepage.gameObject.SetActive(true);
         backBtn.gameObject.SetActive(false);
         lastVisited.gameObject.SetActive(false);
+    }
+
+    private void Cart() {
+        cartPage.gameObject.SetActive(true);
+
+        cartText.text = "";
+        foreach (KeyValuePair<string, int> item in CartManager.cart) {
+            if (item.Value > 0) {
+                cartText.text += "\n" + item.Value.ToString() + "x " + item.Key;
+            }
+        }
+
+        if (cartText.text == "") {
+            cartText.text = "\nEmpty!";
+            Debug.Log("No items");
+        }
     }
 }
 
