@@ -5,7 +5,27 @@ using UnityEngine.UI;
 
 public class CartManager : MonoBehaviour
 { 
+
+    [SerializeField] private Button checkoutBtn;
+    [SerializeField] private Button yesBtn;
+    [SerializeField] private Button noBtn;
+
+    [SerializeField] private Canvas purchasedPage;
+
     public static IDictionary<string, int> cart = new Dictionary<string, int>();
+
+    void OnEnable() {
+        Deny();
+    }
+
+    void Start() {
+        checkoutBtn.onClick.AddListener(Checkout);
+        yesBtn.onClick.AddListener(Confirm);
+        noBtn.onClick.AddListener(Deny);
+
+        yesBtn.gameObject.SetActive(false);
+        noBtn.gameObject.SetActive(false);
+    }
 
     public static void AddFood(string food) {
         if (cart.ContainsKey(food)) {       // if the cart already has the food in it
@@ -13,8 +33,6 @@ public class CartManager : MonoBehaviour
         } else {
             cart.Add(food, 1);              // cart has a new food
         }
-
-        Debug.Log(food + " " + cart[food]);
     }
 
     public static void SubtractFood(string food) {
@@ -23,6 +41,25 @@ public class CartManager : MonoBehaviour
         } else {                            // if the cart has 1 food (should not be able to subtract at 0)
             cart[food] = 0;
         }
-        Debug.Log(food + " " + cart[food]);
+    }
+
+    private void Checkout() {
+        checkoutBtn.gameObject.SetActive(false);
+        yesBtn.gameObject.SetActive(true);
+        noBtn.gameObject.SetActive(true);
+    }
+
+    private void Confirm() {
+        purchasedPage.gameObject.SetActive(true);
+
+        // ELEPHANT save
+
+        gameObject.SetActive(false);
+    }
+
+    private void Deny() {
+        checkoutBtn.gameObject.SetActive(true);
+        yesBtn.gameObject.SetActive(false);
+        noBtn.gameObject.SetActive(false);
     }
 }
