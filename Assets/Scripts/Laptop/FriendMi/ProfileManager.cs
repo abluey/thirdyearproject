@@ -22,12 +22,15 @@ public class ProfileManager : MonoBehaviour
     private string dobProcessed;
     private string[] dobArray;
 
-    void Start()
-    {   
+    void OnEnable() {
         if (PlayerPrefs.HasKey("Name")) {
             firstTimeImage.gameObject.SetActive(false);
             PopulateProfile();
         }
+    }
+    
+    void Start()
+    {   
         saveBtn.onClick.AddListener(Save);
 
         errorText.gameObject.SetActive(false);
