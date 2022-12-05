@@ -12,18 +12,46 @@ using UnityEngine;
 
 public class Save : MonoBehaviour
 {
-    public static void SaveData() {
-        Debug.Log(Application.persistentDataPath);
-        string data = JsonUtility.ToJson(GetPlayerPlantChoices()); //there's an option to prettify (prettyPrint), default False
-        System.IO.File.WriteAllText(Application.persistentDataPath + "/PlantData.json", data);
+    // there's probably loops here we can use to save and load all this, right?
+
+    static string[] array = {"PlantData.json", "GroceryData.json"};
+    static string datapath;
+
+    void Start() {
+        datapath = Application.persistentDataPath;
     }
 
-    public void LoadData() {
-        string filepath = System.IO.Path.Combine(Application.persistentDataPath, "PlantData.json");
+    public static void SaveData() {
+        Debug.Log(datapath);
+
+        string data = JsonUtility.ToJson(GetPlayerPlantChoices()); //there's an option to prettify (prettyPrint), default False
+        System.IO.File.WriteAllText(datapath + "/PlantData.json", data);
+
+        data = JsonUtility.ToJson(GetPlayerGroceryData());
+        System.IO.File.WriteAllText(datapath + "/GroceryData.json", data);
+    }
+
+    public static void LoadData() {
+        string filepath = System.IO.Path.Combine(datapath, "PlantData.json");
         string data = System.IO.File.ReadAllText(filepath);
 
         PlantData plantData = JsonUtility.FromJson<PlantData>(data);
         SetPlayerPlantChoices(plantData);
+
+        filepath = System.IO.Path.Combine(datapath, "GroceryData.json");
+        data = System.IO.File.ReadAllText(filepath);
+
+        GroceryData grocData = JsonUtility.FromJson<GroceryData>(data);
+        SetPlayerShopChoices(grocData);
+    }
+
+    public static void DeleteAllData() {
+        foreach (string item in array) {
+            string filepath = System.IO.Path.Combine(datapath, item);
+            if (System.IO.File.Exists(filepath)) {
+                System.IO.File.Delete(filepath);
+            }
+        }
     }
 
     public static PlantData GetPlayerPlantChoices() {
@@ -35,11 +63,23 @@ public class Save : MonoBehaviour
         return data;
     }
 
-    public void SetPlayerPlantChoices(PlantData data) {
+    public static GroceryData GetPlayerGroceryData() {
+        GroceryData data = new GroceryData();
+        data.shoppedItems = PlayerChoices.shoppedItems;
+        data.groceryDone = PlayerChoices.groceryDone;
+        return data;
+    }
+
+    public static void SetPlayerPlantChoices(PlantData data) {
         PlayerChoices.buyPremiumPlant = data.buyPremiumPlant;
         PlayerChoices.receivePlantPromo = data.receivePlantPromo;
         PlayerChoices.plantRibbonColor = data.plantRibbonColor;
         PlayerChoices.plantType = data.plantType;
+    }
+
+    public static void SetPlayerShopChoices(GroceryData data) {
+        PlayerChoices.shoppedItems = data.shoppedItems;
+        PlayerChoices.groceryDone = data.groceryDone;
     }
 }
 
@@ -49,4 +89,10 @@ public class PlantData {
     public bool receivePlantPromo;
     public string plantRibbonColor;
     public string plantType;
+}
+
+[System.Serializable]
+public class GroceryData {
+    public string[] shoppedItems;
+    public bool groceryDone;
 }

@@ -19,6 +19,7 @@ public class GameMenuManager : MonoBehaviour
     }
 
     private void Menu() {
+        PlayerChoices.ResetChoices();
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("StartMenu", LoadSceneMode.Additive);
         asyncLoad.completed += OnLoadComplete;
     }

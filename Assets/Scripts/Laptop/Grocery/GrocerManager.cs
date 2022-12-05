@@ -67,9 +67,9 @@ public class GrocerManager : MonoBehaviour
 
         cartText.text = "";
         foreach (KeyValuePair<string, int> item in CartManager.cart) {
-            if (item.Value > 0) {
+            // if (item.Value > 0) {
                 cartText.text += "\n" + item.Value.ToString() + "x " + item.Key;
-            }
+            // }
         }
 
         if (cartText.text == "") {

@@ -24,6 +24,11 @@ public class FoodBought : MonoBehaviour
 
     private void Home() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        homepage.gameObject.SetActive(true);
         gameObject.SetActive(false);
+        staples.gameObject.SetActive(false);
+        veg.gameObject.SetActive(false);
+        dairy.gameObject.SetActive(false);
+        condiment.gameObject.SetActive(false);
     }
 }

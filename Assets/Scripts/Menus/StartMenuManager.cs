@@ -43,6 +43,7 @@ public class StartMenuManager : MonoBehaviour
 
     private void Reset() {
         PlayerPrefs.DeleteAll();
+        Save.DeleteAllData();
     }
 
     private void PopScene(string sceneName) {
@@ -51,6 +52,7 @@ public class StartMenuManager : MonoBehaviour
 
     private void Load() {
         load.gameObject.SetActive(true);
+        Save.LoadData();
     }
 
     private void Credits() {

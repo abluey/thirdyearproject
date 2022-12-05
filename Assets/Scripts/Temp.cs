@@ -10,6 +10,7 @@ public class Temp : MonoBehaviour
     [SerializeField] private Button cheatBtn;
 
     private string message;
+    private string message2;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,20 @@ public class Temp : MonoBehaviour
                 + "\nReceive promo: " + PlayerChoices.receivePlantPromo
                 + "\nRibbon color: " + PlayerChoices.plantRibbonColor
                 ;
+
+        string temp = "";
+
+        foreach(string item in PlayerChoices.shoppedItems)
+        {
+            temp += item + " ";
+        }  
+
+        message2 = "GROC:"
+                + "\nCart: " + temp
+                + "\nHasShoppped: " + PlayerChoices.groceryDone
+                ;
         Debug.Log(message);
+        Debug.Log(message2);
     }
 
     private void Cheat() {

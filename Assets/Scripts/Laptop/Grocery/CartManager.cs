@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,7 @@ public class CartManager : MonoBehaviour
 
     [SerializeField] private Canvas purchasedPage;
 
-    public static IDictionary<string, int> cart = new Dictionary<string, int>();
+    public static Dictionary<string, int> cart = new Dictionary<string, int>();
 
     void OnEnable() {
         Deny();
@@ -39,7 +40,7 @@ public class CartManager : MonoBehaviour
         if (cart[food] > 1) {               // if the cart has 2 or more foods
             cart[food] = cart[food] - 1;    // minimum number is 1
         } else {                            // if the cart has 1 food (should not be able to subtract at 0)
-            cart[food] = 0;
+            cart.Remove(food);              // remove the entry from the cart if it's at 0
         }
     }
 
@@ -52,7 +53,24 @@ public class CartManager : MonoBehaviour
     private void Confirm() {
         purchasedPage.gameObject.SetActive(true);
 
-        // ELEPHANT save
+        string[] cartKeys = cart.Keys.ToArray();
+        int[] cartValues = cart.Values.ToArray();
+        int cartIndex = 0;
+
+        PlayerChoices.shoppedItems = new string[cart.Count * 2];
+
+        for (int i = 0; i < PlayerChoices.shoppedItems.Length; i++) {
+            if (i % 2 == 0) {   // even numbers, i.e. the keys
+                PlayerChoices.shoppedItems[i] = cartKeys[cartIndex];
+            } else {    // odd numbers, i.e. the values of the previous keys
+                PlayerChoices.shoppedItems[i] = (cartValues[cartIndex]).ToString();
+            }
+
+            if (i > 0 && i % 2 == 1) cartIndex++;   // on every odd number, the cartIndex moves
+        }
+
+
+        PlayerChoices.groceryDone = true;
 
         gameObject.SetActive(false);
     }
