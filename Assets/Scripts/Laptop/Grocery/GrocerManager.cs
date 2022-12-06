@@ -23,10 +23,19 @@ public class GrocerManager : MonoBehaviour
     [SerializeField] private Canvas condiment;
     [SerializeField] private Canvas cartPage;
     [SerializeField] private Canvas purchasedPage;
+    [SerializeField] private Canvas speech;
 
     private Canvas lastVisited;
+    public static bool warning;
 
-    void OnEnable() {
+    // void OnEnable() {
+    //     warning = false;
+    // }
+
+    void Start()
+    {   
+        warning = false;
+        
         cartPage.gameObject.SetActive(false);
         purchasedPage.gameObject.SetActive(false);
         staples.gameObject.SetActive(false);
@@ -34,10 +43,8 @@ public class GrocerManager : MonoBehaviour
         dairy.gameObject.SetActive(false);
         condiment.gameObject.SetActive(false);
         backBtn.gameObject.SetActive(false);
-    }
-
-    void Start()
-    {
+        speech.gameObject.SetActive(false);
+        
         stapBtn.onClick.AddListener( delegate { LoadCanvas(staples); } );
         vegBtn.onClick.AddListener( delegate { LoadCanvas(veg); } );
         dairyBtn.onClick.AddListener( delegate { LoadCanvas(dairy); } );

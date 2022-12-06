@@ -12,6 +12,7 @@ public class CartManager : MonoBehaviour
     [SerializeField] private Button noBtn;
 
     [SerializeField] private Canvas purchasedPage;
+    [SerializeField] private Canvas speech;
 
     public static Dictionary<string, int> cart = new Dictionary<string, int>();
 
@@ -45,9 +46,14 @@ public class CartManager : MonoBehaviour
     }
 
     private void Checkout() {
-        checkoutBtn.gameObject.SetActive(false);
-        yesBtn.gameObject.SetActive(true);
-        noBtn.gameObject.SetActive(true);
+        if (PlayerChoices.groceryDone || !GrocerManager.warning || cart.Count == 0) {
+            speech.gameObject.SetActive(true);
+        }
+        else {
+            checkoutBtn.gameObject.SetActive(false);
+            yesBtn.gameObject.SetActive(true);
+            noBtn.gameObject.SetActive(true);
+        }
     }
 
     private void Confirm() {

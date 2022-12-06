@@ -85,34 +85,4 @@ public class FoodManager : MonoBehaviour
             if (foodCount3?.text == "1") sub3?.gameObject.SetActive(true);    // only sets true once
         }
     }
-
-    // private void AddCount(string food) {
-    //     // can't rely on counting using the CartManager because no idea which code gets executed first
-
-    //     switch (food) {
-    //         case "Bread": 
-    //             breadCount.text = (Int32.Parse(breadCount.text) + 1).ToString();
-    //             if (breadCount.text == "1") subBread.gameObject.SetActive(true); // only sets true once
-    //             break;
-    //         case "Pasta":
-    //             pastaCount.text = (Int32.Parse(pastaCount.text) + 1).ToString();
-    //             if (pastaCount.text == "1") subPasta.gameObject.SetActive(true);
-    //             break;
-    //         default: Debug.Log("Something went wrong"); break;
-    //     }
-    // }
-
-    // private void SubCount(string food) {
-    //     switch (food) {
-    //         case "Bread": 
-    //             breadCount.text = (Int32.Parse(breadCount.text) - 1).ToString();
-    //             if (breadCount.text == "0") subBread.gameObject.SetActive(false); // only sets false once
-    //             break;
-    //         case "Pasta":
-    //             pastaCount.text = (Int32.Parse(pastaCount.text) - 1).ToString();
-    //             if (pastaCount.text == "0") subPasta.gameObject.SetActive(false);
-    //             break;
-    //         default: Debug.Log("Something went wrong"); break;
-    //     }
-    // }
 }

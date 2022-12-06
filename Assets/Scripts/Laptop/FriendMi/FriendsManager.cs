@@ -8,6 +8,8 @@ public class FriendsManager : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text noFriendsText;
 
     [SerializeField] private Button newFriendRequest;
+    [SerializeField] private Button quitBtn;
+
     [SerializeField] private Canvas chatPage;
 
     void Start()
@@ -31,5 +33,6 @@ public class FriendsManager : MonoBehaviour
     private void AcceptFriendReq() {
         gameObject.SetActive(false);
         chatPage.gameObject.SetActive(true);
+        quitBtn.gameObject.SetActive(false);    // controlled here because if chatMan controls it it'll just disappear
     }
 }
