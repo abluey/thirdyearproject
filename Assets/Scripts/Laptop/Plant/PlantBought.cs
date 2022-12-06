@@ -19,5 +19,6 @@ public class PlantBought : MonoBehaviour
         homepage.gameObject.SetActive(true);
         gameObject.SetActive(false);
         checkoutPage.gameObject.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

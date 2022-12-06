@@ -22,7 +22,7 @@ public class ClockManager : MonoBehaviour
         // }
     }
 
-    private void OnLoadComplete(AsyncOperation loadOperation) {
-        _ = SceneManager.UnloadSceneAsync(gameObject.scene);
-    }
+    // private void OnLoadComplete(AsyncOperation loadOperation) {
+    //     _ = SceneManager.UnloadSceneAsync(gameObject.scene);
+    // }
 }

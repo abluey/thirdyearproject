@@ -8,10 +8,10 @@ public class CanvasBack : MonoBehaviour
     [SerializeField] private Button backBtn;
 
     void Start() {
-        backBtn.onClick.AddListener(Back);
+        backBtn?.onClick.AddListener(Back);
     }
 
-    private void Back() {
+    public void Back() {
         gameObject.SetActive(false);
     }
 }

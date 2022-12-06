@@ -13,14 +13,18 @@ public class PlantCheckout : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text plantName;
     [SerializeField] private TMPro.TMP_Text price;
     [SerializeField] private TMPro.TMP_Text errorText;
+
     [SerializeField] private Canvas purchasedPage;
+    [SerializeField] private Canvas speech;
 
     private string actualPlantName;
 
+    void Awake() {
+        confirmBtn.onClick.AddListener(Confirm);
+    }
+    
     void OnEnable()
     {
-        confirmBtn.onClick.AddListener(Confirm);
-
         switch (PlantManager.selectedPlant) {
             case "stabs": actualPlantName = "Mr. Stabs"; break;
             case "mb": actualPlantName = "Baron Moneybags"; break;
@@ -41,17 +45,32 @@ public class PlantCheckout : MonoBehaviour
     }
 
     private void Confirm() {
-        if (tcs.isOn) {
-            errorText.gameObject.SetActive(false);
-            
-            PlayerChoices.receivePlantPromo = promo.isOn;
-            PlayerChoices.buyPremiumPlant = PlantShopManager.plantPremium;
-            PlayerChoices.plantRibbonColor = PlantShopManager.ribbonColor;
-            PlayerChoices.plantType = PlantManager.selectedPlant;
 
-            purchasedPage.gameObject.SetActive(true);
+        // can only buy a plant when the buy plant activity is active on ToDo list
+        if (PlayerPrefs.GetInt("DayCount") == 1 && PlayerPrefs.GetInt("TimeCount") >= 1) {
+
+            // no saved record of bought plant yet and has checked the Ts&Cs box
+            if (PlayerChoices.plantType == "" && tcs.isOn) {
+                errorText.gameObject.SetActive(false);
+                
+                // setting record
+                PlayerChoices.receivePlantPromo = promo.isOn;
+                PlayerChoices.buyPremiumPlant = PlantShopManager.plantPremium;
+                PlayerChoices.plantRibbonColor = PlantShopManager.ribbonColor;
+                PlayerChoices.plantType = PlantManager.selectedPlant;
+
+                purchasedPage.gameObject.SetActive(true);
+
+            } else if (PlayerChoices.plantType == "" && !tcs.isOn) {
+                // no T&Cs box ticked
+                errorText.gameObject.SetActive(true);
+
+            } else {
+                // if the Player's plant type has already been set; i.e. already bought a plant
+                speech.gameObject.SetActive(true);
+            }
         } else {
-            errorText.gameObject.SetActive(true);
+            speech.gameObject.SetActive(true);
         }
     }
 }
