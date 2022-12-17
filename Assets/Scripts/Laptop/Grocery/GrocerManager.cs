@@ -35,7 +35,7 @@ public class GrocerManager : MonoBehaviour
     void Start()
     {   
         warning = false;
-        
+
         cartPage.gameObject.SetActive(false);
         purchasedPage.gameObject.SetActive(false);
         staples.gameObject.SetActive(false);
@@ -81,7 +81,6 @@ public class GrocerManager : MonoBehaviour
 
         if (cartText.text == "") {
             cartText.text = "\nEmpty!";
-            Debug.Log("No items");
         }
     }
 }

@@ -14,7 +14,7 @@ public class Save : MonoBehaviour
 {
     // there's probably loops here we can use to save and load all this, right?
 
-    static string[] array = {"PlantData.json", "GroceryData.json"};
+    static string[] array = {"PlantData.json", "GroceryData.json", "FriendData.json"};
     static string datapath;
 
     void Start() {
@@ -29,6 +29,9 @@ public class Save : MonoBehaviour
 
         data = JsonUtility.ToJson(GetPlayerGroceryData());
         System.IO.File.WriteAllText(datapath + "/GroceryData.json", data);
+
+        data = JsonUtility.ToJson(GetPlayerFriendData());
+        System.IO.File.WriteAllText(datapath + "/FriendData.json", data);
     }
 
     public static void LoadData() {
@@ -43,6 +46,12 @@ public class Save : MonoBehaviour
 
         GroceryData grocData = JsonUtility.FromJson<GroceryData>(data);
         SetPlayerShopChoices(grocData);
+
+        filepath = System.IO.Path.Combine(datapath, "FriendData.json");
+        data = System.IO.File.ReadAllText(filepath);
+
+        FriendData frenData = JsonUtility.FromJson<FriendData>(data);
+        SetPlayerFriendChoices(frenData);
     }
 
     public static void DeleteAllData() {
@@ -53,6 +62,8 @@ public class Save : MonoBehaviour
             }
         }
     }
+
+    // GETs
 
     public static PlantData GetPlayerPlantChoices() {
         PlantData data = new PlantData();
@@ -70,6 +81,16 @@ public class Save : MonoBehaviour
         return data;
     }
 
+    public static FriendData GetPlayerFriendData() {
+        FriendData data = new FriendData();
+        data.acceptRequest = PlayerChoices.acceptRequest;
+        data.introducedYourself = PlayerChoices.introducedYourself;
+        data.chatRecord = PlayerChoices.chatRecord;
+        return data;
+    }
+
+    // SETs
+
     public static void SetPlayerPlantChoices(PlantData data) {
         PlayerChoices.buyPremiumPlant = data.buyPremiumPlant;
         PlayerChoices.receivePlantPromo = data.receivePlantPromo;
@@ -80,6 +101,12 @@ public class Save : MonoBehaviour
     public static void SetPlayerShopChoices(GroceryData data) {
         PlayerChoices.shoppedItems = data.shoppedItems;
         PlayerChoices.groceryDone = data.groceryDone;
+    }
+
+    public static void SetPlayerFriendChoices(FriendData data) {
+        PlayerChoices.acceptRequest = data.acceptRequest;
+        PlayerChoices.introducedYourself = data.introducedYourself;
+        PlayerChoices.chatRecord = data.chatRecord;
     }
 }
 
@@ -95,4 +122,11 @@ public class PlantData {
 public class GroceryData {
     public string[] shoppedItems;
     public bool groceryDone;
+}
+
+[System.Serializable]
+public class FriendData {
+    public bool acceptRequest;
+    public bool introducedYourself;
+    public string chatRecord;
 }

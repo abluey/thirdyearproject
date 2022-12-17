@@ -42,7 +42,7 @@ public class ProfileManager : MonoBehaviour
         savedText.gameObject.SetActive(false);
 
         if (ValidateInput() == "Validate OK") {
-            Debug.Log("validate ok");
+            // Debug.Log("validate ok");
 
             PlayerPrefs.SetString("Name", nameInput.text);
 
@@ -54,10 +54,10 @@ public class ProfileManager : MonoBehaviour
             if (!string.IsNullOrEmpty(bioInput.text)) PlayerPrefs.SetString("Bio", bioInput.text);
             StartCoroutine(ShowNotif());
 
-            Debug.Log(PlayerPrefs.GetString("Name"));
-            Debug.Log(PlayerPrefs.GetString("Gender"));
-            Debug.Log(PlayerPrefs.GetString("DOB"));
-            Debug.Log(PlayerPrefs.GetString("Bio"));
+            // Debug.Log(PlayerPrefs.GetString("Name"));
+            // Debug.Log(PlayerPrefs.GetString("Gender"));
+            // Debug.Log(PlayerPrefs.GetString("DOB"));
+            // Debug.Log(PlayerPrefs.GetString("Bio"));
         } else {
             errorText.text = ValidateInput();
             errorText.gameObject.SetActive(true);

@@ -15,6 +15,7 @@ public class FMManager : MonoBehaviour
     [SerializeField] private Canvas profile;
     [SerializeField] private Canvas about;
     [SerializeField] private Canvas chat;
+    [SerializeField] private Canvas chatLog;
 
     [SerializeField] private Button homeBtn;
     private Canvas lastVisited;
@@ -29,6 +30,7 @@ public class FMManager : MonoBehaviour
         friends.gameObject.SetActive(false);
         about.gameObject.SetActive(false);
         chat.gameObject.SetActive(false);
+        chatLog.gameObject.SetActive(false);
         
         homeBtn.gameObject.SetActive(false);
 

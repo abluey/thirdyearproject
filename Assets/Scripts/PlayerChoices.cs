@@ -19,6 +19,11 @@ public class PlayerChoices : MonoBehaviour
     public static string[] shoppedItems {get; set;} = {}; // default empty? does this work?
     public static bool groceryDone {get; set;} = false;
 
+    // friendmi
+    public static bool acceptRequest {get; set;} = false;   // default no friend request accepted
+    public static bool introducedYourself {get; set;} = false;
+    public static string chatRecord {get; set;} = "No messages yet.";
+
     // choices are currently reset once you go back to MainMenu
     // choices will persist in JSON if saved
     public static void ResetChoices() {
@@ -29,5 +34,9 @@ public class PlayerChoices : MonoBehaviour
 
         shoppedItems = Array.Empty<string>();   // creates an empty array
         groceryDone = false;
+
+        acceptRequest = false;
+        introducedYourself = false;
+        chatRecord = "No messages yet.";
     }
 }
