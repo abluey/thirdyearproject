@@ -13,19 +13,19 @@ public class SpeechModalBack : MonoBehaviour
     void Start()
     {
         warning = ClockManager.clockBlock;
+        switch (warning) {
+            case 100: thought.text = "I should set up my FriendMi profile first."; break;
+            case 101: thought.text = "I should buy something from the grocery store first."; break;
+            case 102: thought.text = "I should check my laptop notification."; break;
+            case 202: thought.text = "I should introduce myself to my new friend on FriendMi."; break;
+            case 302: thought.text = "I should finish my chat with Reese."; break;
+            default:
+                thought.text = "(You shouldn't be seeing this screen right now.)";
+                break;
+        }
     }
 
     public void Back() {
-        if (warning == 0) {
-            _ = SceneManager.UnloadSceneAsync(gameObject.scene);
-        }
-
-        if (warning == 201) {
-            thought.text = "I should set up my FriendMi profile first.";
-        }
-
-        if (warning == 202) {
-            thought.text = "I should check my laptop notification.";
-        }
+        _ = SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 }

@@ -39,6 +39,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameMenu.unity
     guid: e11083e29a68eb142a416da650bc5e98
   - enabled: 1
+    path: Assets/Scenes/SpeechModal.unity
+    guid: 6f8d4d7e2278b354ea42c64f4bb2d1aa
+  - enabled: 1
     path: Assets/Scenes/Quit.unity
     guid: e3e55fdae322e7f4c898ea70fd9b7dbc
   m_configObjects: {}

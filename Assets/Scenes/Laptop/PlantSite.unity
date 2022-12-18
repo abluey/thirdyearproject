@@ -4545,7 +4545,7 @@ MonoBehaviour:
   price: {fileID: 1557623515}
   errorText: {fileID: 600477931}
   purchasedPage: {fileID: 121711342}
-  speech: {fileID: 0}
+  speech: {fileID: 1011022894}
 --- !u!1001 &998608691
 PrefabInstance:
   m_ObjectHideFlags: 0

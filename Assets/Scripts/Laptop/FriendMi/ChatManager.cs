@@ -8,12 +8,10 @@ public class ChatManager : MonoBehaviour
 {
     // default message when first added day 0 time 2 (evening)
 
-    // chatProgress only updates when player clicks button
-
-    // chatProgress format is step/day/time
+    // chatProgress saves just after updatechatbox with Reese's reply
+    // the next step after that is ALWAYS presenting with new choices / finish
     // 0 means haven't started
     // 1 means completely finished
-    // For day 0 time 2: Intro num + abc's; a = 1, b = 2, c = 3 (Example: Intro2b = 22)
 
     [SerializeField] private Button homeBtn;
     [SerializeField] private Button quitApp;
@@ -62,18 +60,16 @@ public class ChatManager : MonoBehaviour
             choice1.gameObject.SetActive(true);
             choice1text.text = "Hello, my name is " + PlayerPrefs.GetString("Name") + "\n";
 
-            choice1.onClick.AddListener(Intro1);
+            choice1.onClick.AddListener(Intro);
         } else if (PlayerPrefs.GetInt("DayCount") == 0) {
             Debug.Log(PlayerChoices.chatProgress);
             chatbox.text = PlayerChoices.chatRecord;
 
             switch (PlayerChoices.chatProgress) {
                 case 1: break;
-                case 102: Intro1ab(); break;
-                case 202: Intro2ab(); break;
-                case 3102: Intro4(); break;
-                case 3202: Intro3ca(); break;
-                case 4102: Intro4b(); break;
+                case 2: IntroReplyChoice(); break;
+                case 3: Intro2ReplyChoice(); break;
+                case 4: Intro3ReplyChoice(); break;
                 default: Debug.Log("Something went wrong"); break;
             }
         } else {
@@ -82,43 +78,44 @@ public class ChatManager : MonoBehaviour
     }
 
     private IEnumerator IsTyping(float num) {
+        homeBtn.gameObject.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         isTyping.gameObject.SetActive(true);
         yield return new WaitForSeconds(num);
         isTyping.gameObject.SetActive(false);
+        homeBtn.gameObject.SetActive(true);
     }
 
-    private void updateChatRecords(string text) {
+    public void updateChatRecords(string text) {
         chatbox.text += text;
         PlayerChoices.chatRecord += text;
     }
 
-    private void Intro1() {
-        // display chat text
-        // update chat record
+    private void Intro() {
+        // update chat box and chat record
 
-        choice1.onClick.RemoveListener(Intro1);
+        choice1.onClick.RemoveListener(Intro);
         PlayerChoices.introducedYourself = true;
         chatbox.text = "Day 0\nYou: Hello, my name is " + PlayerPrefs.GetString("Name") + "\n";
         PlayerChoices.chatRecord = chatbox.text;
         choice1.gameObject.SetActive(false);
 
-        StartCoroutine(Intro1a());
+        StartCoroutine(IntroReply());
     }
 
-    private IEnumerator Intro1a() {
-        // "istyping"
-        // display chat reply
-        // set up reply choices
+    private IEnumerator IntroReply() {
+        // IsTyping; update chat box and chat record with reply
 
         yield return StartCoroutine(IsTyping(2.0f));
         updateChatRecords("\nReese: Hi there! Nice to meet you.\n");
-        PlayerChoices.chatProgress = 102;
-        Intro1ab();
+        PlayerChoices.chatProgress = 2;
+        IntroReplyChoice();
     }
 
     // separation is necessary so the updatechatrecord doesn't repeat when loading back into the game from menu
-    private void Intro1ab() {
+    // Keep Reese's chats self-contained
+    private void IntroReplyChoice() {
+        // set up the reply choice
         choice1text.text = "Nice to meet you too.";
 
         choice1.onClick.AddListener(Intro2);
@@ -131,72 +128,68 @@ public class ChatManager : MonoBehaviour
         updateChatRecords("\nYou: Nice to meet you too.\n");
         choice1.gameObject.SetActive(false);
 
-        StartCoroutine(Intro2a());
+        StartCoroutine(Intro2Reply());
     }
 
-    private IEnumerator Intro2a() {
+    private IEnumerator Intro2Reply() {
         yield return StartCoroutine(IsTyping(2.0f));
 
         updateChatRecords("\nReese: Not many people use FriendMi now. Glad to see a new face!\n");
-        PlayerChoices.chatProgress = 202;
-        Intro2ab();
+        PlayerChoices.chatProgress = 3;
+        Intro2ReplyChoice();
     }
 
-    private void Intro2ab() {
-        choice1text.text = "Looking forward to our chats :)";
+    private void Intro2ReplyChoice() {
+        choice1text.text = "I'm looking forward to our chats :)";
         choice2text.text = "Oh, why?";
 
-        choice1.onClick.AddListener(Intro3a);
+        choice1.onClick.AddListener(Intro2Reply1);
         choice1.gameObject.SetActive(true);
 
-        choice2.onClick.AddListener(Intro3b);
+        choice2.onClick.AddListener(Intro2Reply2);
         choice2.gameObject.SetActive(true);
     }
 
-    private void Intro3a() {
-        choice1.onClick.RemoveListener(Intro3a);
-        choice2.onClick.RemoveListener(Intro3b);
+    private void Intro2Reply1() {
+        choice1.onClick.RemoveListener(Intro2Reply1);
+        choice2.onClick.RemoveListener(Intro2Reply2);
 
-        updateChatRecords("\nYou: Looking forward to our chats :)\n");
-
-        // if the player doesn't wait for Intro4 then the dialogue is lost (sucks to suck)
-        // this is to avoid the double-chat problem when loading back into game
-        PlayerChoices.chatProgress = 1;
+        updateChatRecords("\nYou: I'm looking forward to our chats :)\n");
 
         choice1.gameObject.SetActive(false);
         choice2.gameObject.SetActive(false);
 
-        StartCoroutine(Intro4());
+        StartCoroutine(IntroFinish());
     }
 
-    private void Intro3b() {
-        choice1.onClick.RemoveListener(Intro3a);
-        choice2.onClick.RemoveListener(Intro3b);
+    private void Intro2Reply2() {
+        choice1.onClick.RemoveListener(Intro2Reply1);
+        choice2.onClick.RemoveListener(Intro2Reply2);
 
         updateChatRecords("\nYou: Oh, why?\n");
 
         choice1.gameObject.SetActive(false);
         choice2.gameObject.SetActive(false);
 
-        StartCoroutine(Intro3c());
+        StartCoroutine(Intro3Reply());
     }
 
-    private IEnumerator Intro3c() {
+    private IEnumerator Intro3Reply() {
         yield return StartCoroutine(IsTyping(3.5f));
 
         updateChatRecords("\nReese: I'm surprised you haven't heard. There's rumors of a security breach. But honestly? Everything seems fine to me.\n");
-        PlayerChoices.chatProgress = 3202;
-        Intro3ca();
+        PlayerChoices.chatProgress = 4;
+        Intro3ReplyChoice();
     }
 
-    private void Intro3ca() {
+    private void Intro3ReplyChoice() {
         choice1text.text = "I... see. Well, I look forward to our chats anyway.";
 
-        choice1.onClick.AddListener(Intro4a);
+        choice1.onClick.AddListener(IntroFinish1);
         choice1.gameObject.SetActive(true);
     }
 
-    private IEnumerator Intro4() {
+    private IEnumerator IntroFinish() {
         choice1.onClick.RemoveAllListeners();
         choice2.onClick.RemoveAllListeners();
         choice1.gameObject.SetActive(false);
@@ -205,21 +198,21 @@ public class ChatManager : MonoBehaviour
         yield return IsTyping(1.0f);
 
         updateChatRecords("\nReese: Of course! I'll see you around.");
+        PlayerChoices.chatProgress = 1;
     }
 
-    private void Intro4a() {
+    private void IntroFinish1() {
         choice1.onClick.RemoveAllListeners();
         choice2.onClick.RemoveAllListeners();
         choice1.gameObject.SetActive(false);
         choice2.gameObject.SetActive(false);
-        PlayerChoices.chatProgress = 4102;
 
         updateChatRecords("\nYou: I... see. Well, I look forward to our chats anyway.\n");
 
-        StartCoroutine(Intro4b());
+        StartCoroutine(IntroFinish2());
     }
 
-    private IEnumerator Intro4b() {
+    private IEnumerator IntroFinish2() {
         yield return StartCoroutine(IsTyping(1.0f));
         updateChatRecords("\nReese: Same here! I'll see you around.");
         PlayerChoices.chatProgress = 1;
