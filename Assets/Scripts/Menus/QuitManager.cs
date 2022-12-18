@@ -9,13 +9,13 @@ public class QuitManager : MonoBehaviour
     [SerializeField] private Button yesBtn;
     [SerializeField] private Button noBtn;
 
-    // Start is called before the first frame update
     void Start() {
         yesBtn.onClick.AddListener(QuitYes);
         noBtn.onClick.AddListener(QuitNo);
     }
 
     private void QuitYes() {
+        Save.SaveData();
         Application.Quit();
     }
 

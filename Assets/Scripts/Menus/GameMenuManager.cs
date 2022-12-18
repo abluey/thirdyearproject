@@ -7,18 +7,16 @@ using UnityEngine.SceneManagement;
 public class GameMenuManager : MonoBehaviour
 {
     [SerializeField] private Button saveBtn;
-    [SerializeField] private Button menuBtn;
 
     public TMPro.TMP_Text savedText;
 
     void Start() {
         savedText.text = "";
-
         saveBtn.onClick.AddListener(Save);
-        menuBtn.onClick.AddListener(Menu);
     }
 
-    private void Menu() {
+    private void Save() {
+        PlayerPrefs.Save();
         PlayerChoices.ResetChoices();
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("StartMenu", LoadSceneMode.Additive);
         asyncLoad.completed += OnLoadComplete;
@@ -33,17 +31,5 @@ public class GameMenuManager : MonoBehaviour
                 }
             }
         _ = SceneManager.UnloadSceneAsync(gameObject.scene);
-    }
-
-    private void Save() {
-        Debug.Log("Day: " + PlayerPrefs.GetInt("DayCount") + " Time: " + PlayerPrefs.GetInt("TimeCount"));
-        PlayerPrefs.Save();
-        StartCoroutine(ShowSavedNotif());
-    }
-
-    IEnumerator ShowSavedNotif() {
-        savedText.text = "Game saved.";
-        yield return new WaitForSeconds (2.0f);
-        savedText.text = "";
     }
 }

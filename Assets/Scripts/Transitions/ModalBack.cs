@@ -8,7 +8,6 @@ public class ModalBack : MonoBehaviour
 {
     [SerializeField] private Button backBtn;
 
-    // Start is called before the first frame update
     void Start()
     {
         backBtn.onClick.AddListener(Back);

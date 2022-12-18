@@ -48,6 +48,7 @@ public class TimeTransition : MonoBehaviour
         content.text = "Day " + PlayerPrefs.GetInt("DayCount") + ", " + GetTimeName(PlayerPrefs.GetInt("TimeCount"));
         
         PlayerPrefs.Save();
+        PlayerChoices.chatProgress = 0;
         Save.SaveData();
         savedText.text = "Game saved.";
 

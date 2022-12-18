@@ -34,17 +34,21 @@ public class FMManager : MonoBehaviour
         
         homeBtn.gameObject.SetActive(false);
 
-        if (!PlayerPrefs.HasKey("Name")) {
-            LoadCanvas(profile);
-        } else {
+        if (PlayerPrefs.HasKey("Name")) {
             profile.gameObject.SetActive(false);
+        } else {
+            LoadCanvas(profile);
         }
     }
 
     private void LoadCanvas(Canvas canvas) {
         canvas.gameObject.SetActive(true);
         homepage.gameObject.SetActive(false);
-        homeBtn.gameObject.SetActive(true);
+        if (PlayerPrefs.HasKey("Name")) {
+            homeBtn.gameObject.SetActive(true);
+        } else {
+            homeBtn.gameObject.SetActive(false);
+        }
         lastVisited = canvas;
     }
 

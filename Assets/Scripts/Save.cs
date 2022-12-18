@@ -8,7 +8,7 @@ using UnityEngine;
 
     // logic: only needs saving into JSON if it's not player-facing because so far i'm lazy
 
-    // places to save: GameMenu (Save button), TimeTransition.AdvanceTime
+    // places to save: GameMenu (Save button), TimeTransition.AdvanceTime, Quit
 
 public class Save : MonoBehaviour
 {
@@ -86,6 +86,7 @@ public class Save : MonoBehaviour
         data.acceptRequest = PlayerChoices.acceptRequest;
         data.introducedYourself = PlayerChoices.introducedYourself;
         data.chatRecord = PlayerChoices.chatRecord;
+        data.chatProgress = PlayerChoices.chatProgress;
         return data;
     }
 
@@ -107,6 +108,7 @@ public class Save : MonoBehaviour
         PlayerChoices.acceptRequest = data.acceptRequest;
         PlayerChoices.introducedYourself = data.introducedYourself;
         PlayerChoices.chatRecord = data.chatRecord;
+        PlayerChoices.chatProgress = data.chatProgress;
     }
 }
 
@@ -129,4 +131,5 @@ public class FriendData {
     public bool acceptRequest;
     public bool introducedYourself;
     public string chatRecord;
+    public int chatProgress;
 }

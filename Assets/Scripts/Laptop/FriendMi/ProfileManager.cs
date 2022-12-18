@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ProfileManager : MonoBehaviour
 {
     [SerializeField] private Button saveBtn;
+    [SerializeField] private Button homeBtn;
 
     [SerializeField] private Image firstTimeImage;
 
@@ -23,6 +24,9 @@ public class ProfileManager : MonoBehaviour
     private string[] dobArray;
 
     void OnEnable() {
+        StopAllCoroutines();
+        errorText.gameObject.SetActive(false);
+        savedText.gameObject.SetActive(false);
         if (PlayerPrefs.HasKey("Name")) {
             firstTimeImage.gameObject.SetActive(false);
             PopulateProfile();
@@ -42,7 +46,8 @@ public class ProfileManager : MonoBehaviour
         savedText.gameObject.SetActive(false);
 
         if (ValidateInput() == "Validate OK") {
-            // Debug.Log("validate ok");
+
+            if (!PlayerPrefs.HasKey("Name")) homeBtn.gameObject.SetActive(true);
 
             PlayerPrefs.SetString("Name", nameInput.text);
 
@@ -52,12 +57,8 @@ public class ProfileManager : MonoBehaviour
 
             if (!string.IsNullOrEmpty(dobInput.text)) PlayerPrefs.SetString("DOB", dobInput.text.Replace(" ", ""));
             if (!string.IsNullOrEmpty(bioInput.text)) PlayerPrefs.SetString("Bio", bioInput.text);
-            StartCoroutine(ShowNotif());
+            StartCoroutine(ShowNotif());    // this CRT is fine because I have nothing else after it; doesn't affect anything
 
-            // Debug.Log(PlayerPrefs.GetString("Name"));
-            // Debug.Log(PlayerPrefs.GetString("Gender"));
-            // Debug.Log(PlayerPrefs.GetString("DOB"));
-            // Debug.Log(PlayerPrefs.GetString("Bio"));
         } else {
             errorText.text = ValidateInput();
             errorText.gameObject.SetActive(true);
