@@ -34,9 +34,9 @@ public class ToDoListManager : MonoBehaviour
             if (time >= 1) {
                 todo += "\n\n- Buy a plant!";
             }
-            if (time == 2) {
-                todo += "\n\n- Buy snacks";
-            }
+            // if (time == 2) {
+            //     todo += "\n\n- Buy snacks";
+            // }
         } else if (day == 2) {
             if (time >= 1) {
                 todo += "\n\n- Buy a present for mom";

@@ -37,8 +37,6 @@ public class ClockManager : MonoBehaviour
             else if (PlayerChoices.chatProgress != 1) clockBlock = 302;
         }
 
-        Debug.Log("clockBlock code " + clockBlock.ToString());
-
         // everything ok
         if (clockBlock == 0) {
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("TimeConfirm", LoadSceneMode.Additive);

@@ -52,7 +52,7 @@ public class Temp : MonoBehaviour
             PlayerPrefs.SetInt("TimeCount", 0);
             PlayerPrefs.SetInt("DayCount", day + 1);
         }
-        
+        PlayerChoices.chatProgress = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
