@@ -26,6 +26,10 @@ public class PlayerChoices : MonoBehaviour
     public static bool introducedYourself {get; set;} = false;
     public static string chatRecord {get; set;} = "";
     public static int chatProgress {get; set;} = 0;     // format for this is step/day/time; resets on TimeTransition
+    // friendmi day 1
+    public static bool checkedFriendProfile {get; set;} = false;
+    public static int willUpdateProfile {get; set;} = 0;    // 0 is default; 1 is will update, 2 is will not
+    public static bool friendPrivacy {get; set;} = false;   // if friend has said why they don't have their pf filled in
 
     // choices are currently reset once you go back to MainMenu
     // choices will persist in JSON if saved
@@ -42,5 +46,9 @@ public class PlayerChoices : MonoBehaviour
         introducedYourself = false;
         chatRecord = "";
         chatProgress = 0;
+
+        checkedFriendProfile = false;
+        willUpdateProfile = 0;
+        friendPrivacy = false;
     }
 }

@@ -20,6 +20,9 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private Button quitApp;
     [SerializeField] private Button logBtn;
 
+    [SerializeField] private Button friendProfile;
+    [SerializeField] private Canvas friendProfilePage;
+
     [SerializeField] private Canvas homepage;
     [SerializeField] private Canvas logPage;
 
@@ -34,7 +37,7 @@ public class ChatManager : MonoBehaviour
     private ChatDay0 day0;
     private ChatDay1 day1;
 
-    void OnEnable() {
+    void Awake() {
         homeBtn = nonstaticHomeBtn;
         isTyping = gameObject.transform.Find("FriendIsTyping").GetComponent<TMPro.TMP_Text>();
         chatbox = gameObject.transform.Find("FriendChat/Viewport/Content/Chatbox").GetComponent<TMPro.TMP_Text>();
@@ -48,12 +51,15 @@ public class ChatManager : MonoBehaviour
         choice2text = gameObject.transform.Find("Choice 2/Choice2Text").GetComponent<TMPro.TMP_Text>();
 
         day0 = gameObject.GetComponent<ChatDay0>();
-        day0.enabled = false;
-        day1 = gameObject.GetComponent<ChatDay1>();
-        day1.enabled = false;
+        day1 = gameObject.GetComponent<ChatDay1>(); 
+    }
 
+    void OnEnable() {
         ResetListeners();
         ShowChoices(false);
+        
+        day0.enabled = false;
+        day1.enabled = false;
 
         StopAllCoroutines();
         CalcChatText();
@@ -64,6 +70,8 @@ public class ChatManager : MonoBehaviour
         homeBtn.onClick.AddListener(Home);
         logBtn.onClick.AddListener(ChatLog);
         isTyping.gameObject.SetActive(false);
+        
+        friendProfile.onClick.AddListener(FriendProfile);
     }
 
     private void Home() {
@@ -76,6 +84,11 @@ public class ChatManager : MonoBehaviour
         logPage.gameObject.SetActive(true);
     }
 
+    private void FriendProfile() {
+        friendProfilePage.gameObject.SetActive(true);
+        PlayerChoices.checkedFriendProfile = true;
+    }
+
     private void CalcChatText() {
         chatbox.text = "No messages";
 
@@ -86,16 +99,16 @@ public class ChatManager : MonoBehaviour
         }
 
         else if (PlayerPrefs.GetInt("DayCount") == 1) {
-            if (PlayerPrefs.GetInt("TimeCount") == 0 && PlayerChoices.chatProgress == 0) {
+            if (PlayerPrefs.GetInt("TimeCount") == 0) {
                 day1.enabled = true;
             }
         }
 
     }
 
-    public static IEnumerator IsTyping(float num) {
+    public static IEnumerator IsTyping(float num, float num2 = 0.5f) {
         homeBtn.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(num2);
         isTyping.gameObject.SetActive(true);
         yield return new WaitForSeconds(num);
         isTyping.gameObject.SetActive(false);

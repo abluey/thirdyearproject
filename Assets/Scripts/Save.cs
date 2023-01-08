@@ -87,6 +87,10 @@ public class Save : MonoBehaviour
         data.introducedYourself = PlayerChoices.introducedYourself;
         data.chatRecord = PlayerChoices.chatRecord;
         data.chatProgress = PlayerChoices.chatProgress;
+
+        data.checkedFriendProfile = PlayerChoices.checkedFriendProfile;
+        data.willUpdateProfile = PlayerChoices.willUpdateProfile;
+        data.friendPrivacy = PlayerChoices.friendPrivacy;
         return data;
     }
 
@@ -109,6 +113,10 @@ public class Save : MonoBehaviour
         PlayerChoices.introducedYourself = data.introducedYourself;
         PlayerChoices.chatRecord = data.chatRecord;
         PlayerChoices.chatProgress = data.chatProgress;
+
+        PlayerChoices.checkedFriendProfile = data.checkedFriendProfile;
+        PlayerChoices.willUpdateProfile = data.willUpdateProfile;
+        PlayerChoices.friendPrivacy = data.friendPrivacy;
     }
 }
 
@@ -132,4 +140,8 @@ public class FriendData {
     public bool introducedYourself;
     public string chatRecord;
     public int chatProgress;
+
+    public bool checkedFriendProfile;
+    public int willUpdateProfile;
+    public bool friendPrivacy;
 }
