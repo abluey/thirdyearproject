@@ -13,11 +13,14 @@ public class BedroomManager : MonoBehaviour
 
     [SerializeField] private Image exclamationMark;
 
+    void OnEnable() {
+        exclamationMark.gameObject.SetActive(false);
+        CalcExclMark();
+    }
+
     void Start()
     {
         list.gameObject.SetActive(false);
-
-        CalcExclMark();
         
         laptopBtn.onClick.AddListener(OpenLaptop);
         todoListBtn.onClick.AddListener(ToDoList);
@@ -36,15 +39,39 @@ public class BedroomManager : MonoBehaviour
         list.gameObject.SetActive(true);
     }
 
+    // only graphics; doesn't control whether the player can chat with Reese or not
+    // default is they can always chat with Reese which is objectively bad
     private void CalcExclMark() {
-        // seeing if you need to put out the exclamation mark
-        if (PlayerPrefs.GetInt("DayCount") == 0 && PlayerPrefs.GetInt("TimeCount") <= 1) {
-            exclamationMark.gameObject.SetActive(false);
-        } else {
-            exclamationMark.gameObject.SetActive(true);
-        }
+        if (PlayerPrefs.GetInt("DayCount") == 0) {
 
-        // for now, friend req will be first day evening
-        // every time transition after that, there will be a new chat waiting
+            if (PlayerPrefs.GetInt("TimeCount") == 2 && PlayerChoices.chatProgress != 1) {
+                // D0T2; friend req, if not finished chat
+                exclamationMark.gameObject.SetActive(true);
+            }
+
+        } else if (PlayerPrefs.GetInt("DayCount") == 1) {
+            
+            if (PlayerPrefs.GetInt("TimeCount") == 0) {
+                // privacy
+                if (PlayerChoices.chatProgress != 1) {
+                    exclamationMark.gameObject.SetActive(true);
+                }
+
+            } else if (PlayerPrefs.GetInt("TimeCount") == 1) {
+                // groceries
+                if (PlayerChoices.groceryDone && PlayerChoices.chatProgress != 1) {
+                    exclamationMark.gameObject.SetActive(true);
+                }
+
+            } else if (PlayerPrefs.GetInt("TimeCount") == 2) {
+                // plant
+                if (PlayerChoices.plantType != "" && PlayerChoices.chatProgress != 1) {
+                    exclamationMark.gameObject.SetActive(true);
+                }
+            }
+
+        } else if (PlayerPrefs.GetInt("DayCount") == 2) {
+
+        }
     }
 }
