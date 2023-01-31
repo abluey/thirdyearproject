@@ -33,6 +33,12 @@ public class PlayerChoices : MonoBehaviour
     public static bool friendPrivacy {get; set;} = false;   // if friend has said why they don't have their pf filled in
     public static bool learnPrivacy {get; set;} = false;
 
+    public static int D1T1Ending {get; set;} = 0;
+    // 1: having 1 groc store is fine
+    // 2: Reese mentions their friends seem "programmed"; "no reason for player to be not human"
+    // 3: player said 1 groc store is weird, but then backtracks
+    // 4: player asked questions about the store
+
     // choices are currently reset once you go back to MainMenu
     // choices will persist in JSON if saved
     public static void ResetChoices() {
@@ -53,5 +59,7 @@ public class PlayerChoices : MonoBehaviour
         willUpdateProfile = 0;
         friendPrivacy = false;
         learnPrivacy = false;
+
+        D1T1Ending = 0;
     }
 }

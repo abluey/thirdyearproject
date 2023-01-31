@@ -92,6 +92,8 @@ public class Save : MonoBehaviour
         data.willUpdateProfile = PlayerChoices.willUpdateProfile;
         data.friendPrivacy = PlayerChoices.friendPrivacy;
         data.learnPrivacy = PlayerChoices.learnPrivacy;
+
+        data.D1T1Ending = PlayerChoices.D1T1Ending;
         return data;
     }
 
@@ -119,6 +121,8 @@ public class Save : MonoBehaviour
         PlayerChoices.willUpdateProfile = data.willUpdateProfile;
         PlayerChoices.friendPrivacy = data.friendPrivacy;
         PlayerChoices.learnPrivacy = data.learnPrivacy;
+
+        PlayerChoices.D1T1Ending = data.D1T1Ending;
     }
 }
 
@@ -147,4 +151,6 @@ public class FriendData {
     public int willUpdateProfile;
     public bool friendPrivacy;
     public bool learnPrivacy;
+
+    public int D1T1Ending;
 }

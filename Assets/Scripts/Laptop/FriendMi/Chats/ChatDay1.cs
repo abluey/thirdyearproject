@@ -47,9 +47,13 @@ public class ChatDay1 : MonoBehaviour {
                     case 1: break;
                     case 11: T1_Choice(); break;
                     case 21: T1_ChoiceThink(); break;
-                    case 31: break;
-                    case 41: break;
+                    case 31: T1_CT1PreEnd(); break;
+                    case 41: T1_CT2PreEnd(); break;
+                    case 51: T1_CT2End12(); break;
                     case 101: T1_GrocQuestions(); break;
+                    case 102: T1_GQPt2(); break;
+                    case 103: T1_GQPt3(); break;
+                    case 104: T1_GQPt4(); break;
                     case 420: T1_Start(); break;
                     default: Debug.Log("Something went wrong, D1T1."); break;
                 }
@@ -224,7 +228,7 @@ public class ChatDay1 : MonoBehaviour {
             string.IsNullOrEmpty(PlayerPrefs.GetString("DOB")) &&
             (PlayerPrefs.GetString("Gender") == "Prefer not to say")) {
                 yield return StartCoroutine(ChatManager.IsTyping(5.0f));
-                ChatManager.updateChatRecords("\nReese: Sorry if that puts you off completing the rest of your profile.\n");
+                ChatManager.updateChatRecords("\nSorry if that puts you off completing the rest of your profile.\n");
             }
 
         PlayerChoices.chatProgress = 40;
@@ -264,6 +268,12 @@ public class ChatDay1 : MonoBehaviour {
         yield return StartCoroutine(ChatManager.IsTyping(1.0f));
         ChatManager.updateChatRecords("\nReese: Yep!\n");
 
+        // if player profile complete
+        // NEEDS TESTING
+        if (!string.IsNullOrEmpty(PlayerPrefs.GetString("DOB")) && (PlayerPrefs.GetString("Gender") != "Prefer not to say")) {
+            yield return StartCoroutine(RFPExtra());
+        }
+
         if (PlayerPrefs.GetInt("TimeCount") == 1) {
             yield return StartCoroutine(ChatManager.IsTyping(1.0f));
             ChatManager.updateChatRecords("\nAnyway...!\n");
@@ -276,20 +286,33 @@ public class ChatDay1 : MonoBehaviour {
 
     private IEnumerator RFPEnd2() {
         yield return StartCoroutine(ChatManager.IsTyping(1.5f));
-        ChatManager.updateChatRecords("\nReese: Well... you should.\n");
+        ChatManager.updateChatRecords("\nReese: Well... you should!\n");
         yield return StartCoroutine(ChatManager.IsTyping(2.0f));
         ChatManager.updateChatRecords("\nEven the smallest detail can be used to infer what your life.\n");
         yield return StartCoroutine(ChatManager.IsTyping(4.0f));
         ChatManager.updateChatRecords("\nEvery little bit of privacy counts in our hyper-surveillance society.\n");
 
+        // if player profile complete
+        // NEEDS TESTING
+        if (!string.IsNullOrEmpty(PlayerPrefs.GetString("DOB")) && (PlayerPrefs.GetString("Gender") != "Prefer not to say")) {
+            yield return StartCoroutine(RFPExtra());
+        }
+
         if (PlayerPrefs.GetInt("TimeCount") == 1) {
             yield return StartCoroutine(ChatManager.IsTyping(3.0f));
-            ChatManager.updateChatRecords("\nAnyway...!\n");
+            ChatManager.updateChatRecords("\nAnyway...\n");
             PlayerChoices.chatProgress = 420;
             T1_AfterConfront_Start();
         } else {
             PlayerChoices.chatProgress = 1;
         }
+    }
+
+    private IEnumerator RFPExtra() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nOf course, if the stuff in your profile is fake, then... hehe!\n");
+        yield return StartCoroutine(ChatManager.IsTyping(4.0f));
+        ChatManager.updateChatRecords("\nDon't tell me if it is or not, though! That ruins the surprise.\n");
     }
    
 
@@ -419,7 +442,7 @@ public class ChatDay1 : MonoBehaviour {
     }
 
     private void T1_ChoiceThink() {
-        ChatManager.choice1text.text = "No?";
+        ChatManager.choice1text.text = "Not really. I think it's fine.";
         ChatManager.choice2text.text = "It is kind of weird now that you say it.";
         ChatManager.choice1.onClick.AddListener(T1_ChoiceThink1);
         ChatManager.choice2.onClick.AddListener(T1_ChoiceThink2);
@@ -431,16 +454,37 @@ public class ChatDay1 : MonoBehaviour {
         ChatManager.ShowChoices(false);
         ChatManager.ResetListeners();
 
-        ChatManager.updateChatRecords("\nYou: No?\n");
+        ChatManager.updateChatRecords("\nYou: Not really. I think it's fine.\n");
 
         StartCoroutine(T1_CT1Reply());
     }
 
     private IEnumerator T1_CT1Reply() {
         yield return StartCoroutine(ChatManager.IsTyping(3.0f));
-        ChatManager.updateChatRecords("\nReese: \n");   //elephant
+        ChatManager.updateChatRecords("\nReese: Really? Is it like this in other places too?\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.5f));
+        ChatManager.updateChatRecords("\nI always thought some terrible disaster ate the other choices.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nBut maybe it's just always been like this.\n");
 
         PlayerChoices.chatProgress = 31;
+        T1_CT1PreEnd();
+    }
+
+    private void T1_CT1PreEnd() {
+        ChatManager.choice1text.text = "I suppose so.";
+        ChatManager.choice1.onClick.AddListener(T1_CT1End);
+
+        ChatManager.choice1.gameObject.SetActive(true);
+    }
+
+    private void T1_CT1End() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: I suppose so.\n");
+        PlayerChoices.D1T1Ending = 1;
+        PlayerChoices.chatProgress = 1;
     }
 
     private void T1_ChoiceThink2() {
@@ -448,15 +492,94 @@ public class ChatDay1 : MonoBehaviour {
         ChatManager.ResetListeners();
 
         ChatManager.updateChatRecords("\nYou: It is kind of weird now that you say it.\n");
-
         StartCoroutine(T1_CT2Reply());
     }
 
     private IEnumerator T1_CT2Reply() {
         yield return StartCoroutine(ChatManager.IsTyping(3.0f));
-        ChatManager.updateChatRecords("\nReese: \n");   //elephant
+        ChatManager.updateChatRecords("\nReese: I know, right?? I'm glad I'm not the only one who sees this!\n");
+        yield return StartCoroutine(ChatManager.IsTyping(4.5f));
+        ChatManager.updateChatRecords("\nI swear other shops existed before. You remember too, right?\n");
 
         PlayerChoices.chatProgress = 41;
+        T1_CT2PreEnd();
+    }
+
+    private void T1_CT2PreEnd() {
+        ChatManager.choice1text.text = "Yes.";
+        ChatManager.choice1.onClick.AddListener(T1_CT2PreEnd1);
+        ChatManager.choice2text.text = "No.";
+        ChatManager.choice2.onClick.AddListener(T1_CT2PreEnd2);
+
+        ChatManager.ShowChoices(true);
+    }
+
+    private void T1_CT2PreEnd1() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Yes.\n");
+        StartCoroutine(T1_CT2End1());
+    }
+
+    private IEnumerator T1_CT2End1() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: Yes! I'm not the only one!\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nMy other friends only mention The Grocery Store. Nothing else.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(4.0f));
+        ChatManager.updateChatRecords("\nIt's like they're programmed to say one thing only.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nBut now at least I know you're a real person :)\n");
+
+        PlayerChoices.chatProgress = 51;
+
+        T1_CT2End12();
+    }
+
+    private void T1_CT2End12() {
+        ChatManager.choice1text.text = "Of course I am.";
+        ChatManager.choice1.onClick.AddListener(T1_CT2End3);
+        ChatManager.choice1.gameObject.SetActive(true);
+    }
+
+    private void T1_CT2End3() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Of course I am.\n");
+
+        StartCoroutine(T1_CT2EndEnd());
+    }
+
+    private IEnumerator T1_CT2EndEnd() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: Of course, of course!\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.5f));
+        ChatManager.updateChatRecords("\nAbsolutely no reason for you not to be.\n");
+
+        PlayerChoices.D1T1Ending = 2;
+        PlayerChoices.chatProgress = 1;
+    }
+
+    private void T1_CT2PreEnd2() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: No.\n");
+        StartCoroutine(T1_CT2End2());
+    }
+
+    private IEnumerator T1_CT2End2() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: Oh, haha, very funny.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nOther chains existed. I know it.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nYou know it too.\n");
+
+        PlayerChoices.D1T1Ending = 3;
+        PlayerChoices.chatProgress = 1;
     }
 
     private void T1_Choice2() {
@@ -482,14 +605,126 @@ public class ChatDay1 : MonoBehaviour {
 
         ChatManager.choice1.onClick.AddListener(T1_GQ1);
         ChatManager.choice2.onClick.AddListener(T1_GQ2);
+
+        ChatManager.ShowChoices(true);
     }
 
     private void T1_GQ1() {
-        // elephant
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Does the city only have one store?\n");
+
+        StartCoroutine(T1_GQ1Ans());
     }
 
     private void T1_GQ2() {
-        
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Who owns the store?\n");
+
+        StartCoroutine(T1_GQ2Ans());
+    }
+
+    private IEnumerator T1_GQ1Ans() {
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nReese: Yep. The government runs it.\n");
+
+        PlayerChoices.chatProgress = 102;
+        T1_GQPt2();
+    }
+
+    private IEnumerator T1_GQ2Ans() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: The government runs it. It's the only store in town.\n");
+
+        PlayerChoices.chatProgress = 102;
+        T1_GQPt2();
+    }
+
+    private void T1_GQPt2() {
+        ChatManager.choice1text.text = "What happened to the other stores?";
+        ChatManager.choice2text.text = "That's all, thanks.";
+
+        ChatManager.ShowChoices(true);
+        ChatManager.choice1.onClick.AddListener(T1_GQPt2_1);
+        ChatManager.choice2.onClick.AddListener(T1_GQEnd);
+    }
+
+    private void T1_GQEnd() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: That's all, thanks.\n");
+        StartCoroutine(T1_GQEndReply());
+    }
+
+    private IEnumerator T1_GQEndReply() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: No worries!");
+
+        PlayerChoices.D1T1Ending = 4;
+        PlayerChoices.chatProgress = 1;
+    }
+
+    private void T1_GQPt2_1() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: What happened to the other stores?\n");
+        StartCoroutine(T1_GQPt2Reply());
+    }
+
+    private IEnumerator T1_GQPt2Reply() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: I have no idea.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nBest I can tell, they all got bought out or something.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nBut, no one remembers.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f,2.0f));
+        ChatManager.updateChatRecords("\nDo you have other questions?\n");
+
+        PlayerChoices.chatProgress = 103;
+        T1_GQPt3();
+    }
+
+    private void T1_GQPt3() {
+        ChatManager.choice1text.text = "Is the store evil?";
+        ChatManager.choice2text.text = "That's all, thanks.";
+
+        ChatManager.ShowChoices(true);
+        ChatManager.choice1.onClick.AddListener(T1_GQPt3_1);
+        ChatManager.choice2.onClick.AddListener(T1_GQEnd);
+    }
+
+    private void T1_GQPt3_1() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Is the store evil?\n");
+        StartCoroutine(T1_GQPt3Reply());
+    }
+
+    private IEnumerator T1_GQPt3Reply() {
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f, 1.5f));
+        ChatManager.updateChatRecords("\nReese: HAHA! That's the funniest thing I've read in a while.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        yield return StartCoroutine(ChatManager.IsTyping(1.0f, 2.0f));
+        ChatManager.updateChatRecords("\nNo, it's not.\n");
+
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f,2.0f));
+        ChatManager.updateChatRecords("\nDo you have other questions?\n");
+
+        T1_GQPt4();   
+    }
+
+    private void T1_GQPt4() {
+        ChatManager.choice1text.text = "That's all, thanks.";
+
+        ChatManager.choice1.gameObject.SetActive(true);
+        ChatManager.choice1.onClick.AddListener(T1_GQEnd);
     }
 
 }
