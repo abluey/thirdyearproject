@@ -32,14 +32,14 @@ public class ChatManager : MonoBehaviour
     public static TMPro.TMP_Text choice2text;
 
     public static TMPro.TMP_Text chatbox;
-    private static TMPro.TMP_Text isTyping;
+    private static TMPro.TMP_Text isTypingText;
 
     private ChatDay0 day0;
     private ChatDay1 day1;
 
     void Awake() {
         homeBtn = nonstaticHomeBtn;
-        isTyping = gameObject.transform.Find("FriendIsTyping").GetComponent<TMPro.TMP_Text>();
+        isTypingText = gameObject.transform.Find("FriendIsTyping").GetComponent<TMPro.TMP_Text>();
         chatbox = gameObject.transform.Find("FriendChat/Viewport/Content/Chatbox").GetComponent<TMPro.TMP_Text>();
         choice1 = gameObject.transform.Find("Choice 1").GetComponent<Button>();
         choice2 = gameObject.transform.Find("Choice 2").GetComponent<Button>();
@@ -69,7 +69,7 @@ public class ChatManager : MonoBehaviour
     {
         homeBtn.onClick.AddListener(Home);
         logBtn.onClick.AddListener(ChatLog);
-        isTyping.gameObject.SetActive(false);
+        isTypingText.gameObject.SetActive(false);
         
         friendProfile.onClick.AddListener(FriendProfile);
     }
@@ -109,12 +109,13 @@ public class ChatManager : MonoBehaviour
     public static IEnumerator IsTyping(float num, float num2 = 0.5f) {
         homeBtn.gameObject.SetActive(false);
         yield return new WaitForSeconds(num2);
-        isTyping.gameObject.SetActive(true);
+        isTypingText.gameObject.SetActive(true);
         yield return new WaitForSeconds(num);
-        isTyping.gameObject.SetActive(false);
+        isTypingText.gameObject.SetActive(false);
         homeBtn.gameObject.SetActive(true);
     }
 
+    // ELEPHANT: would string text work if you just put "ChatManager.choice1text.text"?
     public static void updateChatRecords(string text) {
         chatbox.text += text;
         PlayerChoices.chatRecord += text;

@@ -2121,10 +2121,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Please send me details of products and offers from
+  m_text: 'I do not agree to not receive product advertisements
 
-    third party organizations
-    recommended by Plants4Days.'
+    and recommendations
+    from Plants 4 Days.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 13cd8453547272648af730516331c54a, type: 2}
   m_sharedMaterial: {fileID: 1244535969318450599, guid: 13cd8453547272648af730516331c54a, type: 2}
@@ -3149,7 +3149,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1110454438}
   m_Direction: 2
   m_Value: 0.9999999
-  m_Size: 0.28615388
+  m_Size: 0.28615385
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

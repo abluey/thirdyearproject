@@ -10,6 +10,7 @@ public class PlayerChoices : MonoBehaviour
     // Name, DOB, Gender, Bio
 
     // All of PlayerChoices resets after Save&Menu in GameMenu
+    // ELEPHANT: is there some things that don't need resetting?
 
     // plant
     public static bool buyPremiumPlant {get; set;} = true;  // default is to get it unless it's unchecked
@@ -32,6 +33,8 @@ public class PlayerChoices : MonoBehaviour
     public static int willUpdateProfile {get; set;} = 0;    // 0 is default; 1 is will update, 2 is will not
     public static bool friendPrivacy {get; set;} = false;   // if friend has said why they don't have their pf filled in
     public static bool learnPrivacy {get; set;} = false;
+    public static bool learnDPDef {get; set;} = false;
+    public static bool learnDPPlant {get; set;} = false;    // misdirection and trick questions
 
     public static int D1T1Ending {get; set;} = 0;
     // 1: having 1 groc store is fine
@@ -59,6 +62,8 @@ public class PlayerChoices : MonoBehaviour
         willUpdateProfile = 0;
         friendPrivacy = false;
         learnPrivacy = false;
+        learnDPDef = false;
+        learnDPPlant = false;
 
         D1T1Ending = 0;
     }

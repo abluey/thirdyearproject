@@ -6,8 +6,11 @@ using UnityEngine.UI;
 
 public class ChatDay1 : MonoBehaviour {
 
+    private bool showName;
+
     void OnEnable() {
         ChatManager.chatbox.text = PlayerChoices.chatRecord;
+        showName = false;
 
         if (PlayerPrefs.GetInt("TimeCount") == 0) {
             switch (PlayerChoices.chatProgress) {
@@ -30,17 +33,21 @@ public class ChatDay1 : MonoBehaviour {
                 default: Debug.Log("Something went wrong, D1T0."); break;
             }
         } else if (PlayerPrefs.GetInt("TimeCount") == 1) {
+            
+            // NOTHING can happen if you haven't shopped yet
+            if (!PlayerChoices.groceryDone) {
+                // do nothing
+            }
+
             // final opportunity to ask why they don't have their profs completed
             // otherwise ask what's up with the grocery store
-
-            if (!PlayerChoices.friendPrivacy && PlayerChoices.checkedFriendProfile) {
+            else if (!PlayerChoices.friendPrivacy && PlayerChoices.checkedFriendProfile) {
                 ChatManager.choice1.gameObject.SetActive(true);
                 ChatManager.choice1text.text = "Why do you not have your profile completed?";
 
                 ChatManager.choice1.onClick.AddListener(T1_Confront);
 
             } else {
-                Debug.Log("Switch" + PlayerChoices.chatProgress);
 
                 switch (PlayerChoices.chatProgress) {
                     case 0: T1_Start(); break;
@@ -60,8 +67,23 @@ public class ChatDay1 : MonoBehaviour {
             }
             
         } else if (PlayerPrefs.GetInt("TimeCount") == 2) {
-            // switch
-            // ask for plant
+            
+            // nothing should happen before buying a plant
+            if (PlayerChoices.plantType == "") {
+                // do nothing
+            } else {
+                switch (PlayerChoices.chatProgress) {
+                    case 0: T2_Start(); break;
+                    case 1: break;
+                    case 12: DPP1(); break;
+                    case 13: WhatIsDP(); break;
+                    case 201: T2_C2What(); break;
+                    case 202: T2_C2PrePermission(); break;
+                    case 203: T2_PostPermission(); break;
+                    default: Debug.Log("Something went wrong, D1T2."); break;
+                }
+            }
+            
         } else {
             Debug.Log("Something went wrong");
         }
@@ -269,7 +291,7 @@ public class ChatDay1 : MonoBehaviour {
         ChatManager.updateChatRecords("\nReese: Yep!\n");
 
         // if player profile complete
-        // NEEDS TESTING
+        // elephant: NEEDS TESTING
         if (!string.IsNullOrEmpty(PlayerPrefs.GetString("DOB")) && (PlayerPrefs.GetString("Gender") != "Prefer not to say")) {
             yield return StartCoroutine(RFPExtra());
         }
@@ -407,6 +429,7 @@ public class ChatDay1 : MonoBehaviour {
         if (PlayerChoices.chatProgress == 420) {
             ChatManager.updateChatRecords("\nGrocery store. Weird, huh?\n");
         } else {
+            // elephant: does it duplicate?
             ChatManager.updateChatRecords("\nReese: Grocery store. Weird, huh?\n");
         }
         
@@ -629,15 +652,15 @@ public class ChatDay1 : MonoBehaviour {
 
     private IEnumerator T1_GQ1Ans() {
         yield return StartCoroutine(ChatManager.IsTyping(3.0f));
-        ChatManager.updateChatRecords("\nReese: Yep. The government runs it.\n");
+        ChatManager.updateChatRecords("\nReese: Yep. The city runs it.\n");
 
         PlayerChoices.chatProgress = 102;
         T1_GQPt2();
     }
 
     private IEnumerator T1_GQ2Ans() {
-        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
-        ChatManager.updateChatRecords("\nReese: The government runs it. It's the only store in town.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nReese: The city owns and runs it. It's the only store in town.\n");
 
         PlayerChoices.chatProgress = 102;
         T1_GQPt2();
@@ -662,7 +685,7 @@ public class ChatDay1 : MonoBehaviour {
 
     private IEnumerator T1_GQEndReply() {
         yield return StartCoroutine(ChatManager.IsTyping(2.0f));
-        ChatManager.updateChatRecords("\nReese: No worries!");
+        ChatManager.updateChatRecords("\nReese: No worries.");
 
         PlayerChoices.D1T1Ending = 4;
         PlayerChoices.chatProgress = 1;
@@ -682,7 +705,7 @@ public class ChatDay1 : MonoBehaviour {
         yield return StartCoroutine(ChatManager.IsTyping(3.0f));
         ChatManager.updateChatRecords("\nBest I can tell, they all got bought out or something.\n");
         yield return StartCoroutine(ChatManager.IsTyping(3.0f));
-        ChatManager.updateChatRecords("\nBut, no one remembers.\n");
+        ChatManager.updateChatRecords("\nBut no one remembers.\n");
         yield return StartCoroutine(ChatManager.IsTyping(2.0f,2.0f));
         ChatManager.updateChatRecords("\nDo you have other questions?\n");
 
@@ -691,7 +714,7 @@ public class ChatDay1 : MonoBehaviour {
     }
 
     private void T1_GQPt3() {
-        ChatManager.choice1text.text = "Is the store evil?";
+        ChatManager.choice1text.text = "Why does the store not have product prices?";
         ChatManager.choice2text.text = "That's all, thanks.";
 
         ChatManager.ShowChoices(true);
@@ -703,19 +726,25 @@ public class ChatDay1 : MonoBehaviour {
         ChatManager.ShowChoices(false);
         ChatManager.ResetListeners();
 
-        ChatManager.updateChatRecords("\nYou: Is the store evil?\n");
+        ChatManager.updateChatRecords("\nYou: Why does the store not have product prices?\n");
         StartCoroutine(T1_GQPt3Reply());
     }
 
     private IEnumerator T1_GQPt3Reply() {
-        yield return StartCoroutine(ChatManager.IsTyping(3.0f, 1.5f));
-        ChatManager.updateChatRecords("\nReese: HAHA! That's the funniest thing I've read in a while.\n");
-        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
-        yield return StartCoroutine(ChatManager.IsTyping(1.0f, 2.0f));
-        ChatManager.updateChatRecords("\nNo, it's not.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nReese: Well, originally it was to prevent price comparison between stores.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nThat's an example of a 'dark pattern', by the way. Techniques that try to trick you into doing things you didn't mean to.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(5.0f));
+        ChatManager.updateChatRecords("\nBut the price comparison doesn't matter now, since it's the only store in town anyway.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nNow, the prices are gone in the hopes that you overspend.\n");
 
         yield return StartCoroutine(ChatManager.IsTyping(2.0f,2.0f));
         ChatManager.updateChatRecords("\nDo you have other questions?\n");
+
+        PlayerChoices.chatProgress = 104;
+        PlayerChoices.learnDPDef = true;
 
         T1_GQPt4();   
     }
@@ -726,5 +755,353 @@ public class ChatDay1 : MonoBehaviour {
         ChatManager.choice1.gameObject.SetActive(true);
         ChatManager.choice1.onClick.AddListener(T1_GQEnd);
     }
+
+    /***
+    TIME 2
+    ***/
+
+    private void T2_Start() {
+        // ELEPHANT: will it duplicate??
+        ChatManager.updateChatRecords("\nReese: You got a plant??\n");
+
+        ChatManager.choice1text.text = "Yeah? Is something wrong?";
+        ChatManager.choice2text.text = "How did you know?";
+
+        ChatManager.choice1.onClick.AddListener(T2_C1PreDP);
+        ChatManager.choice2.onClick.AddListener(T2_C2);
+        ChatManager.ShowChoices(true);
+    }
+
+    private void T2_C1PreDP() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Yeah? Is something wrong?\n");
+
+        StartCoroutine(DarkPatternPlant());
+    }
+
+    private IEnumerator DarkPatternPlant() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: You know that website is... quite interesting?\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.5f));
+        if (PlayerChoices.buyPremiumPlant) {
+            ChatManager.updateChatRecords("\nYou got a premium plant... Was that on purpose?\n");
+        } else {
+            ChatManager.updateChatRecords("\nI see you didn't get a premium plant, so you must've caught on to their lies.\n");
+        }
+
+        PlayerChoices.chatProgress = 12;
+        DPP1();
+    }
+
+    private void DPP1() {
+        if (PlayerChoices.buyPremiumPlant) {
+            ChatManager.choice1text.text = "Yes.";
+            ChatManager.choice2text.text = "No.";
+
+            ChatManager.choice1.onClick.AddListener(DPPPremY);
+            ChatManager.choice2.onClick.AddListener(DPPPremN);
+        } else {
+            ChatManager.choice1text.text = "Yeah. I noticed the price increase so I double-checked.";
+            ChatManager.choice2text.text = "Yeah. I saw the option to continue without an upgrade.";
+
+            ChatManager.choice1.onClick.AddListener(DPPNoPrem1);
+            ChatManager.choice2.onClick.AddListener(DPPNoPrem2);
+        }
+
+        ChatManager.ShowChoices(true);
+    }
+
+    private void DPPPremY() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Yes.\n");
+        StartCoroutine(DPPPremYReply());
+    }
+
+    private IEnumerator DPPPremYReply() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: ...Oh.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nWell, it really wasn't worth it in my opinion, but you do you.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nAt least you're well-versed in dark pattern misdirection, then!\n");
+
+        PlayerChoices.chatProgress = 13;
+        WhatIsDP();
+    }
+
+    private void WhatIsDP() {
+        ChatManager.choice1text.text = "What do you mean by misdirection?";
+        ChatManager.choice1.onClick.AddListener(PreLearnDPPlant);
+        
+        if (PlayerChoices.learnDPDef) {
+            ChatManager.choice2text.text = "Could you remind me what dark patterns are again?";
+            ChatManager.choice2.onClick.AddListener(PreLearnDP1);
+        } else {
+            ChatManager.choice2text.text = "Ah, no. What are dark patterns?";
+            ChatManager.choice2.onClick.AddListener(PreLearnDP2);
+        }
+        
+
+        ChatManager.ShowChoices(true);
+    }
+
+    private void PreLearnDPPlant() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: What do you mean by misdirection?\n");
+        StartCoroutine(LearnDPPlant());
+    }
+
+    private IEnumerator LearnDPPlant() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        if (showName) {
+            ChatManager.updateChatRecords("\nReese: Misdirection is a type of dark pattern, and hides what's actually going on.\n");
+            showName = false;
+        } else {
+            ChatManager.updateChatRecords("\nMisdirection is a type of dark pattern, and hides what's actually going on.\n");
+        }
+        
+        yield return StartCoroutine(ChatManager.IsTyping(4.0f));
+        ChatManager.updateChatRecords("\nIn the case of the plant store, if you don't pay attention, you're automatically charged extra.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f, 1.0f));
+        ChatManager.updateChatRecords("\nThere's another sneaky thing they do, which are trick questions: questions designed to be confusing, so you give an answer they want.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(4.0f));
+        ChatManager.updateChatRecords("\nYou can see it at the checkout page when they ask if you want to receive ads from them.\n");
+
+        PlayerChoices.learnDPPlant = true;
+        PlayerChoices.chatProgress = 14;
+        PostDPPlant();
+    }
+
+    private void PostDPPlant() {
+        if (PlayerChoices.receivePlantPromo) {
+            ChatManager.choice1text.text = "Ah... I didn't pick up on that.";
+            ChatManager.choice2text.text = "I see. I saw it but still chose to receive the ads.";
+
+            ChatManager.choice1.onClick.AddListener(T2_PreEnd1);
+            ChatManager.choice2.onClick.AddListener(T2_PreEnd2);
+            ChatManager.ShowChoices(true);
+
+        } else {
+            ChatManager.choice1text.text = "I see. I did pick up on it and unticked the box.";
+
+            ChatManager.choice1.onClick.AddListener(T2_PreEnd3);
+            ChatManager.choice1.gameObject.SetActive(true);
+        }
+    }
+
+    private void T2_PreEnd1() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Ah... I didn't pick up on that.\n");
+        StartCoroutine(T2_End1());
+    }
+
+    private void T2_PreEnd2() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: I see. I saw it but still chose to receive the ads.\n");
+        StartCoroutine(T2_End1());
+    }
+
+    private void T2_PreEnd3() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: I see. I did pick up on it and unticked the box.\n");
+        StartCoroutine(T2_End2());
+    }
+
+    private IEnumerator T2_End1() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        if (PlayerChoices.receivePlantPromo) {
+            ChatManager.updateChatRecords("\nReese: Huh. No harm in that, I suppose, if you knew what you were doing.\n");
+        } else {
+            ChatManager.updateChatRecords("\nReese: Aww, that's unlucky!\n");
+        }
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nNow you know for next time, though!\n");
+
+        // elephant: ending code?
+        PlayerChoices.chatProgress = 1;
+    }
+
+    private IEnumerator T2_End2() {
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nReese: Good! Attention to detail is a crucial skill to combat these patterns.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f,1.0f));
+        ChatManager.updateChatRecords("\nIt's a good skill to have in general, actually.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nKeep it up!\n");
+
+        // elephant: ending code?
+        PlayerChoices.chatProgress = 1;
+    }
+
+    private void PreLearnDP1() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Could you remind me what dark patterns are again?\n");
+        StartCoroutine(LearnDP());
+    }
+
+    private void PreLearnDP2() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Ah, no. What are dark patterns?\n");
+        StartCoroutine(LearnDP());
+    }
+
+    private IEnumerator LearnDP() {
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nReese: Dark patterns are tricks to get you to do things you don't mean to.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nThere's many types, and misdirection is one of them.\n");
+        showName = true;
+        PlayerChoices.learnDPDef = true;
+
+        // elephant HOPE THIS WORKS
+        StartCoroutine(LearnDPPlant());
+    }
+
+    private void DPPPremN() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: No.\n");
+    }
+
+    private void DPPNoPrem1() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Yeah. I noticed the price increase so I double-checked.\n");
+    }
+
+    private void DPPNoPrem2() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Yeah. I saw the option to continue without an upgrade.\n");
+    }
+
+    private void T2_C2() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: How did you know?\n");
+
+        StartCoroutine(T2_C2Reply());
+    }
+
+    private IEnumerator T2_C2Reply() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: They announced it on their social media.\n");
+        PlayerChoices.chatProgress = 201;
+        T2_C2What();
+    }
+
+    private void T2_C2What() {
+        ChatManager.choice1text.text = "What?";
+        ChatManager.choice1.onClick.AddListener(T2_C2What1);
+        ChatManager.choice1.gameObject.SetActive(true);
+    }
+
+    private void T2_C2What1() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+        ChatManager.updateChatRecords("\nYou: What?\n");
+        StartCoroutine(T2_C2WhatReply());
+    }
+
+    private IEnumerator T2_C2WhatReply() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: Yeah, they announce every purchase.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nThey didn't tag you, but I recognized your name.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.5f));
+        ChatManager.updateChatRecords("\nThere can't be that many " + PlayerPrefs.GetString("Name") + "s after all!\n");
+
+        PlayerChoices.chatProgress = 202;
+        T2_C2PrePermission();
+    }
+
+    private void T2_C2PrePermission() {
+        ChatManager.choice1text.text = "Is that allowed?";
+        ChatManager.choice1.onClick.AddListener(T2_C2PrePer1);
+        ChatManager.choice1.gameObject.SetActive(true);
+    }
+
+    private void T2_C2PrePer1() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Is that allowed?\n");
+        StartCoroutine(Permission());
+    }
+
+    private IEnumerator Permission() {
+        yield return StartCoroutine(ChatManager.IsTyping(1.0f));
+        ChatManager.updateChatRecords("\nReese: Yeah, why not?\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nIt's in their terms and conditions.\n");
+
+        PlayerChoices.chatProgress = 203;
+        T2_PostPermission();
+    }
+
+    private void T2_PostPermission() {
+        ChatManager.choice1text.text = "Who reads that anymore?";
+        ChatManager.choice2text.text = "Oh right, I remember reading that.";
+        ChatManager.choice1.onClick.AddListener(T2_PermNoRead);
+        ChatManager.choice2.onClick.AddListener(T2_PermRead);
+        ChatManager.ShowChoices(true);
+    }
+
+    private void T2_PermNoRead() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Who reads that anymore?\n");
+        StartCoroutine(T2_PermNoReadReply());
+    }
+
+    private IEnumerator T2_PermNoReadReply() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("");
+
+        // elephant
+        // PlayerChoices.chatProgress = ;
+        // ();
+    }
+
+    private void T2_PermRead() {
+        ChatManager.ShowChoices(false);
+        ChatManager.ResetListeners();
+
+        ChatManager.updateChatRecords("\nYou: Oh right, I remember reading that.\n");
+        StartCoroutine(T2_PermReadReply());
+    }
+
+    private IEnumerator T2_PermReadReply() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("");
+
+        // elephant
+        // PlayerChoices.chatProgress = ;
+        // ();
+    }
+
+    // ELEPHANT: rewire perms to dark patterns (LearnDPPlant())
+    // maybe say "You gotta be careful about the shop's misdirection too." and then loop into it
 
 }

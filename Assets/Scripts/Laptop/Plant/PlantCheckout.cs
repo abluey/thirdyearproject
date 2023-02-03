@@ -30,7 +30,7 @@ public class PlantCheckout : MonoBehaviour
             case "mb": actualPlantName = "Baron Moneybags"; break;
             case "juice": actualPlantName = "Juice Box"; break;
             case "cheese": actualPlantName = "Cheese"; break;
-            default: actualPlantName = "Error 404: not found"; break;
+            default: actualPlantName = "Error: not found"; break;
         }
 
         if (PlantShopManager.plantPremium) {
@@ -48,6 +48,8 @@ public class PlantCheckout : MonoBehaviour
 
         // can only buy a plant when the buy plant activity is active on ToDo list
         if (PlayerPrefs.GetInt("DayCount") == 1 && PlayerPrefs.GetInt("TimeCount") >= 1) {
+
+            // elephant: this is THE MOST scuffed logical flow i've seen
 
             // no saved record of bought plant yet and has checked the Ts&Cs box
             if (PlayerChoices.plantType == "" && tcs.isOn) {

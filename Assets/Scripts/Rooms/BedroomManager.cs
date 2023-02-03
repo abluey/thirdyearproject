@@ -40,7 +40,7 @@ public class BedroomManager : MonoBehaviour
     }
 
     // only graphics; doesn't control whether the player can chat with Reese or not
-    // default is they can always chat with Reese which is objectively bad
+    // chat control is in their respective Chat scripts
     private void CalcExclMark() {
         if (PlayerPrefs.GetInt("DayCount") == 0) {
 
