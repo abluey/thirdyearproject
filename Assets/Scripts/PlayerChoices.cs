@@ -35,6 +35,7 @@ public class PlayerChoices : MonoBehaviour
     public static bool learnPrivacy {get; set;} = false;
     public static bool learnDPDef {get; set;} = false;
     public static bool learnDPPlant {get; set;} = false;    // misdirection and trick questions
+    public static int readTCs {get; set;} = 0; // 0 is default; 1 is read; 2 is didn't read
 
     public static int D1T1Ending {get; set;} = 0;
     // 1: having 1 groc store is fine
@@ -64,6 +65,7 @@ public class PlayerChoices : MonoBehaviour
         learnPrivacy = false;
         learnDPDef = false;
         learnDPPlant = false;
+        readTCs = 0;
 
         D1T1Ending = 0;
     }

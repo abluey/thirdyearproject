@@ -95,6 +95,7 @@ public class Save : MonoBehaviour
         
         data.learnDPDef = PlayerChoices.learnDPDef;
         data.learnDPPlant = PlayerChoices.learnDPPlant;
+        data.readTCs = PlayerChoices.readTCs;
 
         data.D1T1Ending = PlayerChoices.D1T1Ending;
         return data;
@@ -127,6 +128,7 @@ public class Save : MonoBehaviour
         PlayerChoices.learnPrivacy = data.learnPrivacy;
         PlayerChoices.learnDPDef = data.learnDPDef;
         PlayerChoices.learnDPPlant = data.learnDPPlant;
+        PlayerChoices.readTCs = data.readTCs;
 
         PlayerChoices.D1T1Ending = data.D1T1Ending;
     }
@@ -160,6 +162,7 @@ public class FriendData {
     public bool learnPrivacy;
     public bool learnDPDef;
     public bool learnDPPlant;
+    public int readTCs;
 
     public int D1T1Ending;
 }

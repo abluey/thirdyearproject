@@ -34,8 +34,6 @@ public class ChatDay0 : MonoBehaviour {
     ***/
 
     private void Intro() {
-        // update chat box and chat record
-
         ChatManager.ResetListeners();
 
         PlayerChoices.introducedYourself = true;
@@ -48,8 +46,6 @@ public class ChatDay0 : MonoBehaviour {
     }
 
     private IEnumerator IntroReply() {
-        // IsTyping; update chat box and chat record with reply
-
         yield return StartCoroutine(ChatManager.IsTyping(2.0f));
         ChatManager.updateChatRecords("\nReese: Hi there! Nice to meet you.\n");
         PlayerChoices.chatProgress = 2;

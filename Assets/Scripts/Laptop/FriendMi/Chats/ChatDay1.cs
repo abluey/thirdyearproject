@@ -429,8 +429,8 @@ public class ChatDay1 : MonoBehaviour {
         if (PlayerChoices.chatProgress == 420) {
             ChatManager.updateChatRecords("\nGrocery store. Weird, huh?\n");
         } else {
-            // elephant: does it duplicate?
-            ChatManager.updateChatRecords("\nReese: Grocery store. Weird, huh?\n");
+            // elephant - hopefully works
+            ChatManager.chatbox.text = "Day 1\nReese: Grocery store. Weird, huh?\n";
         }
         
         PlayerChoices.chatProgress = 11;
@@ -761,8 +761,8 @@ public class ChatDay1 : MonoBehaviour {
     ***/
 
     private void T2_Start() {
-        // ELEPHANT: will it duplicate??
-        ChatManager.updateChatRecords("\nReese: You got a plant??\n");
+        // elephant - hopefully works
+        ChatManager.chatbox.text = "\nReese: You got a plant??\n";
 
         ChatManager.choice1text.text = "Yeah? Is something wrong?";
         ChatManager.choice2text.text = "How did you know?";
@@ -836,16 +836,10 @@ public class ChatDay1 : MonoBehaviour {
     private void WhatIsDP() {
         ChatManager.choice1text.text = "What do you mean by misdirection?";
         ChatManager.choice1.onClick.AddListener(PreLearnDPPlant);
-        
-        if (PlayerChoices.learnDPDef) {
-            ChatManager.choice2text.text = "Could you remind me what dark patterns are again?";
-            ChatManager.choice2.onClick.AddListener(PreLearnDP1);
-        } else {
-            ChatManager.choice2text.text = "Ah, no. What are dark patterns?";
-            ChatManager.choice2.onClick.AddListener(PreLearnDP2);
-        }
-        
 
+        ChatManager.choice2text.text = "Could you remind me what dark patterns are again?";
+        ChatManager.choice2.onClick.AddListener(PreLearnDP);
+        
         ChatManager.ShowChoices(true);
     }
 
@@ -921,13 +915,9 @@ public class ChatDay1 : MonoBehaviour {
 
     private IEnumerator T2_End1() {
         yield return StartCoroutine(ChatManager.IsTyping(2.0f));
-        if (PlayerChoices.receivePlantPromo) {
-            ChatManager.updateChatRecords("\nReese: Huh. No harm in that, I suppose, if you knew what you were doing.\n");
-        } else {
-            ChatManager.updateChatRecords("\nReese: Aww, that's unlucky!\n");
-        }
+        ChatManager.updateChatRecords("\nReese: Ahh. Well, regardless!\n");
         yield return StartCoroutine(ChatManager.IsTyping(2.0f));
-        ChatManager.updateChatRecords("\nNow you know for next time, though!\n");
+        ChatManager.updateChatRecords("\nNow you know for next time, too!\n");
 
         // elephant: ending code?
         PlayerChoices.chatProgress = 1;
@@ -945,19 +935,11 @@ public class ChatDay1 : MonoBehaviour {
         PlayerChoices.chatProgress = 1;
     }
 
-    private void PreLearnDP1() {
+    private void PreLearnDP() {
         ChatManager.ShowChoices(false);
         ChatManager.ResetListeners();
 
         ChatManager.updateChatRecords("\nYou: Could you remind me what dark patterns are again?\n");
-        StartCoroutine(LearnDP());
-    }
-
-    private void PreLearnDP2() {
-        ChatManager.ShowChoices(false);
-        ChatManager.ResetListeners();
-
-        ChatManager.updateChatRecords("\nYou: Ah, no. What are dark patterns?\n");
         StartCoroutine(LearnDP());
     }
 
@@ -978,6 +960,20 @@ public class ChatDay1 : MonoBehaviour {
         ChatManager.ResetListeners();
 
         ChatManager.updateChatRecords("\nYou: No.\n");
+
+        StartCoroutine(DPPPremNReply());
+    }
+
+    private IEnumerator DPPPremNReply() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: ...Oh.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nWell, that's unlucky.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nThey use a dark pattern technique called 'misdirection.'\n");
+
+        PlayerChoices.chatProgress = 13;
+        WhatIsDP();
     }
 
     private void DPPNoPrem1() {
@@ -985,6 +981,8 @@ public class ChatDay1 : MonoBehaviour {
         ChatManager.ResetListeners();
 
         ChatManager.updateChatRecords("\nYou: Yeah. I noticed the price increase so I double-checked.\n");
+
+        StartCoroutine(DPPNoPremReply());
     }
 
     private void DPPNoPrem2() {
@@ -992,6 +990,19 @@ public class ChatDay1 : MonoBehaviour {
         ChatManager.ResetListeners();
 
         ChatManager.updateChatRecords("\nYou: Yeah. I saw the option to continue without an upgrade.\n");
+
+        StartCoroutine(DPPNoPremReply());
+    }
+
+    private IEnumerator DPPNoPremReply() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: Good, you got sharp eyes!\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nThat's a form of dark pattern called misdirection!\n");
+
+        PlayerChoices.chatProgress = 13;
+
+        WhatIsDP();
     }
 
     private void T2_C2() {
@@ -1077,11 +1088,13 @@ public class ChatDay1 : MonoBehaviour {
 
     private IEnumerator T2_PermNoReadReply() {
         yield return StartCoroutine(ChatManager.IsTyping(2.0f));
-        ChatManager.updateChatRecords("");
-
-        // elephant
-        // PlayerChoices.chatProgress = ;
-        // ();
+        ChatManager.updateChatRecords("\nReese: You do have a point, but you gotta be careful.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nThough I suppose they fill it up with so much legal jargon it's deliberately difficult to understand anyway.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(1.0f));
+        
+        PlayerChoices.readTCs = 2;
+        StartCoroutine(DPPBridge());
     }
 
     private void T2_PermRead() {
@@ -1094,14 +1107,24 @@ public class ChatDay1 : MonoBehaviour {
 
     private IEnumerator T2_PermReadReply() {
         yield return StartCoroutine(ChatManager.IsTyping(2.0f));
-        ChatManager.updateChatRecords("");
+        ChatManager.updateChatRecords("\nReese: Oh, you actually read that??");
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nYou have to be the second person I know who actually read it.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(1.5f));
+        ChatManager.updateChatRecords("\nThe first person being me, of course :)");
 
-        // elephant
-        // PlayerChoices.chatProgress = ;
-        // ();
+        PlayerChoices.readTCs = 1;
+        StartCoroutine(DPPBridge());
     }
 
-    // ELEPHANT: rewire perms to dark patterns (LearnDPPlant())
-    // maybe say "You gotta be careful about the shop's misdirection too." and then loop into it
+    private IEnumerator DPPBridge() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nMan, dark patterns are all over the place these days.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nWhat you really want to look out for is the store's misdirection though.\n");
+
+        PlayerChoices.chatProgress = 13;
+        WhatIsDP();
+    }
 
 }
