@@ -50,28 +50,68 @@ public class BedroomManager : MonoBehaviour
             }
 
         } else if (PlayerPrefs.GetInt("DayCount") == 1) {
-            
-            if (PlayerPrefs.GetInt("TimeCount") == 0) {
-                // privacy
-                if (PlayerChoices.chatProgress != 1) {
-                    exclamationMark.gameObject.SetActive(true);
-                }
 
-            } else if (PlayerPrefs.GetInt("TimeCount") == 1) {
+            switch (PlayerPrefs.GetInt("TimeCount")) {
+                case 0:
+                    if (PlayerChoices.chatProgress != 1) {
+                        exclamationMark.gameObject.SetActive(true);
+                    }
+                    break;
                 // groceries
-                if (PlayerChoices.groceryDone && PlayerChoices.chatProgress != 1) {
-                    exclamationMark.gameObject.SetActive(true);
-                }
-
-            } else if (PlayerPrefs.GetInt("TimeCount") == 2) {
+                case 1:
+                    if (PlayerChoices.groceryDone && PlayerChoices.chatProgress != 1) {
+                        exclamationMark.gameObject.SetActive(true);
+                    }
+                    break;
                 // plant
-                if (PlayerChoices.plantType != "" && PlayerChoices.chatProgress != 1) {
-                    exclamationMark.gameObject.SetActive(true);
-                }
+                case 2:
+                    if (PlayerChoices.plantType != "" && PlayerChoices.chatProgress != 1) {
+                       exclamationMark.gameObject.SetActive(true);
+                    }
+                    break;
+                default: Debug.Log("CalcExclMark went wrong: Day 1"); break;
             }
+            
+            // if (PlayerPrefs.GetInt("TimeCount") == 0) {
+            //     // privacy
+            //     if (PlayerChoices.chatProgress != 1) {
+            //         exclamationMark.gameObject.SetActive(true);
+            //     }
+
+            // } else if (PlayerPrefs.GetInt("TimeCount") == 1) {
+            //     // groceries
+            //     if (PlayerChoices.groceryDone && PlayerChoices.chatProgress != 1) {
+            //         exclamationMark.gameObject.SetActive(true);
+            //     }
+
+            // } else if (PlayerPrefs.GetInt("TimeCount") == 2) {
+            //     // plant
+            //     if (PlayerChoices.plantType != "" && PlayerChoices.chatProgress != 1) {
+            //         exclamationMark.gameObject.SetActive(true);
+            //     }
+            // }
 
         } else if (PlayerPrefs.GetInt("DayCount") == 2) {
 
+            switch (PlayerPrefs.GetInt("TimeCount")) {
+                case 0:
+                    if (PlayerChoices.chatProgress != 1) {
+                        exclamationMark.gameObject.SetActive(true);
+                    }
+                    break;
+                // buy present
+                case 1:
+                    if (PlayerChoices.buyPresent && PlayerChoices.chatProgress != 1 && PlayerChoices.chatProgress != 0) {
+                        exclamationMark.gameObject.SetActive(true);
+                    }
+                    break;
+                case 2:
+                    if (PlayerChoices.chatProgress != 1) {
+                       exclamationMark.gameObject.SetActive(true);
+                    }
+                    break;
+                default: Debug.Log("CalcExclMark went wrong: Day 1"); break;
+            }
         }
     }
 }

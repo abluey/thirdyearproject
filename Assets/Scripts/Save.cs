@@ -98,6 +98,9 @@ public class Save : MonoBehaviour
         data.readTCs = PlayerChoices.readTCs;
 
         data.D1T1Ending = PlayerChoices.D1T1Ending;
+
+        data.buyPresent = PlayerChoices.buyPresent;
+        data.virusNum = PlayerChoices.virusNum;
         return data;
     }
 
@@ -131,6 +134,9 @@ public class Save : MonoBehaviour
         PlayerChoices.readTCs = data.readTCs;
 
         PlayerChoices.D1T1Ending = data.D1T1Ending;
+
+        PlayerChoices.buyPresent = data.buyPresent;
+        PlayerChoices.virusNum = data.virusNum;
     }
 }
 
@@ -165,4 +171,7 @@ public class FriendData {
     public int readTCs;
 
     public int D1T1Ending;
+
+    public bool buyPresent;
+    public int virusNum;
 }

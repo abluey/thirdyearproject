@@ -12,7 +12,7 @@ public class ChatDay0 : MonoBehaviour {
         if (!PlayerChoices.introducedYourself) {
             ChatManager.chatbox.text = "Day 0\nNo new messages today.";
             ChatManager.choice1.gameObject.SetActive(true);
-            ChatManager.choice1text.text = "Hello, my name is " + PlayerPrefs.GetString("Name") + "\n";
+            ChatManager.choice1text.text = "Hello, my name is " + PlayerPrefs.GetString("Name");
 
             ChatManager.choice1.onClick.AddListener(Intro);
 
@@ -52,7 +52,7 @@ public class ChatDay0 : MonoBehaviour {
         IntroReplyChoice();
     }
 
-    // separation is necessary so the updatechatrecord doesn't repeat when loading back into the game from menu
+    // separation is necessary so the updateChatRecords doesn't repeat when loading back into the game from menu
     // Keep Reese's chats self-contained
     public void IntroReplyChoice() {
         // set up the reply choice

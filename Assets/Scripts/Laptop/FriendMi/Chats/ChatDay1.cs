@@ -862,8 +862,10 @@ public class ChatDay1 : MonoBehaviour {
         
         yield return StartCoroutine(ChatManager.IsTyping(4.0f));
         ChatManager.updateChatRecords("\nIn the case of the plant store, if you don't pay attention, you're automatically charged extra.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(4.0f));
+        ChatManager.updateChatRecords("\nThey used to do something even sneakier, which is sneaking things into your checkout cart, but that's illegal now.\n");
         yield return StartCoroutine(ChatManager.IsTyping(2.0f, 1.0f));
-        ChatManager.updateChatRecords("\nThere's another sneaky thing they do, which are trick questions: questions designed to be confusing, so you give an answer they want.\n");
+        ChatManager.updateChatRecords("\nThere's another thing they do, though, which are trick questions: questions designed to be confusing, so you give an answer they want.\n");
         yield return StartCoroutine(ChatManager.IsTyping(4.0f));
         ChatManager.updateChatRecords("\nYou can see it at the checkout page when they ask if you want to receive ads from them.\n");
 

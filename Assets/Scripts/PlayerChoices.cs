@@ -43,6 +43,10 @@ public class PlayerChoices : MonoBehaviour
     // 3: player said 1 groc store is weird, but then backtracks
     // 4: player asked questions about the store
 
+    // day 2
+    public static bool virusNum {get; set;} = 0;
+    public static bool buyPresent {get; set;} = false;
+
     // choices are currently reset once you go back to MainMenu
     // choices will persist in JSON if saved
     public static void ResetChoices() {
@@ -68,5 +72,8 @@ public class PlayerChoices : MonoBehaviour
         readTCs = 0;
 
         D1T1Ending = 0;
+
+        virusNum = 0;
+        buyPresent = false;
     }
 }
