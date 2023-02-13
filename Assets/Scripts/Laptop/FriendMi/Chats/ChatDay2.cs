@@ -47,9 +47,21 @@ public class ChatDay2 : MonoBehaviour {
             }
             
         } else {
+            // this has to be time 2
             switch (PlayerChoices.chatProgress) {
-                case 0: T2_Start(); break;
+                case 0: 
+                    ChatManager.chatbox.text = "Day 2\nNo new messages today.";
+                    ChatManager.choice1.gameObject.SetActive(true);
+                    ChatManager.choice1text.text = "Hey, how are you doing?";
+                    ChatManager.choice1.onClick.AddListener(T2_Start());
+                    break;
                 case 1: break;
+                case 22: T2_Choice1(); break;
+                case 32: T2_C2(); break;
+                case 42: T2_EndChoice(); break;
+                case 102: T2_BeBackResponse(); break;
+                case 202: T2_ExplainReact(); break;
+                case 302: T2_EndChoiceBot(); break;
                 default: Debug.Log("Something went wrong D2T2"); break;
             }
         }
@@ -293,6 +305,201 @@ public class ChatDay2 : MonoBehaviour {
     ***/
     
     private void T2_Start() {
+        ChatManager.ResetListeners();
 
+        PlayerChoices.introducedYourself = true;
+        ChatManager.chatbox.text = "Day 2\nYou: Hey, how are you doing?\n";
+        PlayerChoices.chatRecord = ChatManager.chatbox.text;
+        
+        ChatManager.ShowChoices(false);
+
+        StartCoroutine(T2_StartReply());
+    }
+
+    private IEnumerator T2_StartReply() {
+        yield return StartCoroutine(ChatManager.IsTyping(1.0f, 1.0f));
+        ChatManager.updateChatRecords("\nReese: Hey there!\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nDoing well. Packing up. Be leaving in a few hours.\n");
+
+        PlayerChoices.chatProgress = 22;
+        T2_Choice1();
+    }
+
+    private void T2_Choice1() {
+        ChatManager.choice1text.text = "You still won't me where you're going, are you?";
+        ChatManager.choice2text.text = "Will you be back online?";
+        ChatManager.choice1.onClick.AddListener(T2_C11);
+        ChatManager.choice2.onClick.AddListener(T2_C12);
+        ChatManager.ShowChoices(true);
+    }
+
+    private void T2_C11() {
+        ChatManager.ResetListeners();
+        ChatManager.ShowChoices(false);
+        ChatManager.updateChatRecords("\nYou: You still won't me where you're going, are you?\n");
+
+        StartCoroutine(T2_C11Reply);
+    }
+
+    private IEnumerator T2_C11Reply() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: No, sorry.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.5f,1.0f));
+        ChatManager.updateChatRecords("\n...I'll tell you this. I'm going to try and find my other friends.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nMy in-person friends, who've all stopped using online services one by one.\n");
+
+        PlayerChoices.chatProgress = 32;
+        T2_C2();
+    }
+
+    private void T2_C2() {
+        ChatManager.choice1text.text = "I see. Stay safe.";
+        ChatManager.choice1.onClick.AddListener(T2_C21);
+        ChatManager.choice2text.text = "Will you be back online?";
+        ChatManager.choice2.onClick.AddListener(T2_C12);
+        ChatManager.ShowChoices(true);
+    }
+
+    private void T2_C21() {
+        ChatManager.ResetListeners();
+        ChatManager.ShowChoices(false);
+        ChatManager.updateChatRecords("\nYou: I see. Stay safe.\n");
+
+        StartCoroutine(T2_BringChange);
+    }
+
+    private IEnumerator T2_BringChange() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        
+        // ELEPHANT needs testing
+        // redirecting from "Stay safe."
+        if (PlayerChoices.chatProgress == 32) {
+            ChatManager.updateChatRecords("\nReese: Thank you. You too.\n");
+        }
+        // redirecting from robot
+        else if (PlayerChoices.chatProgress == 202) {
+            ChatManager.updateChatRecords("\nAnyway.\n");
+        }
+        
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nKeep your eyes peeled for more tricks on the Internet.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(1.5f,1.0f));
+        ChatManager.updateChatRecords("\nBring awareness and change.\n");
+
+        PlayerChoices.chatProgress = 42;
+        T2_EndChoice();
+    }
+
+    private void T2_C12() {
+        ChatManager.ResetListeners();
+        ChatManager.ShowChoices(false);
+        ChatManager.updateChatRecords("\nYou: Will you be back online?\n");
+
+        StartCoroutine(T2_BeBack);
+    }
+
+    private IEnumerator T2_BeBack() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: Depends.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nIf they find someone to replace me, then 'I'll' be back.\n");
+
+        PlayerChoices.chatProgress = 102;
+        T2_BeBackResponse();
+    }
+
+    private void T2_BeBackResponse() {
+        ChatManager.choice1text.text = "That's not ominous at all. What do you mean?";
+        ChatManager.choice1.onClick.AddListener(T2_BBR);
+        ChatManager.choice1.gameObject.SetActive(true);
+    }
+
+    private void T2_BBR() {
+        ChatManager.ResetListeners();
+        ChatManager.ShowChoices(false);
+        ChatManager.updateChatRecords("\nYou: That's not ominous at all. What do you mean?\n");
+
+        StartCoroutine(T2_Explain);
+    }
+
+    private IEnumerator T2_Explain() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f,1.5f));
+        ChatManager.updateChatRecords("\nReese: Well. Every account I used to talk to here has been replaced by bots.\n");
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f,2.0f));
+        ChatManager.updateChatRecords("\nI expect I will be, too. Replaced, I mean.\n");
+
+        PlayerChoices.chatProgress = 202;
+        T2_ExplainReact();
+    }
+
+    private void T2_ExplainReact() {
+        ChatManager.choice1text.text = "Is that why you said not many people use FriendMi now?";
+        ChatManager.choice1.onClick.AddListener(T2_ERDisplay);
+        ChatManager.choice1.gameObject.SetActive(true);
+    }
+
+    private void T2_ERDisplay() {
+        ChatManager.ResetListeners();
+        ChatManager.ShowChoices(false);
+        ChatManager.updateChatRecords("\nYou: Is that why you said not many people use FriendMi now?\n");
+
+        StartCoroutine(T2_ExplainEnd);
+    }
+
+    private IEnumerator T2_ExplainEnd() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: Yeah.\n");
+
+        if (PlayerChoices.D1T1Ending == 2 || PlayerChoices.D1T1Ending == 3) {
+            PlayerChoices.chatProgress = 302;
+            T2_EndChoiceBot();
+        } else {
+            T2_BringChange();
+        }
+    }
+
+    private void T2_EndChoiceBot() {
+        ChatManager.choice1text.text = "How do you know I'm not just a really advanced bot?";
+        ChatManager.choice1.onClick.AddListener(T2_ECBDisplay);
+        ChatManager.choice1.gameObject.SetActive(true);
+    }
+
+    private void T2_ECBDisplay() {
+        ChatManager.ResetListeners();
+        ChatManager.ShowChoices(false);
+        ChatManager.updateChatRecords("\nYou: How do you know I'm not just a really advanced bot?\n");
+
+        StartCoroutine(T2_BotReply);
+    }
+
+    private IEnumerator T2_BotReply() {
+        yield return StartCoroutine(ChatManager.IsTyping(3.0f));
+        ChatManager.updateChatRecords("\nReese: Then I hope you're not like the rest of them and can influence the future with your awareness.\n");
+
+        PlayerChoices.chatProgress = 42;
+        T2_EndChoice();
+    }
+
+    private void T2_EndChoice() {
+        ChatManager.choice1text.text = "This is sounding increasingly dystopian.";
+        ChatManager.choice1.onClick.AddListener(T2_EndFinal);
+        ChatManager.choice1.gameObject.SetActive(true);
+    }
+
+    private void T2_EndFinal() {
+        ChatManager.ResetListeners();
+        ChatManager.ShowChoices(false);
+        ChatManager.updateChatRecords("\nYou: This is sounding increasingly dystopian.\n");
+
+        StartCoroutine(T2_EndFinal);
+    }
+
+    private IEnumerator T2_EndFinal() {
+        yield return StartCoroutine(ChatManager.IsTyping(2.0f));
+        ChatManager.updateChatRecords("\nReese: No one ever said it wasn't.\n");
+
+        PlayerChoices.chatProgress = 1;
     }
 }
