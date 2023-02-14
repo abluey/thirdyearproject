@@ -44,7 +44,7 @@ public class PlayerChoices : MonoBehaviour
     // 4: player asked questions about the store
 
     // day 2
-    public static bool virusNum {get; set;} = 0;
+    public static int virusNum {get; set;} = 0;
     public static bool buyPresent {get; set;} = false;
 
     // choices are currently reset once you go back to MainMenu

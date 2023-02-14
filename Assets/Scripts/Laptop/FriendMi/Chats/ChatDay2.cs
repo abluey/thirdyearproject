@@ -35,7 +35,7 @@ public class ChatDay2 : MonoBehaviour {
                 } else {
                     switch (PlayerChoices.chatProgress) {
                         case 1: break;
-                        case 21: T1_Shop(); break;
+                        case 21: T1_AskForShop(); break;
                         case 31: T1_ShopChoice(); break;
                         case 41: PostDisguisedAds(); break;
                         case 51: End(); break;
@@ -53,7 +53,7 @@ public class ChatDay2 : MonoBehaviour {
                     ChatManager.chatbox.text = "Day 2\nNo new messages today.";
                     ChatManager.choice1.gameObject.SetActive(true);
                     ChatManager.choice1text.text = "Hey, how are you doing?";
-                    ChatManager.choice1.onClick.AddListener(T2_Start());
+                    ChatManager.choice1.onClick.AddListener(T2_Start);
                     break;
                 case 1: break;
                 case 22: T2_Choice1(); break;
@@ -228,7 +228,7 @@ public class ChatDay2 : MonoBehaviour {
         if (showName) {
             ChatManager.updateChatRecords("\nReese: I'm sure you've seen these sorts of pages before.\n");
         } else {
-            ChatManager.updateChatRecords("\nI'm sure you've seen these sorts of pages before.\n")
+            ChatManager.updateChatRecords("\nI'm sure you've seen these sorts of pages before.\n");
             showName = true;
         }
 
@@ -339,7 +339,7 @@ public class ChatDay2 : MonoBehaviour {
         ChatManager.ShowChoices(false);
         ChatManager.updateChatRecords("\nYou: You still won't me where you're going, are you?\n");
 
-        StartCoroutine(T2_C11Reply);
+        StartCoroutine(T2_C11Reply());
     }
 
     private IEnumerator T2_C11Reply() {
@@ -367,7 +367,7 @@ public class ChatDay2 : MonoBehaviour {
         ChatManager.ShowChoices(false);
         ChatManager.updateChatRecords("\nYou: I see. Stay safe.\n");
 
-        StartCoroutine(T2_BringChange);
+        StartCoroutine(T2_BringChange());
     }
 
     private IEnumerator T2_BringChange() {
@@ -397,7 +397,7 @@ public class ChatDay2 : MonoBehaviour {
         ChatManager.ShowChoices(false);
         ChatManager.updateChatRecords("\nYou: Will you be back online?\n");
 
-        StartCoroutine(T2_BeBack);
+        StartCoroutine(T2_BeBack());
     }
 
     private IEnumerator T2_BeBack() {
@@ -421,7 +421,7 @@ public class ChatDay2 : MonoBehaviour {
         ChatManager.ShowChoices(false);
         ChatManager.updateChatRecords("\nYou: That's not ominous at all. What do you mean?\n");
 
-        StartCoroutine(T2_Explain);
+        StartCoroutine(T2_Explain());
     }
 
     private IEnumerator T2_Explain() {
@@ -445,7 +445,7 @@ public class ChatDay2 : MonoBehaviour {
         ChatManager.ShowChoices(false);
         ChatManager.updateChatRecords("\nYou: Is that why you said not many people use FriendMi now?\n");
 
-        StartCoroutine(T2_ExplainEnd);
+        StartCoroutine(T2_ExplainEnd());
     }
 
     private IEnumerator T2_ExplainEnd() {
@@ -471,7 +471,7 @@ public class ChatDay2 : MonoBehaviour {
         ChatManager.ShowChoices(false);
         ChatManager.updateChatRecords("\nYou: How do you know I'm not just a really advanced bot?\n");
 
-        StartCoroutine(T2_BotReply);
+        StartCoroutine(T2_BotReply());
     }
 
     private IEnumerator T2_BotReply() {
@@ -493,10 +493,10 @@ public class ChatDay2 : MonoBehaviour {
         ChatManager.ShowChoices(false);
         ChatManager.updateChatRecords("\nYou: This is sounding increasingly dystopian.\n");
 
-        StartCoroutine(T2_EndFinal);
+        StartCoroutine(T2_EndFinal1());
     }
 
-    private IEnumerator T2_EndFinal() {
+    private IEnumerator T2_EndFinal1() {
         yield return StartCoroutine(ChatManager.IsTyping(2.0f));
         ChatManager.updateChatRecords("\nReese: No one ever said it wasn't.\n");
 

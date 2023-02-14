@@ -310,7 +310,7 @@ public class ChatDay1 : MonoBehaviour {
         yield return StartCoroutine(ChatManager.IsTyping(1.5f));
         ChatManager.updateChatRecords("\nReese: Well... you should!\n");
         yield return StartCoroutine(ChatManager.IsTyping(2.0f));
-        ChatManager.updateChatRecords("\nEven the smallest detail can be used to infer what your life.\n");
+        ChatManager.updateChatRecords("\nEven the smallest detail can be used to infer what your life is like.\n");
         yield return StartCoroutine(ChatManager.IsTyping(4.0f));
         ChatManager.updateChatRecords("\nEvery little bit of privacy counts in our hyper-surveillance society.\n");
 
