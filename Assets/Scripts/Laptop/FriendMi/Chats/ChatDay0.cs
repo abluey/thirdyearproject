@@ -111,13 +111,13 @@ public class ChatDay0 : MonoBehaviour {
     private IEnumerator Intro3Reply() {
         yield return StartCoroutine(ChatManager.IsTyping(3.5f));
 
-        ChatManager.updateChatRecords("\nReese: I'm surprised you haven't heard. There's rumors of a security breach. But honestly? Everything seems fine to me.\n");
+        ChatManager.updateChatRecords("\nReese: There's been an influx of bot accounts lately, so people have moved on.\n");
         PlayerChoices.chatProgress = 4;
         Intro3ReplyChoice();
     }
 
     public void Intro3ReplyChoice() {
-        ChatManager.choice1text.text = "I... see. Well, I look forward to our chats anyway.";
+        ChatManager.choice1text.text = "I see. Well, I look forward to our chats anyway.";
 
         ChatManager.choice1.onClick.AddListener(IntroFinish1);
         ChatManager.choice1.gameObject.SetActive(true);

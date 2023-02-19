@@ -292,6 +292,7 @@ public class ChatDay1 : MonoBehaviour {
 
         // if player profile complete
         // elephant: NEEDS TESTING
+        // SHOULD trigger without issue
         if (!string.IsNullOrEmpty(PlayerPrefs.GetString("DOB")) && (PlayerPrefs.GetString("Gender") != "Prefer not to say")) {
             yield return StartCoroutine(RFPExtra());
         }
@@ -315,11 +316,11 @@ public class ChatDay1 : MonoBehaviour {
         ChatManager.updateChatRecords("\nEvery little bit of privacy counts in our hyper-surveillance society.\n");
 
         // if player profile complete
-        // NEEDS TESTING
         if (!string.IsNullOrEmpty(PlayerPrefs.GetString("DOB")) && (PlayerPrefs.GetString("Gender") != "Prefer not to say")) {
             yield return StartCoroutine(RFPExtra());
         }
 
+        // ELEPHANT: needs testing
         if (PlayerPrefs.GetInt("TimeCount") == 1) {
             yield return StartCoroutine(ChatManager.IsTyping(3.0f));
             ChatManager.updateChatRecords("\nAnyway...\n");
