@@ -18,9 +18,7 @@ public class BirthdayManager : MonoBehaviour
 
     [SerializeField] private Canvas adPage;
     [SerializeField] private Canvas Advert4;
-    [SerializeField] private Canvas Present1;
-    [SerializeField] private Canvas Present2;
-    [SerializeField] private Canvas Present3;
+    [SerializeField] private Canvas presentPage;
     [HideInInspector] public static string adName;
     private Canvas lastVisited;
 
@@ -36,9 +34,9 @@ public class BirthdayManager : MonoBehaviour
         adv4.onClick.AddListener( delegate { LoadCanvas(Advert4, "ad4"); });
         adv5.onClick.AddListener( delegate { LoadCanvas(adPage, "ad5"); });
 
-        pres1.onClick.AddListener( delegate { LoadCanvas(Present1, "pres1"); });
-        pres2.onClick.AddListener( delegate { LoadCanvas(Present2, "pres2"); });
-        pres3.onClick.AddListener( delegate { LoadCanvas(Present3, "pres3"); });
+        pres1.onClick.AddListener( delegate { LoadCanvas(presentPage, "pres1"); });
+        pres2.onClick.AddListener( delegate { LoadCanvas(presentPage, "pres2"); });
+        pres3.onClick.AddListener( delegate { LoadCanvas(presentPage, "pres3"); });
 
         quittBtn.onClick.AddListener( delegate { LoadCanvas(adPage, "quitt"); });
 
@@ -46,6 +44,9 @@ public class BirthdayManager : MonoBehaviour
     }
 
     private void LoadCanvas(Canvas canvas, string canName) {
+        if (canName[0] == 'a') {
+            PlayerChoices.virusNum += 1;
+        }
         adName = canName;
         lastVisited = canvas;
         canvas.gameObject.SetActive(true);

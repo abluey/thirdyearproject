@@ -21,7 +21,7 @@ public class Fader : MonoBehaviour
 
     // Start is called before the first frame update and is only run once
     void Start() {
-        triggerBtn.onClick.AddListener(delegate {FadeToScene(1);});
+        triggerBtn?.onClick.AddListener(delegate {FadeToScene(1);});
 
         // ? for checking for null type
         triggerBtn2?.onClick.AddListener(delegate {FadeToScene(2);});
