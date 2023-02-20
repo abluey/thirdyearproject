@@ -17,7 +17,7 @@ public class StartMenuManager : MonoBehaviour
     [SerializeField] private Canvas settings;
 
 
-// TODO with this: "Are you sure" when selecting New Game instead of Load Game (new modal needed)
+// ELEPHANT TODO with this: "Are you sure" when selecting New Game instead of Load Game (new modal needed)
     private bool hasPlayed = false;
 
     void Start() {

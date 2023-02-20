@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-// using UnityEngine.SceneManagement;
 
 public class BirthdayManager : MonoBehaviour
 {
@@ -11,36 +10,54 @@ public class BirthdayManager : MonoBehaviour
     [SerializeField] private Button adv3;
     [SerializeField] private Button adv4;
     [SerializeField] private Button adv5;
-    [SerializeField] private Button quitt;
+    [SerializeField] private Button quittBtn;
 
     [SerializeField] private Button pres1;
     [SerializeField] private Button pres2;
     [SerializeField] private Button pres3;
 
+    [SerializeField] private Canvas adPage;
+    [SerializeField] private Canvas Advert4;
+    [SerializeField] private Canvas Present1;
+    [SerializeField] private Canvas Present2;
+    [SerializeField] private Canvas Present3;
+    [HideInInspector] public static string adName;
+    private Canvas lastVisited;
+
+    [SerializeField] private Canvas homepage;
+    [SerializeField] private Button homeBtn;
+    [SerializeField] private Button quitBtn;
+
     void Start()
     {
-        adv1.onClick.AddListener( delegate { LoadAd(1); });
-        adv2.onClick.AddListener( delegate { LoadAd(2); });
-        adv3.onClick.AddListener( delegate { LoadAd(3); });
-        adv4.onClick.AddListener( delegate { LoadAd(4); });
-        adv5.onClick.AddListener( delegate { LoadAd(5); });
+        adv1.onClick.AddListener( delegate { LoadCanvas(adPage, "ad1"); });
+        adv2.onClick.AddListener( delegate { LoadCanvas(adPage, "ad2"); });
+        adv3.onClick.AddListener( delegate { LoadCanvas(adPage, "ad3"); });
+        adv4.onClick.AddListener( delegate { LoadCanvas(Advert4, "ad4"); });
+        adv5.onClick.AddListener( delegate { LoadCanvas(adPage, "ad5"); });
 
-        pres1.onClick.AddListener( delegate { LoadPres(1); });
-        pres2.onClick.AddListener( delegate { LoadPres(2); });
-        pres3.onClick.AddListener( delegate { LoadPres(3); });
+        pres1.onClick.AddListener( delegate { LoadCanvas(Present1, "pres1"); });
+        pres2.onClick.AddListener( delegate { LoadCanvas(Present2, "pres2"); });
+        pres3.onClick.AddListener( delegate { LoadCanvas(Present3, "pres3"); });
 
-        quitt.onClick.AddListener(Quitt);
+        quittBtn.onClick.AddListener( delegate { LoadCanvas(adPage, "quitt"); });
+
+        homeBtn.onClick.AddListener(Home);
     }
 
-    private void LoadAd(int adNum) {
-
+    private void LoadCanvas(Canvas canvas, string canName) {
+        adName = canName;
+        lastVisited = canvas;
+        canvas.gameObject.SetActive(true);
+        homepage.gameObject.SetActive(false);
+        homeBtn.gameObject.SetActive(true);
+        quitBtn.gameObject.SetActive(false);
     }
 
-    private void LoadPres(int presNum) {
-
-    }
-
-    private void Quitt() {
-
+    private void Home() {
+        homepage.gameObject.SetActive(true);
+        lastVisited.gameObject.SetActive(false);
+        homeBtn.gameObject.SetActive(false);
+        quitBtn.gameObject.SetActive(true);
     }
 }

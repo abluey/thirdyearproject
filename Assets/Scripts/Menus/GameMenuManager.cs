@@ -26,7 +26,7 @@ public class GameMenuManager : MonoBehaviour
         for (int n = 0; n < SceneManager.sceneCount; ++n)
             {
                 Scene scene = SceneManager.GetSceneAt(n);
-                if (scene.name == "Kitchen" || scene.name == "Room") {
+                if (scene.name == "Room") {
                     _ = SceneManager.UnloadSceneAsync(scene.name);
                 }
             }
