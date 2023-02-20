@@ -71,25 +71,6 @@ public class BedroomManager : MonoBehaviour
                     break;
                 default: Debug.Log("CalcExclMark went wrong: Day 1"); break;
             }
-            
-            // if (PlayerPrefs.GetInt("TimeCount") == 0) {
-            //     // privacy
-            //     if (PlayerChoices.chatProgress != 1) {
-            //         exclamationMark.gameObject.SetActive(true);
-            //     }
-
-            // } else if (PlayerPrefs.GetInt("TimeCount") == 1) {
-            //     // groceries
-            //     if (PlayerChoices.groceryDone && PlayerChoices.chatProgress != 1) {
-            //         exclamationMark.gameObject.SetActive(true);
-            //     }
-
-            // } else if (PlayerPrefs.GetInt("TimeCount") == 2) {
-            //     // plant
-            //     if (PlayerChoices.plantType != "" && PlayerChoices.chatProgress != 1) {
-            //         exclamationMark.gameObject.SetActive(true);
-            //     }
-            // }
 
         } else if (PlayerPrefs.GetInt("DayCount") == 2) {
 

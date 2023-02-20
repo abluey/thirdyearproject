@@ -20,11 +20,10 @@ public class ConfirmTime : MonoBehaviour
 
     private void OnLoadComplete(AsyncOperation loadOperation) {
         
-        // unloading the room
         for (int n = 0; n < SceneManager.sceneCount; ++n)
             {
                 Scene scene = SceneManager.GetSceneAt(n);
-                if (scene.name == "Room" || scene.name == "Kitchen") {
+                if (scene.name == "Room") {
                     _ = SceneManager.UnloadSceneAsync(scene.name);
                 }
             }
