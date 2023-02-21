@@ -35,23 +35,35 @@ public class Save : MonoBehaviour
     }
 
     public static void LoadData() {
-        string filepath = System.IO.Path.Combine(datapath, "PlantData.json");
-        string data = System.IO.File.ReadAllText(filepath);
+        string filepath;
+        string data;
 
-        PlantData plantData = JsonUtility.FromJson<PlantData>(data);
-        SetPlayerPlantChoices(plantData);
+        filepath = System.IO.Path.Combine(datapath, "PlantData.json");
+        
+        if (System.IO.File.Exists(filepath)) {
+            data = System.IO.File.ReadAllText(filepath);
 
+            PlantData plantData = JsonUtility.FromJson<PlantData>(data);
+            SetPlayerPlantChoices(plantData);
+        }
+        
         filepath = System.IO.Path.Combine(datapath, "GroceryData.json");
-        data = System.IO.File.ReadAllText(filepath);
 
-        GroceryData grocData = JsonUtility.FromJson<GroceryData>(data);
-        SetPlayerShopChoices(grocData);
+        if (System.IO.File.Exists(filepath)) {
+            data = System.IO.File.ReadAllText(filepath);
+
+            GroceryData grocData = JsonUtility.FromJson<GroceryData>(data);
+            SetPlayerShopChoices(grocData);
+        }
 
         filepath = System.IO.Path.Combine(datapath, "FriendData.json");
-        data = System.IO.File.ReadAllText(filepath);
 
-        FriendData frenData = JsonUtility.FromJson<FriendData>(data);
-        SetPlayerFriendChoices(frenData);
+        if (System.IO.File.Exists(filepath)) {
+            data = System.IO.File.ReadAllText(filepath);
+
+            FriendData frenData = JsonUtility.FromJson<FriendData>(data);
+            SetPlayerFriendChoices(frenData);
+        }
     }
 
     public static void DeleteAllData() {

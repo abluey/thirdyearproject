@@ -17,24 +17,77 @@ public class ClockManager : MonoBehaviour
     }
 
     private void AdvanceTime() {
+        /***
+        DAY 0
+        ***/
 
-        // no profile set on first day
+        // no profile set
         if (!PlayerPrefs.HasKey("Name")) {
             clockBlock = 100;
         }
 
-        // shopping not done on afternoon first day
-        if (PlayerPrefs.GetInt("DayCount") == 0 && PlayerPrefs.GetInt("TimeCount") == 1 && !PlayerChoices.groceryDone) {
-            clockBlock = 101;
+        if (PlayerPrefs.GetInt("DayCount") == 0) {
+            
+            // shopping not done
+            if (PlayerPrefs.GetInt("TimeCount") == 1 && !PlayerChoices.groceryDone) {
+                clockBlock = 101;
+            }
+
+            // FriendMi chat not finished
+            else if (PlayerPrefs.GetInt("TimeCount") == 2 &&
+                (!PlayerChoices.acceptRequest ||
+                !PlayerChoices.introducedYourself ||
+                PlayerChoices.chatProgress != 1)) {
+                    if (!PlayerChoices.acceptRequest) clockBlock = 102;
+                    else if (!PlayerChoices.introducedYourself) clockBlock = 202;
+                    else if (PlayerChoices.chatProgress != 1) clockBlock = 5;
+                }
         }
 
-        // FriendMi stuff not done
-        if (PlayerPrefs.GetInt("DayCount") == 0 && PlayerPrefs.GetInt("TimeCount") == 2 &&
-          (!PlayerChoices.acceptRequest || !PlayerChoices.introducedYourself || PlayerChoices.chatProgress != 1)) {
+        /***
+        DAY 1
+        ***/
+
+        else if (PlayerPrefs.GetInt("DayCount") == 1) {
+
+            // haven't finished chat on either time 0 or 1
+            if ((PlayerPrefs.GetInt("TimeCount") == 0 || PlayerPrefs.GetInt("TimeCount") == 1) && PlayerChoices.chatProgress != 1) {
+                clockBlock = 5;
+            }
+
+            // plant shenanigans
+            else if (PlayerPrefs.GetInt("TimeCount") == 2) {
+                
+                if (PlayerChoices.plantType == "") {
+                    clockBlock = 111;
+                }
+                else if (PlayerChoices.chatProgress != 1) {
+                    clockBlock = 5;
+                }
+            }
+        }
+
+        /***
+        DAY 2
+        ***/
+
+        else if (PlayerPrefs.GetInt("DayCount") == 2) {
+
+            if (PlayerPrefs.GetInt("TimeCount") == 1) {
+                if (!PlayerChoices.buyPresent) {
+                    clockBlock = 121;
+                }
+                else if (PlayerChoices.chatProgress != 1) {
+                    clockBlock = 5;
+                }
+            }
             
-            if (!PlayerChoices.acceptRequest) clockBlock = 102;
-            else if (!PlayerChoices.introducedYourself) clockBlock = 202;
-            else if (PlayerChoices.chatProgress != 1) clockBlock = 302;
+            // ELEPHANT should encompass chat not complete in times 0 and 2
+            else {
+                if (PlayerChoices.chatProgress != 1) {
+                    clockBlock = 5;
+                }
+            }
         }
 
         // everything ok
@@ -44,14 +97,5 @@ public class ClockManager : MonoBehaviour
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("SpeechModal", LoadSceneMode.Additive);
         }
         
-
-        // else if (PlayerPrefs.GetInt("CompletedTask") == 1) {
-        //     AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("TimeTransition", LoadSceneMode.Additive);
-        //     asyncLoad.completed += OnLoadComplete;
-        // }
     }
-
-    // private void OnLoadComplete(AsyncOperation loadOperation) {
-    //     _ = SceneManager.UnloadSceneAsync(gameObject.scene);
-    // }
 }

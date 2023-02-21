@@ -13,7 +13,18 @@ public class LaptopManager : MonoBehaviour
     [SerializeField] private Button birthdayBtn;
     [SerializeField] private Button shopBtn;
 
-    // Start is called before the first frame update
+    [SerializeField] private Image exclMark;
+
+    void OnEnable() {
+        if (PlayerChoices.chatProgress == 1) {
+            exclMark.gameObject.SetActive(false);
+        } else if (BedroomManager.markActive) {
+            exclMark.gameObject.SetActive(true);
+        } else {
+            exclMark.gameObject.SetActive(false);
+        }
+    }
+
     void Start()
     {
         quitBtn.onClick.AddListener(delegate { LoadScene("Room"); });

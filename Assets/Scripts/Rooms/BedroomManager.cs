@@ -12,9 +12,11 @@ public class BedroomManager : MonoBehaviour
     [SerializeField] private Canvas list;
 
     [SerializeField] private Image exclamationMark;
+    [HideInInspector] public static bool markActive;
 
     void OnEnable() {
         exclamationMark.gameObject.SetActive(false);
+        markActive = false;
         CalcExclMark();
     }
 
@@ -47,6 +49,7 @@ public class BedroomManager : MonoBehaviour
             if (PlayerPrefs.GetInt("TimeCount") == 2 && PlayerChoices.chatProgress != 1) {
                 // D0T2; friend req, if not finished chat
                 exclamationMark.gameObject.SetActive(true);
+                markActive = true;
             }
 
         } else if (PlayerPrefs.GetInt("DayCount") == 1) {
@@ -55,18 +58,21 @@ public class BedroomManager : MonoBehaviour
                 case 0:
                     if (PlayerChoices.chatProgress != 1) {
                         exclamationMark.gameObject.SetActive(true);
+                        markActive = true;
                     }
                     break;
                 // groceries
                 case 1:
                     if (PlayerChoices.groceryDone && PlayerChoices.chatProgress != 1) {
                         exclamationMark.gameObject.SetActive(true);
+                        markActive = true;
                     }
                     break;
                 // plant
                 case 2:
                     if (PlayerChoices.plantType != "" && PlayerChoices.chatProgress != 1) {
                        exclamationMark.gameObject.SetActive(true);
+                       markActive = true;
                     }
                     break;
                 default: Debug.Log("CalcExclMark went wrong: Day 1"); break;
@@ -78,20 +84,23 @@ public class BedroomManager : MonoBehaviour
                 case 0:
                     if (PlayerChoices.chatProgress != 1) {
                         exclamationMark.gameObject.SetActive(true);
+                        markActive = true;
                     }
                     break;
                 // buy present
                 case 1:
                     if (PlayerChoices.buyPresent && PlayerChoices.chatProgress != 1 && PlayerChoices.chatProgress != 0) {
                         exclamationMark.gameObject.SetActive(true);
+                        markActive = true;
                     }
                     break;
                 case 2:
                     if (PlayerChoices.chatProgress != 1) {
                        exclamationMark.gameObject.SetActive(true);
+                       markActive = true;
                     }
                     break;
-                default: Debug.Log("CalcExclMark went wrong: Day 1"); break;
+                default: Debug.Log("CalcExclMark went wrong: Day 2"); break;
             }
         }
     }
