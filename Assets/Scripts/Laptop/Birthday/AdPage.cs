@@ -13,19 +13,24 @@ public class AdPage : MonoBehaviour
         adName = BirthdayManager.adName;
         switch (adName) {
             case "ad1":
-                adText.text = "this is ad 1";
+                // adText.text = "this is ad 1";
+                BirthdayManager.title.text = "Ad 1";
                 break;
             case "ad2":
-                adText.text = "this is ad 2";
+                // adText.text = "this is ad 2";
+                BirthdayManager.title.text = "Ad 2";
                 break;
             case "ad3":
-                adText.text = "this is ad 3";
+                // adText.text = "this is ad 3";
+                BirthdayManager.title.text = "Ad 3";
                 break;
             case "ad5":
-                adText.text = "this is ad 5";
+                // adText.text = "this is ad 5";
+                BirthdayManager.title.text = "Ad 5";
                 break;
             case "quitt":
-                adText.text = "this is quitt";
+                // adText.text = "this is quitt";
+                BirthdayManager.title.text = "Quitt";
                 break;
             default: Debug.Log("Something went wrong"); break;
         }
