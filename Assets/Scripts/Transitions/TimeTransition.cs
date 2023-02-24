@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class TimeTransition : MonoBehaviour
 {
-    public TMPro.TMP_Text content;
-    public TMPro.TMP_Text savedText;
-    public Button continueBtn;
+    [SerializeField] private TMPro.TMP_Text content;
+    [SerializeField] private TMPro.TMP_Text savedText;
+    [SerializeField] private Button continueBtn;
+    [SerializeField] private Button endBtn;
 
     private string timeName;
     private int time;
@@ -16,6 +17,7 @@ public class TimeTransition : MonoBehaviour
     void Start()
     {   
         continueBtn.gameObject.SetActive(false);
+        endBtn.gameObject.SetActive(false);
         savedText.text = "";
 
         time = PlayerPrefs.GetInt("TimeCount");
@@ -53,6 +55,13 @@ public class TimeTransition : MonoBehaviour
         savedText.text = "Game saved.";
 
         yield return new WaitForSeconds(1.5f);
-        continueBtn.gameObject.SetActive(true);
+        if (PlayerPrefs.GetInt("DayCount") == 3) {
+            continueBtn.gameObject.SetActive(false);
+            endBtn.gameObject.SetActive(true);
+        } else {
+            continueBtn.gameObject.SetActive(true);
+            endBtn.gameObject.SetActive(false);
+        }
+        
     }
 }
