@@ -36,6 +36,7 @@ public class LoadGameManager : MonoBehaviour
     }
 
     private void Play() {
+        Save.LoadData();
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Room", LoadSceneMode.Additive);
         asyncLoad.completed += OnLoadComplete;
     }

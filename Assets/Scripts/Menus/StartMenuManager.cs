@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class StartMenuManager : MonoBehaviour
 {
     [SerializeField] private Button startBtn;
+    [SerializeField] private Button hasPlayedStartBtn;
     [SerializeField] private Button loadBtn;
     [SerializeField] private Button settingsBtn;
     [SerializeField] private Button creditsBtn;
@@ -15,15 +16,15 @@ public class StartMenuManager : MonoBehaviour
     [SerializeField] private Canvas load;
     [SerializeField] private Canvas credits;
     [SerializeField] private Canvas settings;
+    [SerializeField] private Canvas startConfirm;
 
-
-// ELEPHANT TODO with this: "Are you sure" when selecting New Game instead of Load Game (new modal needed)
     private bool hasPlayed = false;
 
     void Start() {
         load.gameObject.SetActive(false);
         credits.gameObject.SetActive(false);
         settings.gameObject.SetActive(false);
+        startConfirm.gameObject.SetActive(false);
 
         if (PlayerPrefs.GetInt("DayCount") == 0 && PlayerPrefs.GetInt("TimeCount") == 0 && !PlayerPrefs.HasKey("Name")) {
             loadBtn.interactable = false;
@@ -33,7 +34,19 @@ public class StartMenuManager : MonoBehaviour
             loadBtn.onClick.AddListener(Load);
         }
         
-        startBtn.onClick.AddListener(Reset);
+        if (hasPlayed) {
+            hasPlayedStartBtn.gameObject.SetActive(true);
+            startBtn.gameObject.SetActive(false);
+
+            hasPlayedStartBtn.onClick.AddListener(StartGame);
+        } else {
+            // the set actives may be redundant
+            hasPlayedStartBtn.gameObject.SetActive(false);
+            startBtn.gameObject.SetActive(true);
+
+            startBtn.onClick.AddListener(Reset);
+        }
+        
 
         creditsBtn.onClick.AddListener(Credits);
         settingsBtn.onClick.AddListener(Settings);
@@ -46,13 +59,16 @@ public class StartMenuManager : MonoBehaviour
         Save.DeleteAllData();
     }
 
+    private void StartGame() {
+        startConfirm.gameObject.SetActive(true);
+    }
+
     private void PopScene(string sceneName) {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
     }
 
     private void Load() {
         load.gameObject.SetActive(true);
-        Save.LoadData();
     }
 
     private void Credits() {
