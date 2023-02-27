@@ -19,8 +19,7 @@ public class BirthdayManager : MonoBehaviour
     [SerializeField] private Canvas adPage;
     [SerializeField] private Canvas Advert4;
     [SerializeField] private Canvas presentPage;
-    [HideInInspector] public static string adName;
-    [HideInInspector] public static string presName;
+    [HideInInspector] public static string clickedName;
     private Canvas lastVisited;
 
     [SerializeField] private Canvas homepage;
@@ -34,8 +33,7 @@ public class BirthdayManager : MonoBehaviour
     }
 
     void OnEnable() {
-        adName = "";
-        presName = "";
+        clickedName = "";
     }
 
     void Start()
@@ -56,12 +54,7 @@ public class BirthdayManager : MonoBehaviour
     }
 
     private void LoadCanvas(Canvas canvas, string canName) {
-        if (canName[0] == 'a') {
-            PlayerChoices.virusNum += 1;
-            adName = canName;
-        } else {
-            presName = canName;
-        }
+        clickedName = canName;
         lastVisited = canvas;
         canvas.gameObject.SetActive(true);
         homepage.gameObject.SetActive(false);
@@ -74,6 +67,6 @@ public class BirthdayManager : MonoBehaviour
         lastVisited.gameObject.SetActive(false);
         homeBtn.gameObject.SetActive(false);
         quitBtn.gameObject.SetActive(true);
-        title.text = "BirthDay presents:\nBirthday Presents!";
+        title.text = "Birth Day presents:\nBirthday Presents!";
     }
 }

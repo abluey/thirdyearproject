@@ -33,9 +33,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Laptop/Groceries.unity
     guid: 9c52cf32a6f4aa8489bcb21e6d3ccd24
   - enabled: 1
-    path: Assets/Scenes/Kitchen.unity
-    guid: ade819ddc9bcb91479c0ce5a373b47e6
-  - enabled: 1
     path: Assets/Scenes/GameMenu.unity
     guid: e11083e29a68eb142a416da650bc5e98
   - enabled: 1
@@ -44,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Quit.unity
     guid: e3e55fdae322e7f4c898ea70fd9b7dbc
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: 7866c059cde2a7d40b73e797ce22aa3b
   m_configObjects: {}

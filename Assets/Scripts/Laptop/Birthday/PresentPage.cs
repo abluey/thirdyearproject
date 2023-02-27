@@ -6,13 +6,19 @@ using UnityEngine.UI;
 public class PresentPage : MonoBehaviour
 {
     [SerializeField] private Image presImage;
-    // [SerializeField] private TMPro.TMP_Text presText;
+    [SerializeField] private TMPro.TMP_Text boughtText;
     private string presName;
 
     [SerializeField] private Button buyBtn;
 
     void OnEnable() {
-        presName = BirthdayManager.presName;
+        presName = BirthdayManager.clickedName;
+        boughtText.gameObject.SetActive(false);
+
+        if (PlayerChoices.buyPresent) {
+            buyBtn.gameObject.SetActive(false);
+        }
+
         switch (presName) {
             case "pres1":
                 BirthdayManager.title.text = "Pres 1";
@@ -31,11 +37,12 @@ public class PresentPage : MonoBehaviour
 
     void Start()
     {
-        // backBtn.onClick.AddListener(Back);
         buyBtn.onClick.AddListener(Buy);
     }
 
     private void Buy() {
-
+        buyBtn.gameObject.SetActive(false);
+        boughtText.gameObject.SetActive(true);
+        PlayerChoices.buyPresent = true;
     }
 }
