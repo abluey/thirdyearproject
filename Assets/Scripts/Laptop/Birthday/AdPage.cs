@@ -41,6 +41,7 @@ public class AdPage : MonoBehaviour
             case "quitt":
                 BirthdayManager.title.text = "Quitt";
                 adText.text = "Are you trying to quit smoking? Maybe a gambling addiction? Or even trying to quit a website? Quitting something can be very discouraging, especially without proper support. Luckily we have our newest app QUITT that gives plenty of support and encouragemenet to quitting things by making you really think about WHY you're quitting the thing you're doing in the first place. Does it not bring you joy? Or is it making a huge dent in your wallet? Or maybe you simply don't have enough time anymore. Regardless, we are here to help, and if you've read up until this point then I hope you are feeling all the encouragement and support you need. Your laptop is completely fine and definitely without viruses; you have a very large wallet and a friendly face and everyone likes you also.";
+                adBtn.gameObject.SetActive(false);
                 break;
             default: Debug.Log("Something went wrong"); break;
         }

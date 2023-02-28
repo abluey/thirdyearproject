@@ -27,6 +27,7 @@ public class BirthdayManager : MonoBehaviour
     [SerializeField] private Button quitBtn;
 
     public static TMPro.TMP_Text title;
+    [SerializeField] private Canvas speech;
 
     void Awake() {
         title = gameObject.transform.Find("Title").GetComponent<TMPro.TMP_Text>();
@@ -51,6 +52,10 @@ public class BirthdayManager : MonoBehaviour
         quittBtn.onClick.AddListener( delegate { LoadCanvas(adPage, "quitt"); });
 
         homeBtn.onClick.AddListener(Home);
+
+        if ((PlayerPrefs.GetInt("TimeCount") == 1 && PlayerPrefs.GetInt("DayCount") == 2) && !PlayerChoices.buyPresent) {
+            speech.gameObject.SetActive(false);
+        } else speech.gameObject.SetActive(true);
     }
 
     private void LoadCanvas(Canvas canvas, string canName) {
