@@ -9,13 +9,11 @@ public class StartMenuManager : MonoBehaviour
     [SerializeField] private Button startBtn;
     [SerializeField] private Button hasPlayedStartBtn;
     [SerializeField] private Button loadBtn;
-    [SerializeField] private Button settingsBtn;
     [SerializeField] private Button creditsBtn;
     [SerializeField] private Button quitBtn;
 
     [SerializeField] private Canvas load;
     [SerializeField] private Canvas credits;
-    [SerializeField] private Canvas settings;
     [SerializeField] private Canvas startConfirm;
 
     private bool hasPlayed = false;
@@ -23,7 +21,6 @@ public class StartMenuManager : MonoBehaviour
     void Start() {
         load.gameObject.SetActive(false);
         credits.gameObject.SetActive(false);
-        settings.gameObject.SetActive(false);
         startConfirm.gameObject.SetActive(false);
 
         if (PlayerPrefs.GetInt("DayCount") == 0 && PlayerPrefs.GetInt("TimeCount") == 0 && !PlayerPrefs.HasKey("Name")) {
@@ -47,9 +44,7 @@ public class StartMenuManager : MonoBehaviour
             startBtn.onClick.AddListener(Reset);
         }
         
-
         creditsBtn.onClick.AddListener(Credits);
-        settingsBtn.onClick.AddListener(Settings);
 
         quitBtn.onClick.AddListener(delegate { PopScene("Quit"); });
     }
@@ -73,9 +68,5 @@ public class StartMenuManager : MonoBehaviour
 
     private void Credits() {
         credits.gameObject.SetActive(true);
-    }
-
-    private void Settings() {
-        settings.gameObject.SetActive(true);
     }
 }

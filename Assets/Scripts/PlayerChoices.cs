@@ -47,6 +47,9 @@ public class PlayerChoices : MonoBehaviour
     public static int virusNum {get; set;} = 0;
     public static bool buyPresent {get; set;} = false;
 
+    // end
+    public static int endCount {get; set;} = 0;
+
     // choices are currently reset once you go back to MainMenu
     // choices will persist in JSON if saved
     public static void ResetChoices() {
@@ -75,5 +78,7 @@ public class PlayerChoices : MonoBehaviour
 
         virusNum = 0;
         buyPresent = false;
+
+        endCount = 0;
     }
 }
