@@ -9,6 +9,7 @@ public class RoomManager : MonoBehaviour
 {
     [SerializeField] private Button menuBtn;
     [SerializeField] private Button quitBtn;
+    [SerializeField] private Button helpBtn;
 
     public Image background;
     public Color morning;
@@ -28,6 +29,7 @@ public class RoomManager : MonoBehaviour
 
         menuBtn.onClick.AddListener( delegate { PopModal("GameMenu"); });
         quitBtn.onClick.AddListener( delegate { PopModal("Quit"); });;
+        helpBtn.onClick.AddListener( delegate {PopModal("Help"); });
     }
 
     private void PopModal(string sceneName) {
