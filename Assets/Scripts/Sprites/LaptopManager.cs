@@ -36,6 +36,11 @@ public class LaptopManager : MonoBehaviour
     }
 
     private void LoadScene(string sceneName) {
+        StartCoroutine(WaitLoad(sceneName));
+    }
+
+    private IEnumerator WaitLoad(string sceneName) {
+        yield return new WaitForSeconds(0.2f);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         asyncLoad.completed += OnLoadComplete;
     }

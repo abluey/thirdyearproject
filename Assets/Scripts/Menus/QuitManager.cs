@@ -20,6 +20,11 @@ public class QuitManager : MonoBehaviour
     }
 
     private void QuitNo() {
+        StartCoroutine(WaitLoad());
+    }
+
+    private IEnumerator WaitLoad() {
+        yield return new WaitForSeconds(0.2f);
         _ = SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 }

@@ -15,6 +15,11 @@ public class QuitApp : MonoBehaviour
     }
 
     private void Quit() {
+        StartCoroutine(WaitQuit());   
+    }
+
+    private IEnumerator WaitQuit() {
+        yield return new WaitForSeconds(0.2f);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("LaptopScreen", LoadSceneMode.Additive);
         asyncLoad.completed += OnLoadComplete;
     }

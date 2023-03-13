@@ -45,7 +45,6 @@ public class StartMenuManager : MonoBehaviour
         }
         
         creditsBtn.onClick.AddListener(Credits);
-
         quitBtn.onClick.AddListener(delegate { PopScene("Quit"); });
     }
 

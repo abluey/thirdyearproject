@@ -14,6 +14,11 @@ public class ModalBack : MonoBehaviour
     }
 
     private void Back() {
+        StartCoroutine(WaitLoad());
+    }
+
+    private IEnumerator WaitLoad() {
+        yield return new WaitForSeconds(0.2f);
         _ = SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 }
