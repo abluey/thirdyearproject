@@ -14,6 +14,7 @@ public class HasPlayedStart : MonoBehaviour
 
     private void PlayStart() {
         PlayerPrefs.DeleteAll();
+        PlayerChoices.ResetChoices();
         Save.DeleteAllData();
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Room", LoadSceneMode.Additive);
         asyncLoad.completed += OnLoadComplete;

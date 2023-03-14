@@ -7,10 +7,13 @@ using UnityEngine.UI;
 public class ChatDay2 : MonoBehaviour {
 
     private bool showName;
+
+    [SerializeField] private ScrollRect scrollRect;
     
     void OnEnable() {
         showName = true;
         ChatManager.chatbox.text = PlayerChoices.chatRecord;
+        scrollRect.normalizedPosition = new Vector2(0, 0);
 
         if (PlayerPrefs.GetInt("TimeCount") == 0) {
             switch (PlayerChoices.chatProgress) {
@@ -27,7 +30,7 @@ public class ChatDay2 : MonoBehaviour {
 
                 // no chat yet
                 if (PlayerChoices.chatProgress == 0) {
-                    ChatManager.chatbox.text = "No new messages";
+                    ChatManager.chatbox.text = "No new messages.";
                     ChatManager.choice1.gameObject.SetActive(true);
                     ChatManager.choice1text.text = "Hey, you there?";
 
@@ -50,7 +53,7 @@ public class ChatDay2 : MonoBehaviour {
             // this has to be time 2
             switch (PlayerChoices.chatProgress) {
                 case 0: 
-                    ChatManager.chatbox.text = "Day 2\nNo new messages today.";
+                    ChatManager.chatbox.text = "No new messages.";
                     ChatManager.choice1.gameObject.SetActive(true);
                     ChatManager.choice1text.text = "Hey, how are you doing?";
                     ChatManager.choice1.onClick.AddListener(T2_Start);
@@ -154,7 +157,8 @@ public class ChatDay2 : MonoBehaviour {
         ChatManager.ResetListeners();
         ChatManager.ShowChoices(false);
 
-        ChatManager.updateChatRecords("\nYou: Hey, you there?\n");
+        ChatManager.chatbox.text = "You: Hey, you there?\n";
+        PlayerChoices.chatRecord += "\nYou: Hey, you there?\n";
 
         StartCoroutine(T1_Reply());
     }
@@ -264,7 +268,7 @@ public class ChatDay2 : MonoBehaviour {
         ChatManager.ResetListeners();
         ChatManager.ShowChoices(false);
 
-        ChatManager.updateChatRecords("\nYou: What? How do you know?");
+        ChatManager.updateChatRecords("\nYou: What? How do you know?\n");
         StartCoroutine(RidVirus());
     }
 
@@ -308,8 +312,8 @@ public class ChatDay2 : MonoBehaviour {
         ChatManager.ResetListeners();
 
         PlayerChoices.introducedYourself = true;
-        ChatManager.chatbox.text = "Day 2\nYou: Hey, how are you doing?\n";
-        PlayerChoices.chatRecord = ChatManager.chatbox.text;
+        ChatManager.chatbox.text = "You: Hey, how are you doing?\n";
+        PlayerChoices.chatRecord = "\nYou: Hey, how are you doing?\n";
         
         ChatManager.ShowChoices(false);
 
@@ -327,7 +331,7 @@ public class ChatDay2 : MonoBehaviour {
     }
 
     private void T2_Choice1() {
-        ChatManager.choice1text.text = "You still won't me where you're going, are you?";
+        ChatManager.choice1text.text = "You still won't tell me where you're going, are you?";
         ChatManager.choice2text.text = "Will you be back online?";
         ChatManager.choice1.onClick.AddListener(T2_C11);
         ChatManager.choice2.onClick.AddListener(T2_C12);
@@ -337,7 +341,7 @@ public class ChatDay2 : MonoBehaviour {
     private void T2_C11() {
         ChatManager.ResetListeners();
         ChatManager.ShowChoices(false);
-        ChatManager.updateChatRecords("\nYou: You still won't me where you're going, are you?\n");
+        ChatManager.updateChatRecords("\nYou: You still won't tell me where you're going, are you?\n");
 
         StartCoroutine(T2_C11Reply());
     }

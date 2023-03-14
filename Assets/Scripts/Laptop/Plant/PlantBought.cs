@@ -16,6 +16,11 @@ public class PlantBought : MonoBehaviour
     }
 
     private void Back() {
+        StartCoroutine(WaitLoad());
+    }
+
+    private IEnumerator WaitLoad() {
+        yield return new WaitForSeconds(0.2f);
         homepage.gameObject.SetActive(true);
         gameObject.SetActive(false);
         checkoutPage.gameObject.SetActive(false);

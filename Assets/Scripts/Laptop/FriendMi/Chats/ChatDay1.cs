@@ -7,9 +7,12 @@ using UnityEngine.UI;
 public class ChatDay1 : MonoBehaviour {
 
     private bool showName;
+    
+    [SerializeField] private ScrollRect scrollRect;
 
     void OnEnable() {
         ChatManager.chatbox.text = PlayerChoices.chatRecord;
+        scrollRect.normalizedPosition = new Vector2(0, 0);
         showName = false;
 
         if (PlayerPrefs.GetInt("TimeCount") == 0) {
@@ -427,11 +430,14 @@ public class ChatDay1 : MonoBehaviour {
     }
 
     private void T1_Start() {
+        Debug.Log("T1 Start: " + PlayerChoices.chatProgress);
         if (PlayerChoices.chatProgress == 420) {
             ChatManager.updateChatRecords("\nGrocery store. Weird, huh?\n");
+        } else if (PlayerChoices.chatProgress == 69) {
+            ChatManager.updateChatRecords("\nReese: Anyway. Grocery store. Weird, huh?\n");
         } else {
             // elephant - hopefully works
-            ChatManager.chatbox.text = "Day 1\nReese: Grocery store. Weird, huh?\n";
+            ChatManager.chatbox.text = "Reese: Grocery store. Weird, huh?\n";
         }
         
         PlayerChoices.chatProgress = 11;
@@ -762,8 +768,7 @@ public class ChatDay1 : MonoBehaviour {
     ***/
 
     private void T2_Start() {
-        // elephant - hopefully works
-        ChatManager.chatbox.text = "\nReese: You got a plant??\n";
+        ChatManager.chatbox.text = "Reese: You got a plant??\n";
 
         ChatManager.choice1text.text = "Yeah? Is something wrong?";
         ChatManager.choice2text.text = "How did you know?";
@@ -777,6 +782,7 @@ public class ChatDay1 : MonoBehaviour {
         ChatManager.ShowChoices(false);
         ChatManager.ResetListeners();
 
+        PlayerChoices.chatRecord += "\nReese: You got a plant??\n";
         ChatManager.updateChatRecords("\nYou: Yeah? Is something wrong?\n");
 
         StartCoroutine(DarkPatternPlant());
@@ -863,9 +869,9 @@ public class ChatDay1 : MonoBehaviour {
         
         yield return StartCoroutine(ChatManager.IsTyping(4.0f));
         ChatManager.updateChatRecords("\nIn the case of the plant store, if you don't pay attention, you're automatically charged extra.\n");
-        yield return StartCoroutine(ChatManager.IsTyping(4.0f));
+        yield return StartCoroutine(ChatManager.IsTyping(5.0f));
         ChatManager.updateChatRecords("\nThey used to do something even sneakier, which is sneaking things into your checkout cart, but that's illegal now.\n");
-        yield return StartCoroutine(ChatManager.IsTyping(2.0f, 1.0f));
+        yield return StartCoroutine(ChatManager.IsTyping(4.0f, 1.0f));
         ChatManager.updateChatRecords("\nThere's another thing they do, though, which are trick questions: questions designed to be confusing, so you give an answer they want.\n");
         yield return StartCoroutine(ChatManager.IsTyping(4.0f));
         ChatManager.updateChatRecords("\nYou can see it at the checkout page when they ask if you want to receive ads from them.\n");
@@ -951,10 +957,9 @@ public class ChatDay1 : MonoBehaviour {
         ChatManager.updateChatRecords("\nReese: Dark patterns are tricks to get you to do things you don't mean to.\n");
         yield return StartCoroutine(ChatManager.IsTyping(3.0f));
         ChatManager.updateChatRecords("\nThere's many types, and misdirection is one of them.\n");
-        showName = true;
+        showName = false;
         PlayerChoices.learnDPDef = true;
 
-        // elephant HOPE THIS WORKS
         StartCoroutine(LearnDPPlant());
     }
 
@@ -1012,6 +1017,7 @@ public class ChatDay1 : MonoBehaviour {
         ChatManager.ShowChoices(false);
         ChatManager.ResetListeners();
 
+        PlayerChoices.chatRecord += "\nReese: You got a plant??\n";
         ChatManager.updateChatRecords("\nYou: How did you know?\n");
 
         StartCoroutine(T2_C2Reply());
@@ -1110,11 +1116,11 @@ public class ChatDay1 : MonoBehaviour {
 
     private IEnumerator T2_PermReadReply() {
         yield return StartCoroutine(ChatManager.IsTyping(2.0f));
-        ChatManager.updateChatRecords("\nReese: Oh, you actually read that??");
+        ChatManager.updateChatRecords("\nReese: Oh, you actually read that??\n");
         yield return StartCoroutine(ChatManager.IsTyping(2.0f));
         ChatManager.updateChatRecords("\nYou have to be the second person I know who actually read it.\n");
         yield return StartCoroutine(ChatManager.IsTyping(1.5f));
-        ChatManager.updateChatRecords("\nThe first person being me, of course :)");
+        ChatManager.updateChatRecords("\nThe first person being me, of course :)\n");
 
         PlayerChoices.readTCs = 1;
         StartCoroutine(DPPBridge());

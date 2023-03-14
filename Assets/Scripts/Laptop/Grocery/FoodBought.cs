@@ -23,6 +23,11 @@ public class FoodBought : MonoBehaviour
     }
 
     private void Home() {
+        StartCoroutine(WaitLoad());
+    }
+
+    private IEnumerator WaitLoad() {
+        yield return new WaitForSeconds(0.2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         homepage.gameObject.SetActive(true);
         gameObject.SetActive(false);

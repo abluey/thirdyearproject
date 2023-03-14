@@ -3455,6 +3455,10 @@ PrefabInstance:
       value: 84
       objectReference: {fileID: 0}
     - target: {fileID: 6547748912286406112, guid: aa2b092693ffcd34eb781ea05f1eeab1, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547748912286406112, guid: aa2b092693ffcd34eb781ea05f1eeab1, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 1244535969318450599, guid: 13cd8453547272648af730516331c54a, type: 2}
@@ -4396,6 +4400,10 @@ PrefabInstance:
       value: 84
       objectReference: {fileID: 0}
     - target: {fileID: 6547748912286406112, guid: aa2b092693ffcd34eb781ea05f1eeab1, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547748912286406112, guid: aa2b092693ffcd34eb781ea05f1eeab1, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 1244535969318450599, guid: 13cd8453547272648af730516331c54a, type: 2}
@@ -4740,6 +4748,10 @@ PrefabInstance:
     - target: {fileID: 6547748912286406112, guid: aa2b092693ffcd34eb781ea05f1eeab1, type: 3}
       propertyPath: m_fontSizeBase
       value: 84
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547748912286406112, guid: aa2b092693ffcd34eb781ea05f1eeab1, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6547748912286406112, guid: aa2b092693ffcd34eb781ea05f1eeab1, type: 3}
       propertyPath: m_sharedMaterial
@@ -10189,6 +10201,10 @@ PrefabInstance:
     - target: {fileID: 6547748912286406112, guid: aa2b092693ffcd34eb781ea05f1eeab1, type: 3}
       propertyPath: m_fontSizeBase
       value: 84
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547748912286406112, guid: aa2b092693ffcd34eb781ea05f1eeab1, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6547748912286406112, guid: aa2b092693ffcd34eb781ea05f1eeab1, type: 3}
       propertyPath: m_sharedMaterial

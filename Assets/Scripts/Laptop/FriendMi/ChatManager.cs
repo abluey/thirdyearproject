@@ -36,6 +36,9 @@ public class ChatManager : MonoBehaviour
 
     private ChatDay0 day0;
     private ChatDay1 day1;
+    private ChatDay2 day2;
+
+    public static AudioSource notif;
 
     void Awake() {
         homeBtn = nonstaticHomeBtn;
@@ -50,8 +53,11 @@ public class ChatManager : MonoBehaviour
         choice1text = gameObject.transform.Find("Choice 1/Choice1Text").GetComponent<TMPro.TMP_Text>();
         choice2text = gameObject.transform.Find("Choice 2/Choice2Text").GetComponent<TMPro.TMP_Text>();
 
+        notif = gameObject.transform.Find("AudioChatNotif").GetComponent<AudioSource>();
+
         day0 = gameObject.GetComponent<ChatDay0>();
         day1 = gameObject.GetComponent<ChatDay1>(); 
+        day2 = gameObject.GetComponent<ChatDay2>();
     }
 
     void OnEnable() {
@@ -60,6 +66,7 @@ public class ChatManager : MonoBehaviour
         
         day0.enabled = false;
         day1.enabled = false;
+        day2.enabled = false;
 
         StopAllCoroutines();
         CalcChatText();
@@ -99,9 +106,11 @@ public class ChatManager : MonoBehaviour
         }
 
         else if (PlayerPrefs.GetInt("DayCount") == 1) {
-            if (PlayerPrefs.GetInt("TimeCount") == 0) {
-                day1.enabled = true;
-            }
+            day1.enabled = true;
+        }
+
+        else if (PlayerPrefs.GetInt("DayCount") == 2) {
+            day2.enabled = true;
         }
 
     }
@@ -111,6 +120,8 @@ public class ChatManager : MonoBehaviour
         yield return new WaitForSeconds(num2);
         isTypingText.gameObject.SetActive(true);
         yield return new WaitForSeconds(num);
+        notif.Play();
+        yield return new WaitForSeconds(0.1f);
         isTypingText.gameObject.SetActive(false);
         homeBtn.gameObject.SetActive(true);
     }

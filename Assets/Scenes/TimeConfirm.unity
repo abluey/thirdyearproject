@@ -575,7 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0370b2905bce9d749bce98c67ed33397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickNoise: {fileID: 0}
+  clickNoise: {fileID: 906097704}
 --- !u!1001 &906097702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -732,6 +732,11 @@ PrefabInstance:
 --- !u!224 &906097703 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7838651267945255442, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
+  m_PrefabInstance: {fileID: 906097702}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &906097704 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3332979820552798110, guid: d66b4e6f2dfbb214893e933e4dc109c9, type: 3}
   m_PrefabInstance: {fileID: 906097702}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2123871342

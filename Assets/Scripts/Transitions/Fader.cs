@@ -29,6 +29,11 @@ public class Fader : MonoBehaviour
     }
 
     public void FadeToScene(int triggerNumber) {
+        StartCoroutine(WaitLoad(triggerNumber));
+    }
+
+    private IEnumerator WaitLoad(int triggerNumber) {
+        yield return new WaitForSeconds(0.2f);
         triggerBtnNum = triggerNumber;
         animator.SetTrigger("FadeOut");
     }

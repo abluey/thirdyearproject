@@ -50,6 +50,7 @@ public class StartMenuManager : MonoBehaviour
 
     private void Reset() {
         PlayerPrefs.DeleteAll();
+        PlayerChoices.ResetChoices();
         Save.DeleteAllData();
     }
 

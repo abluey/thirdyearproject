@@ -36,6 +36,11 @@ public class LoadGameManager : MonoBehaviour
     }
 
     private void Play() {
+        StartCoroutine(WaitLoad());
+    }
+
+    private IEnumerator WaitLoad() {
+        yield return new WaitForSeconds(0.2f);
         Save.LoadData();
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Room", LoadSceneMode.Additive);
         asyncLoad.completed += OnLoadComplete;

@@ -31,7 +31,7 @@ public class ToDoListManager : MonoBehaviour
                 todo += "\n\n- Chill";
             }
         } else if (day == 1) {
-            if (time >= 1) {
+            if (time == 2) {
                 todo += "\n\n- Buy a plant!";
             }
 

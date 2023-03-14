@@ -10,10 +10,13 @@ public class End : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text content;
     [SerializeField] private Button nextBtn;
 
-    private string[] headerText = {"Time Passes", "The Days Go By", "In Fact",};
+    private string[] headerText = {"Even More Time Passes", "The Days Go By", "In Fact", "The Reason", "Who Knows?", "Or",};
     private string[] contentText = {"",
                                     "and you never hear from Reese again.",
-                                    "FriendMi is shut down soon after.",};
+                                    "FriendMi is shut down soon after.",
+                                    "being an external attack against the system.",
+                                    "Maybe Reese is living in a cave somewhere with their friends now.",
+                                    "'They' caught up to them. Whoever 'they' are.",};
 
     void Start()
     {   
@@ -46,6 +49,11 @@ public class End : MonoBehaviour
     }
 
     private void Next() {
+        StartCoroutine(NextWaitLoad());
+    }
+
+    private IEnumerator NextWaitLoad() {
+        yield return new WaitForSeconds(0.2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

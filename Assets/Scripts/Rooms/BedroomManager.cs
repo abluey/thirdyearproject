@@ -95,7 +95,7 @@ public class BedroomManager : MonoBehaviour
                     }
                     break;
                 case 2:
-                    if (PlayerChoices.chatProgress != 1) {
+                    if (PlayerChoices.chatProgress != 0 && PlayerChoices.chatProgress != 1) {
                        exclamationMark.gameObject.SetActive(true);
                        markActive = true;
                     }
