@@ -436,8 +436,8 @@ public class ChatDay1 : MonoBehaviour {
         } else if (PlayerChoices.chatProgress == 69) {
             ChatManager.updateChatRecords("\nReese: Anyway. Grocery store. Weird, huh?\n");
         } else {
-            // elephant - hopefully works
-            ChatManager.chatbox.text = "Reese: Grocery store. Weird, huh?\n";
+            // the 1 line below is not running for some reason
+            ChatManager.updateChatRecords("\nReese: Grocery store. Weird, huh?\n");
         }
         
         PlayerChoices.chatProgress = 11;

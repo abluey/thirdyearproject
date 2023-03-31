@@ -460,7 +460,7 @@ public class ChatDay2 : MonoBehaviour {
             PlayerChoices.chatProgress = 302;
             T2_EndChoiceBot();
         } else {
-            T2_BringChange();
+            StartCoroutine(T2_BringChange());
         }
     }
 
